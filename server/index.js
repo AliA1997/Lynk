@@ -9,7 +9,11 @@ const bodyParser = require('body-parser');
 //Initializes the session
 const session = require('express-session');
 //
-
+//INitialize the database with the connection string from your .env file.
+massive(process.env.CONNECTION_STRING).then(database => {
+    //Then assign the database, directory of the sql files to the server.
+    app.set('db', database);
+}).catch(err => console.log(err, 'Database Connection Error'))
 //
 //Controller Files 
 const user = require("./controllers/user_controller");

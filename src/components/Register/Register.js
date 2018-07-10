@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import UserForm from './UserForm/UserForm';
+import axios from 'axios';
+//Import the css file.
+import './Register.css';
 
 export default class Register extends Component {
     constructor() {
@@ -31,6 +34,11 @@ export default class Register extends Component {
     register = () => {
         //Destructure the username, name, password, email, age from the state.
         const { name, username, email, password, age } = this.state;
+        //Assign a newUser variable we will pass to the axios call to our endpoint.
+        const newUser = { name, username, email, password, age };
+        axios.post('/api/register', newUser).then(res => {
+            console.log('Registered Successfully!');
+        }).catch(err => console.log(err, 'Register Axios Error--------------'));
         console.log('register button clicked------------------');
     }
     render() {

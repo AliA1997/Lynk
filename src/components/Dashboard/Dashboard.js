@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import EventForm from './EventForm/EventForm';
+import GroupForm from './GroupForm/GroupForm';
 ///Dashboard components.
 export default class Dashboard extends Component {
     constructor() {
@@ -83,17 +85,29 @@ export default class Dashboard extends Component {
         this.setState({eventAttendeeList: copyOfArr});
     }
     createGroup = () => {
-
+        ///Destruct the groupName, groupDescription, and groupMembers from the state.
+        const { groupName, groupDescription, groupMembers } = this.state;
+        //Assign a new group to the properties of the object.
+        const newGroup = { groupName, groupDescription, groupMembers };
+        axios.post('/api/groups', newGroup).then(res => {
+            console.log('Group Created!!');
+        }).catch(err => console.log(err, 'Create Group Database Error--------------'));
     }
     createEvent = () => {
-
+        ///Destruct the eventName, eventDescription, eventDate, eventLocation, and eventAttendeeeList from the state.
+        const { eventName, eventTopic, eventDate, eventLocation, eventAttendeeList } = this.state;
+        const newEvent = { eventName, eventTopic, eventDate, eventLocation, eventAttendeeList };
+        axios.post('/api/events', newEvent).then(res => {
+            console.log('Event Created!!!');
+        }).catch(err => console.log(err, 'Create Event Database Error-----------------'));
     }
     render() {
         return (
             <div>
                 <h1>Dashboard</h1>
                 <div>
-                    
+                    <EventForm />
+                    <GroupForm />
                 </div>
                 <div>
                     <button>

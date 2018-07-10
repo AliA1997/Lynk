@@ -28,7 +28,8 @@ export default class Home extends Component {
         return (
             <div>
                 Home
-                <Login login={this.login} />
+                <Login login={this.login} {...this.state} handleUsername={this.handleLoginUsername} 
+                 handlePassword={this.handleLoginPassword} />
             </div>
         );
     }

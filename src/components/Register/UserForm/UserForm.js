@@ -27,7 +27,6 @@ const UserForm = (props) => {
           required
           id="username"
           label="username"
-          defaultValue="username"
           onChange={e => props.handleUsername(e.target.value)}
           value={username}
           margin="normal"

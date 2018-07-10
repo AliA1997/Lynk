@@ -12,7 +12,7 @@ export default class Groups extends Component {
 
     componentDidMount() {
         //Axios call setting state with groups array
-        axios.get('/api/groups').then(groups => {
+        axios.get('/api/groups').then(res => {
             this.setState({groups: res.data.groups})
         })
     }

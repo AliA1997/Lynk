@@ -32,7 +32,7 @@ module.exports = {
         db.update_group(updatedGroup).then(groups => {
             //REturn a 200 status code and the updated groups.
             res.status(200).json({groups});
-        }).catch(err, 'Update Group Database Error--------------', err));
+        }).catch(err, 'Update Group Database Error--------------'));
     },
     deleteGroup(req, res) {
         //Assign variable call db that set to the database instance.
@@ -42,14 +42,26 @@ module.exports = {
         db.deleete_group(id).then(groups => {
             //Return a 200 status code with the updated groups.
             res.status(200).json({groups});
-        }).catch(err => console.log(err, "Delete Group Database error------------", err));
+        }).catch(err => console.log(err, "Delete Group Database error------------"));
     },
     addMember(req, res) {
         //Assign variable call db that set to the database instance 
         const db = req.app.get('db');
-        const { }
+        //Destruct the currentAttendeeSelected from the req.body.
+        const { currentAttendeeSelected } = req.body;
+        db.add_member(currentAttendeeSelected).then(groups => {
+            //Return a 200 status code, and the updated members.
+            res.status(200).json({groups});
+        }).catch(err => console.log(err, 'Add Member Database Error-----------'));
+        
     },
     removeMember(req, res) {
-
+        const db = req.app.get('db');
+        //Destruct the currentAttendeeSelect from the req.body;
+        const { currentAttendeeSelected } = req.body;
+        db.remove_member(currentAttendeeSelected).then(groups => {
+            //Return a 200 status code, and the updated members.
+            res.status(200).json({groups});
+        }).catch(() => console.log(err, 'Remove Member Database Error--------------'))
     }
 }

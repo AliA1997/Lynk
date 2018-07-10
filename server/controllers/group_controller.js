@@ -32,7 +32,7 @@ module.exports = {
         db.update_group(updatedGroup).then(groups => {
             //REturn a 200 status code and the updated groups.
             res.status(200).json({groups});
-        }).catch(err, 'Update Group Database Error--------------'));
+        }).catch(err => console.log(err, 'Update Group Database Error--------------'));
     },
     deleteGroup(req, res) {
         //Assign variable call db that set to the database instance.
@@ -62,6 +62,6 @@ module.exports = {
         db.remove_member(currentAttendeeSelected).then(groups => {
             //Return a 200 status code, and the updated members.
             res.status(200).json({groups});
-        }).catch(() => console.log(err, 'Remove Member Database Error--------------'))
+        }).catch(err => console.log(err, 'Remove Member Database Error--------------'))
     }
 }

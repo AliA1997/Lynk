@@ -1,4 +1,4 @@
-INSERT INTO register (name, username, email, password, age)
+INSERT INTO register (name, username, email, profile_picture, password, age)
 VALUES
-(${name}, ${username}, ${email}, ${password}, ${age})
+(${name}, ${username}, ${email}, ${profile_picture}, ${password}, ${age})
 RETURNING *;

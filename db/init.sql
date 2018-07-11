@@ -3,14 +3,22 @@ CREATE TABLE users (
     name TEXT,
     username TEXT,
     email TEXT,
+    age INTEGER,
+    profile_picture TEXT,
     password TEXT,
     groups JSONB[],
     events JSONB[],
-    is_admin BOOLEAN,
-    age INTEGER
+    is_admin BOOLEAN
 );
 ------- User Sql statements.
+--- Registers the User.
+INSERT INTO register (name, username, email, profile_picture, password, age)
+VALUES
+(${name}, ${username}, ${email}, ${profile_picture}, ${password}, ${age})
+RETURNING *;
 
+--- Find the User.
+SELECT * FROM users WHERE username = $1;
 
 
 
@@ -19,19 +27,21 @@ CREATE TABLE groups (
     id SERIAL PRIMARY KEY,
     group_name TEXT,
     group_description TEXT,
+    group_image TEXT,
     group_members JSONB[],
-    group_admin INTEGER References users(id)
+    group_admin INTEGER References users(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 --------- Groups Sql statements.
 -- Create group:
-INSERT INTO groups (group_name, group_description, group_members, group_admin) 
+INSERT INTO groups (group_name, group_description, group_image, group_members, group_admin) 
 VALUES 
-(${group_name}, ${group_description}, ${group_members}::JSONB[], ${group_admin}) RETURNING *;
+(${group_name}, ${group_description}, ${group_image}, ${group_members}::JSONB[], ${group_admin}) RETURNING *;
 
 -- Update group:
 UPDATE groups 
 SET group_name = ${group_name},
 group_description = ${group_description},
+group_image = ${group_image},
 group_members = ${group_members}::JSONB[]
 WHERE id = ${id};
 SELECT * FROM groups;
@@ -52,20 +62,28 @@ CREATE TABLE events (
     id SERIAL PRIMARY KEY,
     event_name TEXT,
     event_topic TEXT,
+    event_image TEXT,
     event_date TEXT,
     event_location TEXT,
     event_attendee_list JSONB[],
-    group_id INTEGER References groups(id)
+    group_id INTEGER References groups(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 -------- Events Sql statements.
 -- Create new event:
-INSERT INTO events (event_name, event_topic, event_date, event_location, event_attendee_list, group_id)
+INSERT INTO events (event_name, event_topic, event_image, event_date, event_location, event_attendee_list, group_id)
 VALUES
-(${event_name}, ${event_topic}, ${event_date}, ${event_location}, ${event_attendee_list}::JSONB[], ${group_id})
+(${event_name}, ${event_topic}, ${event_image}, ${event_date}, ${event_location}, ${event_attendee_list}::JSONB[], ${group_id})
 RETURNING *;
 
 -- Update event:
-UPDATE events SET (event_name, event_topic, event_date, event_location, event_attendee_list, group_id )
+UPDATE events 
+SET event_name, 
+event_topic, 
+event_image = ${event_image}
+event_date, 
+event_location,
+ vent_attendee_list, 
+ group_id 
 VALUE
 (${event_name}, ${event_topic}, ${event_date}, ${event_location}, ${event_attendee_list}::JSONB[], ${group_id});
 SELECT * FROM events;

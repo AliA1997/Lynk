@@ -18,7 +18,9 @@ massive(process.env.CONNECTION_STRING).then(database => {
 //
 //Controller Files 
 const user = require("./controllers/user_controller");
-
+const cloudinary = require('./controllers/cloudinary_controller');
+const group = require('./controllers/group_controller');
+const event = require('./controllers/event_controller');
 //
 
 
@@ -26,9 +28,43 @@ const user = require("./controllers/user_controller");
 const app =  express();
 //
 
+//Initialize our bodyParser data.
+app.use(bodyParser.json());
+
+//Initialize our session
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    //Age of the session
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 14
+    }
+}));
+
+
+//Cloudinary Endpoints 
+app.get('/api/upload', cloudinary.upload);
+
 //User Endpoints 
 app.post('/api/login', user.login);
 app.post('/api/register', user.register);
+
+//Group Endpoints 
+app.get('/api/groups', group.readGroup);
+app.post('/api/groups', group.createGroup);
+app.put('/api/group/:id', group.updateGroup);
+app.delete('/api/group/:id', group.deleteGroup);
+app.patch('/api/group/:id/add_member', group.addMember);
+app.patch('/api/group/:id/remove_member', group.removeMember);
+
+//Event Endpoints
+app.get('/api/events', event.readEvent);
+app.post('/api/events', event.createEvent);
+app.put('/api/event/:id', event.updateEvent);
+app.delete('/api/event/:id', event.deleteEvent);
+
+
 
 ///Server listening on port 4000.
 app.listen(4000, () => console.log('Listening on Port: 4000'));

@@ -2,8 +2,6 @@
 require('dotenv').config();
 //Initializes the server
 const express = require('express');
-//Installing Nodemailer
-const nodemailer = require('nodemailer');
 //Middlewares   
 //Initiallizes the req.body, so without it, the req.body will not be defined.
 const bodyParser = require('body-parser');
@@ -11,7 +9,10 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 //Initializes the Database
 const massive  = require('massive');
-//
+///Define the server 
+const app =  express();
+//Installing Nodemailer
+const nodemailer = require('nodemailer');
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
 massive(process.env.CONNECTION_STRING).then(database => {
@@ -27,11 +28,6 @@ const event = require('./controllers/event_controller');
 const group = require('./controllers/group_controller');
 const nm = require('./controllers/nodemailer_controller');
 //
-
-
-///Define the server 
-const app =  express();
-
 
 //Initialize our bodyParser data.
 app.use(bodyParser.json());
@@ -74,7 +70,7 @@ app.get('/api/chats', chat.readChat);
 app.post('/api/chats', chat.createChat);
 
 //Contact Endpoints
-// app.post('/api/contact', create.nm);
+app.post('/api/contact', nm.sendEmail);
 
 ///Server listening on port 4000.
 app.listen(4000, () => console.log('Listening on Port: 4000'));

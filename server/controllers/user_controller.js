@@ -32,7 +32,21 @@ module.exports = {
        
 
     },
+    
     register(req, res) {
+        //Destructuring name, username, email, password, age from req.body
+        const{ name, username, email, password, age } = req.body;
+        //Setting db to requests database folder(?)
+        const db = req.app.get('db');
 
+        bcrypt.hash(saltRounds, password).then(hashedpassword => {
+            //Creating newUser variable containing name, username, email, password, age
+            const newUser = {name, username, email, password: hashedpassword, age};
+            //Running register sql file and passing newUser as argument
+            db.register(newUser).then(user => {
+                req.session.user = user[0];
+            }).catch(err => console.log(err, "Register error"))
+
+        }).catch(err => console.log(err, "Hashing error"))
     }
 }

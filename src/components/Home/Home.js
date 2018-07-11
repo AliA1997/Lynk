@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 import Login from './Login/Login';
+import axios from 'axios';
+
 
 export default class Home extends Component {
     constructor() {
@@ -25,10 +28,14 @@ export default class Home extends Component {
         }).catch(err => console.log('Login Error---------------', err));
     }
     render() {
+        const { username, password } = this.state;
         return (
             <div>
-                Home
-                <Login login={this.login} />
+                <div>
+                    <h4>Login</h4>
+                    <Login username={username} password={password}
+                    login={this.login}  handleUsername={this.handleLoginUsername}  handlePassword={this.handleLoginPassword} />
+                </div>
             </div>
         );
     }

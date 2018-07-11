@@ -1,1 +1,1 @@
-c
+SELECT * FROM events;

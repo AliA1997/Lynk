@@ -1,0 +1,294 @@
+{
+	"info": {
+		"name": "Lynk testing project.",
+		"_postman_id": "19cc9f3c-5c32-bb75-dcf4-389952be47f0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+        {
+            "name": "POST - Register",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Ali  ALhaddad\",\n    \"email\": \"devmtnali@gmail.com\",\n    \"username\": \"AliA1997\",\n    \"password\": \"1234\"\n,\n    \"password\": \"1234\"\n,\n    \"age\": \"05/07/1997\"\n}"
+                },
+                "url": {
+                    "raw": "localhost:4000/api/register",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000",
+                    "path": [
+                        "api",
+                        "register"
+                    ]
+                },
+                "description": ""
+            },
+            "response": []
+        },
+        {
+            "name": "POST - Login",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"AliA1997\",\n    \"password\": \"1234\"}"
+                },
+                "url": {
+                    "raw": "localhost:4000/api/login",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000",
+                    "path": [
+                        "api",
+                        "login"
+                    ]
+                },
+                "description": ""
+            },
+            "response": []
+        },
+        {
+			"name": "GET - All Groups",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:4000/api/groups",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"groups"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Group By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:4000/api/group/9",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"group",
+						"9"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+    },
+    {
+      "name": "GET - Events",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "localhost:4000/api/events",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "events"
+          ]
+        },
+        "description": ""
+      },
+      "response": []
+    },
+    {
+        "name": "POST - Create Group",
+        "request": {
+            "method": "POST",
+            "header": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "mode": "raw",
+                "raw": "{\n    \"group_name\": \"Crazy Lakers\",\n    \"group_description\": \"Love the Lakers!!!\",\n    \"group_admin\": \"1\"\n}"
+            },
+            "url": {
+                "raw": "localhost:4000/api/groups",
+                "host": [
+                    "localhost"
+                ],
+                "port": "4000",
+                "path": [
+                    "api",
+                    "groups"
+                ]
+            },
+            "description": ""
+        },
+        "response": []
+    },
+    {
+        "name": "POST - Create Event",
+        "request": {
+            "method": "POST",
+            "header": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "mode": "raw",
+                "raw": "{\n    \"event_name\": \"Picnic \",\n    \"event_topic\": \"Eating Food\",\n    \"event_date\": \"07/26/2018\",\n    \"event_location\": \"Moreno Valley, CA+\"\n,\n    \"group_id\": \"1\"\n}"
+            },
+            "url": {
+                "raw": "localhost:4000/api/groups",
+                "host": [
+                    "localhost"
+                ],
+                "port": "4000",
+                "path": [
+                    "api",
+                    "groups"
+                ]
+            },
+            "description": ""
+        },
+        "response": []
+    },
+		{
+			"name": "PUT - Update Group",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"group_name\": \"Lebron james is the Goat!\",\n    \"group_description\": \"Love the Lakers!!!\",\n    \"group_admin\": \"1\"\n}"
+				},
+				"url": {
+					"raw": "localhost:4000/api/group/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"group",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+        },
+        {
+			"name": "PUT - Update Event",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"event_name\": \"Party!! \",\n    \"event_topic\": \"Eating Food\",\n    \"event_date\": \"07/26/2018\",\n    \"event_location\": \"Moreno Valley, CA+\"\n,\n    \"group_id\": \"1\"\n}"
+				},
+				"url": {
+					"raw": "localhost:4000/api/event/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"event",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Remove Group",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:4000/api/group/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"group",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+        },
+        {
+			"name": "DELETE - Remove Event",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:4000/api/event/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"event",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+    ]
+}

@@ -12,6 +12,9 @@ CREATE TABLE users (
 ------- User Sql statements.
 
 
+
+
+
 CREATE TABLE groups (
     id SERIAL PRIMARY KEY,
     group_name TEXT,
@@ -19,7 +22,29 @@ CREATE TABLE groups (
     group_members JSONB[],
     group_admin INTEGER References users(id)
 );
------- Groups Sql statements.
+--------- Groups Sql statements.
+-- Create group:
+INSERT INTO groups (group_name, group_description, group_members, group_admin) 
+VALUES 
+(${group_name}, ${group_description}, ${group_members}::JSONB[], ${group_admin}) RETURNING *;
+
+-- Update group:
+UPDATE groups 
+SET group_name = ${group_name},
+group_description = ${group_description},
+group_members = ${group_members}::JSONB[]
+WHERE id = ${id};
+SELECT * FROM groups;
+
+-- Delete group:
+DELETE FROM groups WHERE id = $1;
+--- REturn the updated groups after deleting the one specified.
+SELECT * FROM groups;
+
+-- Read all groups:
+SELECT * FROM groups;
+
+
 
 
 
@@ -33,4 +58,23 @@ CREATE TABLE events (
     group_id INTEGER References groups(id)
 );
 -------- Events Sql statements.
+-- Create new event:
+INSERT INTO events (event_name, event_topic, event_date, event_location, event_attendee_list, group_id)
+VALUES
+(${event_name}, ${event_topic}, ${event_date}, ${event_location}, ${event_attendee_list}::JSONB[], ${group_id})
+RETURNING *;
 
+-- Update event:
+UPDATE events SET (event_name, event_topic, event_date, event_location, event_attendee_list, group_id )
+VALUE
+(${event_name}, ${event_topic}, ${event_date}, ${event_location}, ${event_attendee_list}::JSONB[], ${group_id});
+SELECT * FROM events;
+
+-- Delete event:
+DELETE FROM events WHERE id = $1;
+SELECT * FROM events;
+
+-- Read all events:
+SELECT * FROM events;
+
+ 

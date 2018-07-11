@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 import Login from './Login/Login';
+import axios from 'axios';
+
 
 export default class Home extends Component {
     constructor() {
@@ -28,7 +31,8 @@ export default class Home extends Component {
         return (
             <div>
                 Home
-                <Login login={this.login} />
+                <Login login={this.login} {...this.state} handleUsername={this.handleLoginUsername} 
+                 handlePassword={this.handleLoginPassword} />
             </div>
         );
     }

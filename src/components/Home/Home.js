@@ -31,9 +31,11 @@ export default class Home extends Component {
         const { username, password } = this.state;
         return (
             <div>
-                Home
-                <Login username={username} password={password}
-                login={this.login}  handleUsername={this.handleLoginUsername}  handlePassword={this.handleLoginPassword} />
+                <div>
+                    <h4>Login</h4>
+                    <Login username={username} password={password}
+                    login={this.login}  handleUsername={this.handleLoginUsername}  handlePassword={this.handleLoginPassword} />
+                </div>
             </div>
         );
     }

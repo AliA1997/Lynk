@@ -2,12 +2,16 @@
 require('dotenv').config();
 //Initializes the server
 const express = require('express');
+
+
 //
 //Middlewares   
 //Initiallizes the req.body, so without it, the req.body will not be defined.
 const bodyParser = require('body-parser');
 //Initializes the session
 const session = require('express-session');
+//Initializes the Database
+const massive  = require('massive');
 //
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
@@ -19,8 +23,9 @@ massive(process.env.CONNECTION_STRING).then(database => {
 //Controller Files 
 const user = require("./controllers/user_controller");
 const cloudinary = require('./controllers/cloudinary_controller');
-const group = require('./controllers/group_controller');
+const chat = require('./controllers/chat_controller');
 const event = require('./controllers/event_controller');
+const group = require('./controllers/group_controller');
 //
 
 

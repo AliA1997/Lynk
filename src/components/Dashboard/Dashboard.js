@@ -102,12 +102,21 @@ export default class Dashboard extends Component {
         }).catch(err => console.log(err, 'Create Event Database Error-----------------'));
     }
     render() {
+        //Destruct the event props and groups props from the props.
+        const { groupName, groupDescription, groupMembers, currentMemberSelected, eventName, eventTopic, eventDate,
+                eventLocation, currentEventAttendeeSelected, eventAttendeeList } = this.state;
         return (
             <div>
                 <h1>Dashboard</h1>
                 <div>
-                    <EventForm />
-                    <GroupForm />
+                    <EventForm 
+                    eventName={eventName} eventDate={eventDate} eventTopic={eventTopic} eventLocation={eventLocation} currentMemberSelected={currentMemberSelected}
+                    currentEventAttendee={currentEventAttendeeSelected} eventMembers={eventAttendeeList} create={this.createEvent} handleName={this.handleEventName} handleTopic={this.handleEventTopic}
+                    handleDate={this.handleEventDate} handleLocation={this.handleEventLocation} handleCurrentAttendee={this.handleCurrentEventAttendee} />
+                    <GroupForm 
+                    groupName={groupName} groupDescription={groupDescription} groupMembers={groupMembers} currentMemberSelected={currentMemberSelected}
+                     create={this.createGroup} handleName={this.handleGroupName} handleDescription={this.handleGroupDescription}
+                    handleCurrentMember={this.handleCurrentGroupMember} add={this.addGroupMember} remove={this.removeGroupMember}/>
                 </div>
                 <div>
                     <button>

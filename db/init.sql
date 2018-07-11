@@ -95,4 +95,20 @@ SELECT * FROM events;
 -- Read all events:
 SELECT * FROM events;
 
- 
+
+
+
+-------- Chat Sql statements:
+
+CREATE TABLE IF NOT EXISTS chat(
+    id SERIAL PRIMARY KEY,
+    topic TEXT,
+    messages JSONB[],
+    users JSONB[]
+);
+
+-- Create chat:
+INSERT INTO chat(topic, messages, users)
+VALUES
+(${topic}, ${messages}::JSONB[], ${users}::JSONB[])
+RETURNING *;

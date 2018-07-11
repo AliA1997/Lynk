@@ -12,7 +12,7 @@ for(let i = 0; i < 110; i++) {
 
 const UserForm = (props) => {
     //Destructure all the props passed by the Register Parent Component.
-    const { name, username, email, password, age } = props;
+    const { name, username, email, age, profile_picture, password } = props;
     return (
         <form>
             <TextField
@@ -41,7 +41,24 @@ const UserForm = (props) => {
             defaultValue="Hello World"
             margin="normal"
           />
-        
+           <TextField 
+            required 
+            id='profile_picture'
+            value={profile_picture}
+            type='file'
+            onChange={e => props.handleUpload(e.target.files)}
+            autoComplete='file'
+            margin='normal'
+            />         
+            <TextField
+              required
+              id="ages"
+              value={age}
+              type='date'
+              onChange={e => props.handleAge(e.target.value)}
+              autoComplete="age"
+              margin="normal"
+          />
           <TextField
             required
             id="password-input"
@@ -51,15 +68,6 @@ const UserForm = (props) => {
             onChange={e => props.handlePassword(e.target.value)}
             autoComplete="current-password"
             margin="normal"
-          />
-            <TextField
-              required
-              id="ages"
-              value={age}
-              type='date'
-              onChange={e => props.handleAge(e.target.value)}
-              autoComplete="age"
-              margin="normal"
           />
           <Button variant='outlined' color='primary' onClick={() => props.register()}>
             Register 

@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 
 const GroupForm = (props) => {
-    const { groupName, groupDescription, groupMembers, currentMemberSelected } = props;
+    const { groupName, groupDescription, groupImage, groupMembers, currentMemberSelected } = props;
     return (
         <div>
             <h4>Create Group</h4>
@@ -26,6 +26,14 @@ const GroupForm = (props) => {
                 value={groupDescription}
                 margin="normal"
                 />
+                 <TextField
+                id="group-image"
+                type="file"
+                label="Upload Image"
+                onChange={e => props.groupImageUpload(e.target.files)}
+                value={groupImage}
+                margin="normal"
+                />      
                 <TextField
                 required
                 id="members"

@@ -12,7 +12,8 @@ export default class Register extends Component {
             username: '',
             email: '',
             password: '',
-            age: ''
+            age: '',
+            profile_picture: ''
         }
     }
     handleName = (val) => {
@@ -27,6 +28,9 @@ export default class Register extends Component {
     handlePassword = (val) => {
         console.log('Hit handle Password-------------', val);
         this.setState({password: val});
+    }
+    handleUpload = files => {
+
     }
     handleAge = (val) => {
         this.setState({age: val});
@@ -46,8 +50,8 @@ export default class Register extends Component {
             <div>
                 Register 
                 {/* Use the spread operator to automatically assign all the properties of an object.*/}
-                <UserForm {...this.state} handleUsername={this.handleUsername} handleName={this.handleName} register={this.register}
-                handlePassword={this.handlePassword} handleEmail={this.handleEmail} handleAge={this.handleAge}/>
+                <UserForm {...this.state} handleUsername={this.handleUsername} handleName={this.handleName} register={this.register} 
+                handlePassword={this.handlePassword} handleEmail={this.handleEmail} handleAge={this.handleAge} handleUpload={this.handleUpload}/>
             </div>
         );
     }

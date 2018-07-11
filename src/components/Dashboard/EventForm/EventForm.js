@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 
 
 const EventForm = (props) => {
-    const { eventName, eventTopic, eventDate, eventLocation, currentEventAttendeeSelected, eventAttendeeList } = props;
+    const { eventName, eventTopic, eventImage, eventDate, eventLocation, currentEventAttendeeSelected, eventAttendeeList } = props;
     return (
         <div>
             <h4>Create Event</h4>
@@ -26,7 +26,16 @@ const EventForm = (props) => {
                 onChange={e => props.handleTopic(e.target.value)}
                 value={eventTopic}
                 margin="normal"
-                />            
+                />          
+                <TextField
+                required
+                id="event-image"
+                type="file"
+                label="Upload Image"
+                onChange={e => props.eventImageUpload(e.target.files)}
+                value={eventImage}
+                margin="normal"
+                />      
                 <TextField
                 required
                 id="date"

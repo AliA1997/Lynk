@@ -86,39 +86,45 @@ export default class Dashboard extends Component {
         //Then set the state of the group members to the copy of array.
         this.setState({eventAttendeeList: copyOfArr});
     }
+    eventImageUpload = (files) => {
+
+    }
+    groupImageUpload = (files) => {
+
+    }
     createGroup = () => {
         ///Destruct the groupName, groupDescription, and groupMembers from the state.
-        const { groupName, groupDescription, groupMembers } = this.state;
+        const { groupName, groupDescription, groupImage, groupMembers } = this.state;
         //Assign a new group to the properties of the object.
-        const newGroup = { groupName, groupDescription, groupMembers };
+        const newGroup = { groupName, groupDescription, groupImage,  groupMembers };
         axios.post('/api/groups', newGroup).then(res => {
             console.log('Group Created!!');
         }).catch(err => console.log(err, 'Create Group Database Error--------------'));
     }
     createEvent = () => {
         ///Destruct the eventName, eventDescription, eventDate, eventLocation, and eventAttendeeeList from the state.
-        const { eventName, eventTopic, eventDate, eventLocation, eventAttendeeList } = this.state;
-        const newEvent = { eventName, eventTopic, eventDate, eventLocation, eventAttendeeList };
+        const { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList } = this.state;
+        const newEvent = { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList };
         axios.post('/api/events', newEvent).then(res => {
             console.log('Event Created!!!');
         }).catch(err => console.log(err, 'Create Event Database Error-----------------'));
     }
     render() {
         //Destruct the event props and groups props from the props.
-        const { groupName, groupDescription, groupMembers, currentMemberSelected, eventName, eventTopic, eventDate,
-                eventLocation, currentEventAttendeeSelected, eventAttendeeList } = this.state;
+        const { groupName, groupDescription, groupImage, groupMembers, currentMemberSelected, eventName, eventTopic, 
+            eventImage, eventDate, eventLocation, currentEventAttendeeSelected, eventAttendeeList } = this.state;
         return (
             <div>
                 <h1>Dashboard</h1>
                 <div>
                     <div className='dashboard-event-form-div'>
-                        <EventForm 
+                        <EventForm eventImage={eventImage} eventImageUpload={this.eventImageUpload}
                         eventName={eventName} eventDate={eventDate} eventTopic={eventTopic} eventLocation={eventLocation} currentMemberSelected={currentMemberSelected}
                         currentEventAttendee={currentEventAttendeeSelected} eventMembers={eventAttendeeList} create={this.createEvent} handleName={this.handleEventName} handleTopic={this.handleEventTopic}
                         handleDate={this.handleEventDate} handleLocation={this.handleEventLocation} handleCurrentAttendee={this.handleCurrentEventAttendee} />
                     </div>
                     <div className='dashboard-group-form-div'>
-                        <GroupForm 
+                        <GroupForm groupImage={groupImage} groupImageUpload={this.groupImageUpload}
                         groupName={groupName} groupDescription={groupDescription} groupMembers={groupMembers} currentMemberSelected={currentMemberSelected}
                         create={this.createGroup} handleName={this.handleGroupName} handleDescription={this.handleGroupDescription}
                         handleCurrentMember={this.handleCurrentGroupMember} add={this.addGroupMember} remove={this.removeGroupMember}/>

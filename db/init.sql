@@ -96,3 +96,15 @@ SELECT * FROM events;
 SELECT * FROM events;
 
  
+-- Session Table
+-- Create a table that holds a session.
+CREATE TABLE "session" (
+    --- have a sid that is not null and default value is default.
+  "sid" varchar NOT NULL COLLATE "default",
+  -- Make sure json is not null
+	"sess" json NOT NULL,
+    --- Have a timestamp of six characters.
+	"expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;

@@ -64,7 +64,9 @@ app.post('/api/events', event.createEvent);
 app.put('/api/event/:id', event.updateEvent);
 app.delete('/api/event/:id', event.deleteEvent);
 
-
+//Chat Endpoints
+app.get('/api/chats', chat.readChat);
+app.post('/api/chats', chat.createChat);
 
 ///Server listening on port 4000.
 app.listen(4000, () => console.log('Listening on Port: 4000'));

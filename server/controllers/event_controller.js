@@ -6,7 +6,7 @@ module.exports = {
         const{ event_name, event_topic, event_date, event_location, event_attendee_list, group_id } = req.body;
         //Setting db to requests database folder(?)
         const db = req.app.get('db');
-        let event_image = 'FUck you!!!!!!!!!!!!!!!!!!';
+        let event_image = 'image';
         //Setting new event object to newEvent variable
         const newEvent = { event_name, event_topic, event_image, event_date, event_location, event_attendee_list, group_id };
         db.create_event(newEvent).then(events => {

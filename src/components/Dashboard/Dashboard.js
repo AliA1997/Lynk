@@ -111,14 +111,18 @@ export default class Dashboard extends Component {
             <div>
                 <h1>Dashboard</h1>
                 <div>
-                    <EventForm 
-                    eventName={eventName} eventDate={eventDate} eventTopic={eventTopic} eventLocation={eventLocation} currentMemberSelected={currentMemberSelected}
-                    currentEventAttendee={currentEventAttendeeSelected} eventMembers={eventAttendeeList} create={this.createEvent} handleName={this.handleEventName} handleTopic={this.handleEventTopic}
-                    handleDate={this.handleEventDate} handleLocation={this.handleEventLocation} handleCurrentAttendee={this.handleCurrentEventAttendee} />
-                    <GroupForm 
-                    groupName={groupName} groupDescription={groupDescription} groupMembers={groupMembers} currentMemberSelected={currentMemberSelected}
-                     create={this.createGroup} handleName={this.handleGroupName} handleDescription={this.handleGroupDescription}
-                    handleCurrentMember={this.handleCurrentGroupMember} add={this.addGroupMember} remove={this.removeGroupMember}/>
+                    <div className='dashboard-event-form-div'>
+                        <EventForm 
+                        eventName={eventName} eventDate={eventDate} eventTopic={eventTopic} eventLocation={eventLocation} currentMemberSelected={currentMemberSelected}
+                        currentEventAttendee={currentEventAttendeeSelected} eventMembers={eventAttendeeList} create={this.createEvent} handleName={this.handleEventName} handleTopic={this.handleEventTopic}
+                        handleDate={this.handleEventDate} handleLocation={this.handleEventLocation} handleCurrentAttendee={this.handleCurrentEventAttendee} />
+                    </div>
+                    <div className='dashboard-group-form-div'>
+                        <GroupForm 
+                        groupName={groupName} groupDescription={groupDescription} groupMembers={groupMembers} currentMemberSelected={currentMemberSelected}
+                        create={this.createGroup} handleName={this.handleGroupName} handleDescription={this.handleGroupDescription}
+                        handleCurrentMember={this.handleCurrentGroupMember} add={this.addGroupMember} remove={this.removeGroupMember}/>
+                    </div>
                 </div>
                 <div>
                     <button>

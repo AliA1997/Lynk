@@ -25,6 +25,7 @@ const cloudinary = require('./controllers/cloudinary_controller');
 const chat = require('./controllers/chat_controller');
 const event = require('./controllers/event_controller');
 const group = require('./controllers/group_controller');
+const nm = require('./controllers/nodemailer_controller');
 //
 
 
@@ -51,8 +52,8 @@ app.use(session({
 app.get('/api/upload', cloudinary.upload);
 
 //User Endpoints 
-app.post('/api/login', user.login);
-app.post('/api/register', user.register);
+// app.post('/api/login', user.login);
+// app.post('/api/register', user.register);
 
 //Group Endpoints 
 app.get('/api/groups', group.readGroup);
@@ -71,6 +72,9 @@ app.delete('/api/event/:id', event.deleteEvent);
 //Chat Endpoints
 app.get('/api/chats', chat.readChat);
 app.post('/api/chats', chat.createChat);
+
+//Contact Endpoints
+// app.post('/api/contact', create.nm);
 
 ///Server listening on port 4000.
 app.listen(4000, () => console.log('Listening on Port: 4000'));

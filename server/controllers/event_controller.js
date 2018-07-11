@@ -6,9 +6,11 @@ module.exports = {
         const{ event_name, event_topic, event_date, event_location, event_attendee_list, group_id } = req.body;
         //Setting db to requests database folder(?)
         const db = req.app.get('db');
+        let event_image = 'FUck you!!!!!!!!!!!!!!!!!!';
         //Setting new event object to newEvent variable
-        const newEvent = { event_name, event_topic, event_date, event_location, event_attendee_list, group_id };
+        const newEvent = { event_name, event_topic, event_image, event_date, event_location, event_attendee_list, group_id };
         db.create_event(newEvent).then(events => {
+            console.log('events--------', events);
             res.status(200).json({events})
         }).catch(err => console.log(err, 'Create event error'))
     },

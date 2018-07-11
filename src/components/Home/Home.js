@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import Login from './Login/Login';
 import axios from 'axios';
 
-import Login from './Login/Login';
 
 export default class Home extends Component {
     constructor() {

@@ -8,7 +8,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
-import './Nav.css';
+import './Navbar.css';
 
 //Define inline styles for the component
 const styles = {
@@ -21,7 +21,8 @@ const styles = {
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
-    }
+    },
+
 }
 
 export default class  extends Component {
@@ -44,7 +45,7 @@ export default class  extends Component {
         const { auth, anchorEl } = this.state;
         const open = Boolean(anchorEl);
         return (
-            <div>
+            <div className='navbar'>
                 <AppBar position="static">
                 <Toolbar>
                     <IconButton color="inherit" aria-label="Menu">
@@ -56,27 +57,27 @@ export default class  extends Component {
                         </Link>
                     </Typography>
                     <Typography variant="title" color="inherit">
-                        <Link to='/dashboard'>
+                        <Link to='/dashboard' className='nav-link'>
                             My Dashboard
                         </Link>
                     </Typography>
                     <Typography variant="title" color="inherit">
-                        <Link to='/groups'>
+                        <Link to='/groups'  className='nav-link'>
                             Groups
                         </Link>
                     </Typography>
                     <Typography variant="title" color="inherit">
-                        <Link to='/events'>
+                        <Link to='/events' className='nav-link'>
                             Events
                         </Link>
                     </Typography>
                     <Typography variant="title" color="inherit">
-                        <Link to='/about'>
+                        <Link to='/about' className='nav-link'>
                             About
                         </Link>
                     </Typography>
                     <Typography variant="title" color="inherit">
-                        <Link to='/contact'>
+                        <Link to='/contact' className='nav-link'>
                             Contact
                         </Link>
                     </Typography>

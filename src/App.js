@@ -6,6 +6,7 @@ import pink from '@material-ui/core/colors/pink';
 import red from '@material-ui/core/colors/red';
 import logo from './logo.svg';
 import routes  from './routes';
+import Navbar from './components/Global/Navbar/Navbar';
 import './App.css';
 
 // All the following keys are optional.
@@ -28,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <Button>Test</Button>
+        <Navbar />
         {routes}
       </MuiThemeProvider>
     );

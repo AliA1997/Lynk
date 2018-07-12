@@ -80,7 +80,8 @@ export default class CreateGroup extends Component {
         //Assign a new group to the properties of the object.
         const newGroup = { groupName, groupDescription, groupImage,  groupMembers };
         axios.post('/api/groups', newGroup).then(res => {
-            console.log('Group Created!!');
+            console.log(res.data.group);
+            alert('Group Created-----------');
         }).catch(err => console.log(err, 'Create Group Database Error--------------'));
     }
     render() {

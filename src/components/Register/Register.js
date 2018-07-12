@@ -67,11 +67,12 @@ export default class Register extends Component {
     }
     register = () => {
         //Destructure the username, name, password, email, age from the state.
-        const { name, username, email, password, age } = this.state;
+        const { name, username, profile_picture, email, password, age } = this.state;
         //Assign a newUser variable we will pass to the axios call to our endpoint.
-        const newUser = { name, username, email, password, age };
+        const newUser = { name, username, profile_picture, email, password, age };
         axios.post('/api/register', newUser).then(res => {
-            console.log('Registered Successfully!');
+            //Redirects user.
+            alert('Registered Successfully!');
         }).catch(err => console.log(err, 'Register Axios Error--------------'));
         console.log('register button clicked------------------');
     }

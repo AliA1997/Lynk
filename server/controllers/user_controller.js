@@ -36,8 +36,7 @@ module.exports = {
     
     register(req, res) {
         //Destructuring name, username, email, password, age from req.body
-        const{ name, username, email, password, age } = req.body;
-        let profile_picture = 'test picture'
+        const{ name, username, email, password, profile_picture, age } = req.body;
         //Setting db to requests database folder(?)
         const db = req.app.get('db');
 

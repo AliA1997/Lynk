@@ -12,6 +12,7 @@ export default class Create_Event extends Component {
             eventName: '',
             eventTopic: '',
             eventDate: '',
+            eventImage: '',
             eventLocation: '',
             currentEventAttendeeSelected: '',
             eventAttendeeList: []
@@ -92,7 +93,7 @@ export default class Create_Event extends Component {
         const { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList } = this.state;
         const newEvent = { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList };
         axios.post('/api/events', newEvent).then(res => {
-            console.log('Event Created!!!');
+            alert('Event Created!!!');
         }).catch(err => console.log(err, 'Create Event Database Error-----------------'));
     }
     render() {

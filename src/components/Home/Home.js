@@ -24,7 +24,7 @@ export default class Home extends Component {
         const loginInfo = { username, password };
         axios.post('/api/login', loginInfo)
         .then(res => {
-            alert(res.data.message);
+            alert('Login Successfully');
         }).catch(err => console.log('Login Error---------------', err));
     }
     render() {

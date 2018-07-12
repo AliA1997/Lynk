@@ -3,13 +3,12 @@ module.exports = {
 
     createEvent(req, res){
         //Destructuring event_name, event_topic, event_date, event_location, event_attendee_list, group_id from req.body
-        const{ event_name, event_topic, event_date, event_location, event_attendee_list, group_id } = req.body;
-        const event_image = 'Test 1';
+        const{ eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList, groupId } = req.body;
         //Setting db to requests database folder(?)
         const db = req.app.get('db');
-        let event_image = 'image';
         //Setting new event object to newEvent variable
-        const newEvent = { event_name, event_topic, event_date, event_image, event_location, event_attendee_list, group_id };
+        const newEvent = { event_name: eventName, event_topic: eventTopic, event_date: eventDate,
+             event_image: eventImage, event_location: eventLocation, event_attendee_list: eventAttendeeList, group_id: 9 };
         db.create_event(newEvent).then(events => {
             console.log('events--------', events);
             res.status(200).json({events})

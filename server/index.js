@@ -12,6 +12,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 //Initializes the Database
 const massive  = require('massive');
+//Connects session to database.
+const connectPg = require('connect-pg-simple');
 //
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
@@ -39,8 +41,14 @@ app.use(bodyParser.json());
 //Initialize our session
 app.use(session({
     secret: process.env.SESSION_SECRET,
+    store: new pgSession({
+        //Uses the connection string to connect to database
+        conString: process.env.CONNECTION_STRING,
+        //Insert this table.
+        tableName: 'session'
+    }),
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     //Age of the session
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 14

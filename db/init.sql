@@ -12,7 +12,7 @@ CREATE TABLE users (
 );
 ------- User Sql statements.
 --- Registers the User.
-INSERT INTO register (name, username, email, profile_picture, password, age)
+INSERT INTO users (name, username, email, profile_picture, password, age)
 VALUES
 (${name}, ${username}, ${email}, ${profile_picture}, ${password}, ${age})
 RETURNING *;
@@ -95,4 +95,33 @@ SELECT * FROM events;
 -- Read all events:
 SELECT * FROM events;
 
+
+
+
+-------- Chat Sql statements:
+
+CREATE TABLE IF NOT EXISTS chat(
+    id SERIAL PRIMARY KEY,
+    topic TEXT,
+    messages JSONB[],
+    users JSONB[]
+);
+
+-- Create chat:
+INSERT INTO chat(topic, messages, users)
+VALUES
+(${topic}, ${messages}::JSONB[], ${users}::JSONB[])
+RETURNING *;
  
+-- Session Table
+-- Create a table that holds a session.
+CREATE TABLE "session" (
+    --- have a sid that is not null and default value is default.
+  "sid" varchar NOT NULL COLLATE "default",
+  -- Make sure json is not null
+	"sess" json NOT NULL,
+    --- Have a timestamp of six characters.
+	"expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;

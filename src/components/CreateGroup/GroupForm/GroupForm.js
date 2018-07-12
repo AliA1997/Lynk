@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
+import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
 
@@ -26,14 +27,8 @@ const GroupForm = (props) => {
                 value={groupDescription}
                 margin="normal"
                 />
-                 <TextField
-                id="group-image"
-                type="file"
-                label="Upload Image"
-                onChange={e => props.groupImageUpload(e.target.files)}
-                value={groupImage}
-                margin="normal"
-                />      
+                <Avatar alt={groupName} src={groupImage} style={{height: '10em', width: '10em'}} />  
+                <input type='file' placeholder='Group Image' onChange={e => props.groupImageUpload(e.target.files)} />         
                 <TextField
                 required
                 id="members"

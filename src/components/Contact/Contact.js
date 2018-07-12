@@ -48,6 +48,14 @@ export default class  extends Component {
         return (
             <div>
                 <form action="/contact" id="contact-form" method="post" role="form">
+                    <fieldset>
+                        <label for='name'>Name &#42;</label>
+                        <input id='name' type='text' placeholder='Your Name' required='required'>
+                        <label for='email'>Email &#42;</label>
+                        <input id='email' type='text' placeholder='Your Email' required='required'>
+                        <label id='message'>Message &#42;<label>
+                            
+                    </fieldset>
                 </form>
 
             </div>

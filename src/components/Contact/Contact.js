@@ -34,13 +34,14 @@ export default class  extends Component {
     }
 
     handleSubmitButton(e){
+        console.log('handleSubmitButton', e)
         const {name, email, text } = this.state
         axios.post('/api/contact', {
             name,
             email,
             text
         }).then(response => {
-            console.log('=======>response', response)
+            console.log('=======>response', response.data)
         })
     }
 
@@ -49,15 +50,15 @@ export default class  extends Component {
             <div>
                 <form action="/contact" id="contact-form" method="post" role="form">
                     <fieldset>
-                        <label for='name'>Name &#42;</label>
-                        <input id='name' type='text' placeholder='Your Name' required='required'>
-                        <label for='email'>Email &#42;</label>
-                        <input id='email' type='text' placeholder='Your Email' required='required'>
-                        <label id='message'>Message &#42;<label>
-                            
+                        <label htmlFor='name'>Name &#42;</label>
+                        <input onChange={event => this.handleName(event.target.value)} id='name' type='text' placeholder='Your Name' required='required'/>
+                        <label htmlFor='email'>Email &#42;</label>
+                        <input onChange={event => this.handleEmail(event.target.value)} id='email' type='text' placeholder='Your Email' required='required'/>
+                        <label htmlFor='message'>Message &#42;</label>
+                        <textarea onChange={event => this.handleText(event.target.value)} id='message' placeholder='Enter your message here' rows='8' required='required'></textarea>
+                        <button onClick={(e) => this.handleSubmitButton(e)} type='submit'>Submit</button>
                     </fieldset>
                 </form>
-
             </div>
         );
     }

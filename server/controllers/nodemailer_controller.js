@@ -1,8 +1,15 @@
+//must require nodemailer in this controller
+const nodemailer = require('nodemailer');
+//must config dotenv because we are using the variables of node_mailer_email and node_mailer_pass
+require('dotenv').config()
+
+
+
 module.exports = {
     sendEmail: (req, res) => {
         const { name, email, text } = req.body
         let transporter = nodemailer.createTransport({
-            service: "gmail",
+            service: "Gmail",
             auth: {
                 user: process.env.NODE_MAILER_EMAIL,
                 pass: process.env.NODE_MAILER_PASS
@@ -13,16 +20,18 @@ module.exports = {
         })
     
         let mailOptions = {
-            from: name + ' ' + NODE_MAILER_EMAIL ,
-            to: NODE_MAILER_EMAIL,
+            from: name + ' ' + process.envNODE_MAILER_EMAIL,
+            to: process.env.NODE_MAILER_EMAIL,
             subject: 'Comments/Concern',
             text: name + ' ' + email + ' ' + text
         }
-        transporter.sendMail(message, (error, info) => {
+        transporter.sendMail((error, info) => {
             if(error){
                 console.log("=======", error)
+                return
             } else {
                 console.log("Message was sent", info)
+                transporter.close()
             }
         })
     }

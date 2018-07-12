@@ -3,6 +3,8 @@ import EventForm from './EventForm/EventForm';
 import GroupForm from './GroupForm/GroupForm';
 import axios from 'axios';
 
+const CLOUDINARY_URL ='https://api.cloudinary.com/v1_1/lynk00/image/upload';
+
 ///Dashboard components.
 export default class Dashboard extends Component {
     constructor() {
@@ -88,9 +90,64 @@ export default class Dashboard extends Component {
     }
     eventImageUpload = (files) => {
 
+            //axios call to server to request hashed signature
+            console.log('file', files)
+            console.log('files', files[0])
+            axios.get('/api/upload').then(response => {
+            console.log(response.data)
+            
+            //form data for signed uploads
+    
+            let formData = new FormData();
+            formData.append("signature", response.data.payload.signature)
+            formData.append("api_key", process.env.REACT_APP_CLOUDINARY_KEY);
+            formData.append("timestamp", response.data.payload.timestamp)
+            formData.append("file", files[0]);
+    
+            for(var pair of formData.entries()) {
+                console.log(pair); 
+             }
+             console.log('formData---------------', formData);
+            //axios call to cloudinary using the URL set at top 
+                axios.post(CLOUDINARY_URL, formData).then(response => {
+                    console.log(response.data);
+    
+                    // Setting state with the secure_url
+                    this.setState({
+                        eventImage: response.data.secure_url
+                    })
+                }).catch( err => console.log("CLoudinary Database Errorr------------", err));
+            }).catch(err => console.log("get credentail error-----------", err));
     }
     groupImageUpload = (files) => {
-
+            //axios call to server to request hashed signature
+            console.log('file', files)
+            console.log('files', files[0])
+            axios.get('/api/upload').then(response => {
+            console.log(response.data)
+            
+            //form data for signed uploads
+    
+            let formData = new FormData();
+            formData.append("signature", response.data.payload.signature)
+            formData.append("api_key", process.env.REACT_APP_CLOUDINARY_KEY);
+            formData.append("timestamp", response.data.payload.timestamp)
+            formData.append("file", files[0]);
+    
+            for(var pair of formData.entries()) {
+                console.log(pair); 
+             }
+             console.log('formData---------------', formData);
+            //axios call to cloudinary using the URL set at top 
+                axios.post(CLOUDINARY_URL, formData).then(response => {
+                    console.log(response.data);
+    
+                    // Setting state with the secure_url
+                    this.setState({
+                        groupImage: response.data.secure_url
+                    })
+                }).catch( err => console.log("CLoudinary Database Errorr------------", err));
+            }).catch(err => console.log("get credentail error-----------", err));
     }
     createGroup = () => {
         ///Destruct the groupName, groupDescription, and groupMembers from the state.

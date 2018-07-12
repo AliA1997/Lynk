@@ -20,6 +20,7 @@ module.exports = {
                 if(doPasswordsMatch){
                        delete userData.password;
                        req.session.user = userData;
+                       req.session.save();
                        res.status(200).json({user: req.session.user})
                    }
                }).catch(err => console.log(err, 'Bcrypt compare error')) 
@@ -46,7 +47,9 @@ module.exports = {
             //Running register sql file and passing newUser as argument
             db.register(newUser).then(user => {
                 req.session.user = user[0];
-                res.status(200).json({user: req.session.user})
+                //Save the session.
+                req.session.save();
+                res.status(200).json({user: req.session.user});
             }).catch(err => console.log(err, "Register error"))
 
         }).catch(err => console.log(err, "Hashing error"))

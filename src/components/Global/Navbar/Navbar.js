@@ -106,8 +106,10 @@ export default class  extends Component {
                         onClose={this.handleClose}
                         >
                         {/* When the menu item is clicked the menu is closed! */}
-                        <MenuItem onClick={() => this.handleClose()}>Profile</MenuItem>
-                        <MenuItem onClick={() => this.handleClose()}>My account</MenuItem>
+                        <MenuItem onClick={() => this.handleClose()}>
+                            <Link to='/dashboard/create_group' className='nav-sublink'>Create Group</Link>
+                        </MenuItem>
+                        <MenuItem onClick={() => this.handleClose()} className='nav-sublink'>My account</MenuItem>
                         </Menu>
                     </div>
                     )}

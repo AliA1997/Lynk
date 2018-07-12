@@ -1,3 +1,7 @@
 .nav-link {
     padding: 20px;
 }
+.nav-sublink {
+    font-weight: 800;
+    color: indigo;
+}

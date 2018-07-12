@@ -10,13 +10,15 @@ import Contact from './components/Contact/Contact';
 import Dashboard from './components/Dashboard/Dashboard';
 import Home from './components/Home/Home';
 import Register from './components/Register/Register';
+import CreateGroup from './components/CreateGroup/CreateGroup';
 
 //Export a default do does not have to be named.
 export default (
     <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/register' component={Register} />
-        <Route path='/dashboard' component={Dashboard} />
+        <Route exact path='/dashboard' component={Dashboard} />
+        <Route path='/dashboard/create_group' component={CreateGroup} />
         <Route path='/about' component={About} />
         <Route path='/contact' component={Contact} />
     </Switch>

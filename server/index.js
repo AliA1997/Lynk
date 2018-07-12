@@ -30,6 +30,10 @@ const nm = require('./controllers/nodemailer_controller');
 //
 
 //Initialize our bodyParser data.
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 app.use(bodyParser.json());
 
 //Initialize our session
@@ -70,7 +74,8 @@ app.get('/api/chats', chat.readChat);
 app.post('/api/chats', chat.createChat);
 
 //Contact Endpoints
-app.post('/api/contact', nm.sendEmail);
+app.post('/api/contactform', nm.sendEmail);
+// app.post('/api/test', nm.test);
 
 ///Server listening on port 4000.
 app.listen(4000, () => console.log('Listening on Port: 4000'));

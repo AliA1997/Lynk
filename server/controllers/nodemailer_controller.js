@@ -7,35 +7,42 @@ require('dotenv').config()
 
 module.exports = {
     sendEmail: (req, res) => {
-        const { name, email, text } = req.body
-        let transporter = nodemailer.createTransport({
-            service: "Gmail",
-            auth: {
-                user: process.env.NODE_MAILER_EMAIL,
-                pass: process.env.NODE_MAILER_PASS
-            },
-            tls: {
-                rejectUnauthorized: false
-            }
-        })
+        console.log('body1', req.body)
+         const { name, email, text } = req.body
+         console.log('req.body', name, email, text)
+         let transporter = nodemailer.createTransport({
+             service: "gmail",
+             auth: {
+                 user: process.env.NODE_MAILER_EMAIL,
+                 pass: process.env.NODE_MAILER_PASS
+             },
+             tls: {
+                 rejectUnauthorized: false
+             }
+         })
+         console.log('transporter', transporter)
     
         let mailOptions = {
-            from: name + ' ' + process.envNODE_MAILER_EMAIL,
+            from: name + ' ' + process.env.NODE_MAILER_EMAIL,
             to: process.env.NODE_MAILER_EMAIL,
             subject: 'Comments/Concern',
             text: name + ' ' + email + ' ' + text
         }
-        transporter.sendMail((error, info) => {
-            if(error){
-                console.log("=======", error)
-                return
-            } else {
-                console.log("Message was sent", info)
-                transporter.close()
-            }
-        })
+        console.log('process.env.NODE_MAILER_EMAIL',process.env.NODE_MAILER_EMAIL)
+        transporter.sendMail(mailOptions, (error, info) => {
+             if(error){
+                 console.log("=======", error)
+                 return
+             } else {
+                 console.log("Message was sent", info)
+                 transporter.close()
+             }
+         })
     }
-}
+//     test: (req, res) => {
+//         console.log('body', req.body)
+//     }
+ }
 
 
 // // Generate test SMTP service account from ethereal.email

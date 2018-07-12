@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
-export default class  extends Component {
+export default class Contact extends Component {
     constructor(){
         super()
         this.state = {
@@ -9,56 +9,55 @@ export default class  extends Component {
             email: '',
             text: ''
         }
-        this.handleName = this.handleName.bind(this)
-        this.handleEmail = this.handleEmail.bind(this)
-        this.handleText = this.handleText.bind(this)
-        this.handleSubmitButton = this.handleSubmitButton(this)
     }
 
     handleName(e){
         this.setState({
-            name: e
+            name: e.target.value
         })
     }
 
     handleEmail(e){
         this.setState({
-            email: e
+            email: e.target.value
         })
     }
 
     handleText(e){
         this.setState({
-            text: e
+            text: e.target.value
         })
     }
 
-    handleSubmitButton(e){
-        console.log('handleSubmitButton', e)
+    handleSubmitButton(){
+
+        // event.preventDefault();
         const {name, email, text } = this.state
-        axios.post('/api/contact', {
-            name,
-            email,
-            text
-        }).then(response => {
+        console.log(this.state)
+        let body = {name: name, email: this.state.email, text: this.state.text}
+        setTimeout(() => console.log(body), 1000)
+        axios.post('/api/contactform', body).then(response => {
             console.log('=======>response', response.data)
+        }).catch(error => {
+            console.log('=======error here=======', error)
         })
     }
 
     render() {
+        console.log(this.state)
         return (
             <div>
-                <form action="/contact" id="contact-form" method="post" role="form">
+                <div id="contact-form">
                     <fieldset>
                         <label htmlFor='name'>Name &#42;</label>
-                        <input onChange={event => this.handleName(event.target.value)} id='name' type='text' placeholder='Your Name' required='required'/>
+                        <input onChange={e => this.handleName(e)} id='name' type='text' placeholder='Your Name' name='name'/>
                         <label htmlFor='email'>Email &#42;</label>
-                        <input onChange={event => this.handleEmail(event.target.value)} id='email' type='text' placeholder='Your Email' required='required'/>
+                        <input onChange={e => this.handleEmail(e)} id='email' type='text' placeholder='Your Email'name='email' />
                         <label htmlFor='message'>Message &#42;</label>
-                        <textarea onChange={event => this.handleText(event.target.value)} id='message' placeholder='Enter your message here' rows='8' required='required'></textarea>
-                        <button onClick={(e) => this.handleSubmitButton(e)} type='submit'>Submit</button>
+                        <textarea onChange={e => this.handleText(e)} id='message' placeholder='Enter your message here' rows='8' name='message'/>
+                        <button onClick={() => this.handleSubmitButton()} >Submit</button>
                     </fieldset>
-                </form>
+                </div>
             </div>
         );
     }

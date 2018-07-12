@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
                         
                     </div>
                 </div>
-                <Groups />
+                <Groups isDashboard={true} />
                 <div>
                     <button>
 

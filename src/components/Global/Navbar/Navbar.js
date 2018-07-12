@@ -53,7 +53,7 @@ export default class  extends Component {
                     </IconButton>
                     <Typography variant="title" color="inherit">
                         <Link to='/'>
-                            Lynk
+                            Lynkup
                         </Link>
                     </Typography>
                     <Typography variant="title" color="inherit">

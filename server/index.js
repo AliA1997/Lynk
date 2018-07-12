@@ -3,6 +3,8 @@ require('dotenv').config();
 //Initializes the server
 const express = require('express');
 //Middlewares   
+//For hosting.
+const cors = require('cors');
 //Initiallizes the req.body, so without it, the req.body will not be defined.
 const bodyParser = require('body-parser');
 //Initializes the session
@@ -32,8 +34,10 @@ const group = require('./controllers/group_controller');
 const nm = require('./controllers/nodemailer_controller');
 //
 
-//Initialize our bodyParser data.
+///Use express.static to render public files from the build folder for hosting
+app.use(express.static(`${__dirname}/../build`));
 
+//Initialize our bodyParser data.
 app.use(bodyParser.json());
 
 //Initialize our session
@@ -53,6 +57,9 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 14
     }
 }));
+
+app.use(cors());
+
 
 
 //Cloudinary Endpoints 
@@ -86,6 +93,13 @@ app.post('/api/chats', chat.createChat);
 //Contact Endpoints
 app.post('/api/contactform', nm.sendEmail);
 // app.post('/api/test', nm.test);
+
+
+///FOr all paths 
+const path = require('path')
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 ///Server listening on port 4000.
 app.listen(4000, () => console.log('Listening on Port: 4000'));

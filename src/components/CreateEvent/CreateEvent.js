@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EventForm from './EventForm/EventForm';
 import axios from 'axios';
+import './CreateEvent.css';
 
 const CLOUDINARY_URL ='https://api.cloudinary.com/v1_1/lynk00/image/upload';
 

@@ -1,9 +1,5 @@
 module.exports = {
 
-    createChat(req, res) {
-        const{}
-    },
-    
     readChat(req, res) {
     //Destructuring id from req.params
         const{id} = req.params;

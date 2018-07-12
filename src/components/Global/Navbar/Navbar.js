@@ -109,7 +109,9 @@ export default class  extends Component {
                         <MenuItem onClick={() => this.handleClose()}>
                             <Link to='/dashboard/create_group' className='nav-sublink'>Create Group</Link>
                         </MenuItem>
-                        <MenuItem onClick={() => this.handleClose()} className='nav-sublink'>My account</MenuItem>
+                        <MenuItem onClick={() => this.handleClose()} className='nav-sublink'>
+                            <Link to='/dashboard/create_event'>My account</Link>
+                        </MenuItem>
                         </Menu>
                     </div>
                     )}

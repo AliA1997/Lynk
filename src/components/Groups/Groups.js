@@ -27,7 +27,7 @@ export default class Groups extends Component {
         }
     }
 
-
+    
     render() {
         //Destructuring groups from this.state
         const{ groups } = this.state;
@@ -36,7 +36,7 @@ export default class Groups extends Component {
                 {this.props.isDashboard ? <h1>Groups in Charge</h1> : <h1>Groups</h1>}
                 <div>
             {/* Mapping over groups array and returning GroupCard with spread operator passing each property of group*/}
-                    {groups.length && groups.map(group => <GroupCard {...group}/>)}
+                    {groups.length && groups.map((group, i) => <GroupCard key={i} {...group} isDashboard={this.props.isDashboard}/>)}
                 </div>
             </div>
         );

@@ -54,7 +54,7 @@ export default class GroupCard extends Component {
         }).catch(err => console.log("get credentail error-----------", err));
     }
     deleteGroup = (id) => {
-        if(window.confirm('Do you want to delete this group')) {
+        if(window.confirm('Do you want to delete this group?')) {
             axios.delete(`/api/groups/${id}`).then(res => {
                 this.setState({groups: res.data.groups});
             }).catch(err => console.log('Delete Group Error-------------', err));

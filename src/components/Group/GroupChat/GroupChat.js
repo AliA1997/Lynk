@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Chat = () => {
+const GroupChat = (props) => {
     return (
         <div>
         </div>
     );
 };
 
-export default Chat;
+export default GroupChat;

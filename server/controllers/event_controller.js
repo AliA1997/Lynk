@@ -9,11 +9,7 @@ module.exports = {
         const db = req.app.get('db');
         let event_image = 'image';
         //Setting new event object to newEvent variable
-<<<<<<< HEAD
         const newEvent = { event_name, event_topic, event_date, event_image, event_location, event_attendee_list, group_id };
-=======
-        const newEvent = { event_name, event_topic, event_image, event_date, event_location, event_attendee_list, group_id };
->>>>>>> 7ffdab2be542ab12a203da3c997fc36284a2ddc1
         db.create_event(newEvent).then(events => {
             console.log('events--------', events);
             res.status(200).json({events})

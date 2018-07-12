@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GroupCard from './GroupCard/GroupCard';
+import axios from 'axios';
 
 export default class Groups extends Component {
     constructor(){

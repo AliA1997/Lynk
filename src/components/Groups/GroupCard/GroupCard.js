@@ -17,3 +17,4 @@ const GroupCard = (props) => {
         );
     
 }
+export default GroupCard;

@@ -1,12 +1,23 @@
 module.exports = {
     readGroup(req, res) {
         //Assign a variable that holds your database instance .
-        const dbInstance = req.app.get('db');
+        const db = req.app.get('db');
         //Runs the sql file that reads the groups.
         db.read_all_group().then(groups => {
             ///Return the groups to the frontend.
             res.status(200).json({groups});
         }).catch(err => console.log(err, 'Read All Groups Error------------'));
+    },
+    readUserAdminGroups(req, res) {
+        //Assign variable to database instance.
+        const db = req.app.get('db');
+        //Destruct the id from the request params.
+        const { id } = req.params;
+        //Read User Admin Groups---------
+        db.read_user_admin_groups(id).then(groups => {
+            //Return groups to the frontend.
+            res.status(200).json({groups});
+        }).catch(err => console.log(err, 'Read User Admin Groups Error------------'));
     },
     createGroup(req,res) {
         //Assign a variable that holds your database instance.

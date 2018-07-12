@@ -1,1 +1,1 @@
-SELECT * FROM groups;
+SELECT groups.*, users.username FROM groups JOIN users ON groups.group_admin = users.id;

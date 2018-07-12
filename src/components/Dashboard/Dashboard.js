@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EventForm from './EventForm/EventForm';
 import GroupForm from './GroupForm/GroupForm';
+import Groups from '../Groups/Groups';
 import axios from 'axios';
 
 ///Dashboard components.
@@ -130,6 +131,7 @@ export default class Dashboard extends Component {
                         handleCurrentMember={this.handleCurrentGroupMember} add={this.addGroupMember} remove={this.removeGroupMember}/>
                     </div>
                 </div>
+                <Groups />
                 <div>
                     <button>
 

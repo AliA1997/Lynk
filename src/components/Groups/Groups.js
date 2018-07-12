@@ -12,9 +12,18 @@ export default class Groups extends Component {
 
     componentDidMount() {
         //Axios call setting state with groups array
-        axios.get('/api/groups').then(res => {
-            this.setState({groups: res.data.groups})
-        })
+        //If there is no isDashboard prop.
+        if(!this.props.isDashboard) {
+            axios.get('/api/groups').then(res => {
+                //Gets all default groups
+                this.setState({groups: res.data.groups})
+            }).catch(err => console.log('Get Groups Error-------------', err));
+        } else {
+            axios.get(`/api/groups/admin/1`).then(res => {
+                //Get all groups that the user is in charge of.
+                this.setState({groups: res.data.groups});
+            }).catch(err => console.log('Get User Admin Groups------------', err));
+        }
     }
 
 
@@ -23,7 +32,7 @@ export default class Groups extends Component {
         const{ groups } = this.state;
         return (
             <div> 
-                <h1>Groups</h1>
+                {this.props.isDashboard ? <h1>Groups in Charge</h1> : <h1>Groups</h1>}
                 <div>
             {/* Mapping over groups array and returning GroupCard with spread operator passing each property of group*/}
                     {groups.length && groups.map(group => <GroupCard {...group}/>)}

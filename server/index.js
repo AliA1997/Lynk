@@ -2,9 +2,6 @@
 require('dotenv').config();
 //Initializes the server
 const express = require('express');
-
-
-//
 //Middlewares   
 //Initiallizes the req.body, so without it, the req.body will not be defined.
 const bodyParser = require('body-parser');
@@ -15,27 +12,28 @@ const massive  = require('massive');
 //Connects session to database.
 const pgSession = require('connect-pg-simple')(session);
 //
+///Define the server 
+const app =  express();
+//Installing Nodemailer
+const nodemailer = require('nodemailer');
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
 massive(process.env.CONNECTION_STRING).then(database => {
     //Then assign the database, directory of the sql files to the server.
     app.set('db', database);
 }).catch(err => console.log(err, 'Database Connection Error'))
-//
+
 //Controller Files 
 const user = require("./controllers/user_controller");
 const cloudinary = require('./controllers/cloudinary_controller');
 const chat = require('./controllers/chat_controller');
 const event = require('./controllers/event_controller');
 const group = require('./controllers/group_controller');
-//
-
-
-///Define the server 
-const app =  express();
+const nm = require('./controllers/nodemailer_controller');
 //
 
 //Initialize our bodyParser data.
+
 app.use(bodyParser.json());
 
 //Initialize our session
@@ -84,6 +82,10 @@ app.delete('/api/event/:id', event.deleteEvent);
 //Chat Endpoints
 app.get('/api/chats', chat.readChat);
 app.post('/api/chats', chat.createChat);
+
+//Contact Endpoints
+app.post('/api/contactform', nm.sendEmail);
+// app.post('/api/test', nm.test);
 
 ///Server listening on port 4000.
 app.listen(4000, () => console.log('Listening on Port: 4000'));

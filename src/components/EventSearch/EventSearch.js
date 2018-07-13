@@ -27,13 +27,14 @@ export default class EventSearch extends Component {
         this.setState({searchEvents: copyOfArr});
     }
     render() {
-        const { defaultEvents, searchEvents } = this.state;
+        //Can set default values when destructuring, using the assignment operator(=) and the value.
+        const { defaultEvents = [], searchEvents = [] } = this.state;
         return (
             <div>
                 <div>
                     <h2>Search Events</h2>
-                    <Search handleChange={this.handleSearch}/>
-                    {searchEvents.length ? searchEvents.map(event => <EventCard {...event} />) 
+                    <Search type='Events' handleChange={this.handleSearch}/>
+                    {searchEvents && searchEvents.length ? searchEvents.map(event => <EventCard {...event} />) 
                     : defaultEvents.map(event => <EventCard {...event} />)}
                 </div>
             </div>

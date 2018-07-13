@@ -20,13 +20,14 @@ export default class GroupSearch extends Component {
         this.setState({searchGroups: copyOfArr});
     }
     render() {
-        const { defaultGroups, searchGroups } = this.state;
+        //Can set a default value when destructuring properties from object, by using the assignment operator (=)
+        const { defaultGroups = [], searchGroups = [] } = this.state;
         return (
             <div>
                 <div>
                     <h2>Search Groups</h2>
-                    <Search handleChange={this.handleSearch} />
-                    {searchGroups.length ? searchGroups.map(group => <GroupCard {...group} />) 
+                    <Search type='Groups' handleChange={this.handleSearch} />
+                    {searchGroups && searchGroups.length ? searchGroups.map(group => <GroupCard {...group} />) 
                     : defaultGroups.map(group => <GroupCard {...group} />)}
                 </div>
             </div>

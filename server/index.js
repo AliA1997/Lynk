@@ -32,6 +32,7 @@ const chat = require('./controllers/chat_controller');
 const event = require('./controllers/event_controller');
 const group = require('./controllers/group_controller');
 const nm = require('./controllers/nodemailer_controller');
+const search = require('./controllers/search_controller');
 //
 
 ///Use express.static to render public files from the build folder for hosting
@@ -77,6 +78,7 @@ app.delete('/api/group/:id', group.deleteGroup);
 app.patch('/api/group/:id/add_member', group.addMember);
 app.patch('/api/group/:id/remove_member', group.removeMember);
 
+
 //Dashboard Group Endpionts 
 app.get('/api/groups/admin/:id', group.readUserAdminGroups);
 
@@ -85,6 +87,12 @@ app.get('/api/events', event.readEvent);
 app.post('/api/events', event.createEvent);
 app.put('/api/event/:id', event.updateEvent);
 app.delete('/api/event/:id', event.deleteEvent);
+
+//Search Endpoints 
+//Search Group Endpoints
+app.get('/api/groups/search', search.searchGroup);
+//Search Event Endpoints 
+app.get('/api/events/search', search.searchEvent);
 
 //Chat Endpoints
 app.get('/api/chats', chat.readChat);

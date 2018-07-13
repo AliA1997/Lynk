@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import EditGroup from '../EditGroup/EditGroup';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -86,20 +87,22 @@ export default class GroupCard extends Component {
      const { doEdit, editGroupName, editGroupImage, editGroupDescription } = this.state;
         return (
              <div>
-                 <div>
-                     {/*Displaying the group_name and group_description from props */}
-                     <p>Group Name:</p>
-                     {group_name}
-                     <p>Group Description:</p>
-                     {group_description}
-                 </div>
-                 {this.props.isDashboard && <Button variant='outlined' onClick={() => this.editGroup(id)}>Edit</Button>}
-                 {this.props.isDashboard && <Button variant='outlined' onClick={() => this.deleteGroup(id)}>Delete</Button>}
-                 <div style={{display: doEdit ? 'inline-block' : 'none'}}>
-                    <EditGroup editGroup={this.editGroup} handleName={this.handleEditName} handleDescription={this.handleEditDescription}
-                    handleImage={this.handleEditImage} editName={editGroupName} {...this.state}
-                    groupName={group_name} groupDescription={group_description} group_members={group_members}/>
-                </div>
+                 <Link to={`/groups/${id}`} style={{textDecoration: 'none'}}>
+                    <div>
+                        {/*Displaying the group_name and group_description from props */}
+                        <p>Group Name:</p>
+                        {group_name}
+                        <p>Group Description:</p>
+                        {group_description}
+                    </div>
+                    {this.props.isDashboard && <Button variant='outlined' onClick={() => this.editGroup(id)}>Edit</Button>}
+                    {this.props.isDashboard && <Button variant='outlined' onClick={() => this.deleteGroup(id)}>Delete</Button>}
+                    <div style={{display: doEdit ? 'inline-block' : 'none'}}>
+                        <EditGroup editGroup={this.editGroup} handleName={this.handleEditName} handleDescription={this.handleEditDescription}
+                        handleImage={this.handleEditImage} editName={editGroupName} {...this.state}
+                        groupName={group_name} groupDescription={group_description} group_members={group_members}/>
+                    </div>
+                </Link>
              </div>
         );    
     }

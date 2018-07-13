@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EditEvent from '../EditEvent/EditEvent';
+import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import './EventCard.css';
@@ -68,8 +69,7 @@ export default class EventCard  extends Component {
 
     deleteEvent = (id) => {
         if(window.confirm('Do you want to delete this event?')){
-            axios.delete(`/api/events/${id}`).then(res 
-            => {
+            axios.delete(`/api/events/${id}`).then(res => {
                 // this.setState({events: res.data.events});
             }).catch(err => console.log('Delete Event Error----------', err));
         }
@@ -101,8 +101,8 @@ export default class EventCard  extends Component {
     }
 
     render() {
-        const{event_name, event_topic, event_date, event_location, event_attendee_list, event_image, event_admin} = this.props;
-        const { doEdit, editEventName, editEventTopic, editEventDate, editEventLocation, editEventAttendeeList, editEventImage, editEventImage} = this.state;
+        const{ id, event_name, event_topic, event_date, event_location, event_attendee_list, event_image, event_admin} = this.props;
+        const { doEdit } = this.state;
         return (
             <div>
                 <div>

@@ -68,3 +68,5 @@ const EditEvent = (props) => {
         </div>
     )
 }
+
+export default EditEvent;

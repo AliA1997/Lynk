@@ -14,8 +14,10 @@ export default class EventSearch extends Component {
     componentDidMount() {
         axios.get('/api/events/search')
         .then(res => {
-            //I have 2 arrays on with the default events. and search events. 
-            this.setState({defaultEvents: res.data.events, searchEvents: res.data.events});
+            if(res.data.events) {
+                //I have 2 arrays on with the default events. and search events. 
+                this.setState({defaultEvents: res.data.events, searchEvents: res.data.events});
+            }
         }).catch(err => console.log('Event Search-------------------------', err));
     }
     handleSearch = (val) => {
@@ -28,14 +30,14 @@ export default class EventSearch extends Component {
     }
     render() {
         //Can set default values when destructuring, using the assignment operator(=) and the value.
-        const { defaultEvents = [], searchEvents = [] } = this.state;
+        const { defaultEvents, searchEvents } = this.state;
         return (
             <div>
                 <div>
                     <h2>Search Events</h2>
                     <Search type='Events' handleChange={this.handleSearch}/>
-                    {searchEvents && searchEvents.length ? searchEvents.map(event => <EventCard {...event} />) 
-                    : defaultEvents.map(event => <EventCard {...event} />)}
+                    {searchEvents && searchEvents.length ? searchEvents.map((event, i) => <EventCard key={i} {...event} />) 
+                    : defaultEvents.map((event, i) => <EventCard key={i} {...event} />)}
                 </div>
             </div>
         );

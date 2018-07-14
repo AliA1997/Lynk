@@ -67,6 +67,7 @@ app.use(cors());
 app.get('/api/upload', cloudinary.upload);
 
 //User Endpoints 
+app.get('/api/user-data', user.readUserData);
 app.post('/api/login', user.login);
 app.post('/api/register', user.register);
 

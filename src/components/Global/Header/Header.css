@@ -1,0 +1,35 @@
+.desktop {
+    display: none;
+    text-align: center;
+}
+.mobile {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+.mobile-navbar {
+    height: 80vh;
+    width: 100vw;
+    border: 1px solid #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 5;
+    grid-template-rows: 15% 15% 15% 15% 15% 15%;
+    grid-template-columns: 20% 10% 70%;
+    background: indigo;
+}
+.mobile-navbar > * {
+    border: 1px solid #fff;
+    grid-column: 1/1;
+}
+.active {
+    background: green;
+    grid-column:  1/2;
+}
+.active > * {
+    width: 100%;
+    
+}

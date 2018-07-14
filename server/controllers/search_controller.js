@@ -25,7 +25,8 @@ module.exports = {
             //Do a database call...........
         } else {
             //Else return the grups limited by 10.
-            db.read_groups().then(groups => {
+            db.read_all_groups().then(groups => {
+                console.log('groups-----------', groups);
                 //Return a status code of 200 and the groups.
                 res.status(200).json({groups});
             }).catch(err => console.log('Read all groups database error----------', err));

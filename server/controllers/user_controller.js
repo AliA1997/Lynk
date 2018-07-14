@@ -4,6 +4,10 @@ const bcrypt = require('bcrypt');
 const saltRounds = 12;
 ///Exporting the object with the methods.   
 module.exports = {
+    readUserData(req, res) {
+        //Read the data from the req.session.user
+        res.status(200).json({user: req.session.user});
+    },
     login(req, res) {
     // Destructuring username and password from req.body
        const { username, password } = req.body;

@@ -3,7 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-
+//Import the css file
+import './EventForm.css';
 
 
 const EventForm = (props) => {
@@ -11,7 +12,7 @@ const EventForm = (props) => {
     return (
         <div>
             <h4>Create Event</h4>
-            <form>
+            <form className='create-event-form'>
                 <TextField
                 required
                 id="name"

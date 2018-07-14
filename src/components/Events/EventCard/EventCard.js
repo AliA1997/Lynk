@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import EditEvent from '../EditEvent/EditEvent';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
 import axios from 'axios';
 import './EventCard.css';
 
@@ -101,26 +107,29 @@ export default class EventCard  extends Component {
     }
 
     render() {
-        const{ id, event_name, event_topic, event_date, event_location, event_attendee_list, event_image, event_admin} = this.props;
+        // console.log('this.props------------', this.props);
+        const{ id, event_name, event_topic, event_date, event_location, event_attendee_list, event_image} = this.props;
         const { doEdit } = this.state;
         return (
-            <div>
-                <div>
+            <Card>
                     {/* Displaying the event_image, event_name, event_topic, event_date, event_location from props*/}
-                    <Avatar src= {event_image}/>
-                    <p>Event Name: </p>
-                    {event_name}
-                    <p>Event Topic:</p>
-                    {event_topic}
-                    <p>Event Date:</p>
-                    {event_date}
-                    <p>Event Location</p>
-                    {event_location}
-                </div>
-                {this.props.isDashboard && <Button variant='outlined' onClick={() => this.editEvent(id)}>Edit</Button>}
+                    <CardHeader 
+                    avatar={<Avatar src= {event_image} alt={event_name}/>}
+                    title={event_name}
+                    subtitle={event_topic}
+                    />
+                    <CardMedia 
+                        image={event_image}
+                        title={event_name}
+                    />
+                    <CardContent>
+                        <Typography component="p">Event Location: {event_location}</Typography>
+                    </CardContent>
 
-                {this.props.isDashboard && <Button variant='outlined' onClick={() => this.deleteEvent(id)}>Delete</Button>}
+                    
+                    {this.props.isDashboard && <Button variant='outlined' onClick={() => this.editEvent(id)}>Edit</Button>}
 
+                    {this.props.isDashboard && <Button variant='outlined' onClick={() => this.deleteEvent(id)}>Delete</Button>}
                 <div style={{display: doEdit ? 'inline-block' : 'none'}}>
                     <EditEvent editEvent={this.editEvent} 
                     handleName={this.handleEditName}
@@ -136,7 +145,7 @@ export default class EventCard  extends Component {
                     eventAttendee={event_attendee_list}/>
 
                 </div>
-            </div>
+            </Card>
         
         );
     }

@@ -30,6 +30,8 @@ export default class GroupSearch extends Component {
         this.setState({searchGroups: copyOfArr});
     }
     render() {
+        console.log('defaultGroups----------', this.state.defaultGroups);
+        console.log('searchGroups----------', this.state.searchGroups);
         //Can set a default value when destructuring properties from object, by using the assignment operator (=)
         const { defaultGroups, searchGroups } = this.state;
         return (

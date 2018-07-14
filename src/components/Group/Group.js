@@ -19,6 +19,9 @@ export default class Group extends Component {
         return (
             <div>
                 <div>
+                    <div>
+                        <img src={group_image} alt={group_name} />
+                    </div>
                     <h3>Group Name:</h3>
                     <h3>{group_name}</h3>
                     <h3>Operated by {username}</h3>

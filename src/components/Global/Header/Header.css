@@ -36,3 +36,11 @@
 .active-description {
     display: inline-block;
 }
+@media (min-width: 1260px) {
+    .desktop { 
+        display: inherit;
+    }
+    .mobile {
+        display: none;
+    }
+}

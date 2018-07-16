@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import Avatar from '@material-ui/core/Avatar';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
@@ -26,16 +27,9 @@ const EventForm = (props) => {
                 onChange={e => props.handleTopic(e.target.value)}
                 value={eventTopic}
                 margin="normal"
-                />          
-                <TextField
-                required
-                id="event-image"
-                type="file"
-                label="Upload Image"
-                onChange={e => props.eventImageUpload(e.target.files)}
-                value={eventImage}
-                margin="normal"
-                />      
+                />        
+                <Avatar alt={eventName} src={eventImage} style={{height: '10em', width: '10em'}} />  
+                <input type='file' placeholder='Event Image' onChange={e => props.eventImageUpload(e.target.files)} /> 
                 <TextField
                 required
                 id="date"

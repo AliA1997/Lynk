@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter as R } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './ducks/store';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<R><App /></R>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><R><App /></R></Provider>, document.getElementById('root'));
 registerServiceWorker();

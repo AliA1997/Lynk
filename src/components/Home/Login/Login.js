@@ -19,9 +19,10 @@ const Login = (props) => {
                 <TextField
                     required
                     id="password"
+                    type="password"
                     label="password"
                     onChange={e => props.handlePassword(e.target.value)}
-                    value={username}
+                    value={password}
                     margin="normal"
                 />
                 <Button variant='outlined' color='primary' onClick={() => props.login()}>

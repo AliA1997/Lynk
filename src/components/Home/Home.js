@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+//Redirects the user 
+import { withRouter } from 'react-router-dom';
+//Connects the component to the store.
+import { connect } from 'react-redux';
+//Import the components from material-ui
+import { login } from '../../ducks/reducer';
 import Button from '@material-ui/core/Button';
 import Login from './Login/Login';
 import axios from 'axios';
 
 
-export default class Home extends Component {
+class Home extends Component {
     constructor() {
         super();
         this.state = {
@@ -24,7 +30,9 @@ export default class Home extends Component {
         const loginInfo = { username, password };
         axios.post('/api/login', loginInfo)
         .then(res => {
-            alert(res.data.message);
+            this.props.login(res.data.user);
+            alert('Login Successfully');
+            this.props.history.push('dashboard');
         }).catch(err => console.log('Login Error---------------', err));
     }
     render() {
@@ -40,3 +48,15 @@ export default class Home extends Component {
         );
     }
 }
+//Map the state to props
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    };
+}
+//Map the dispatcher to props.
+const mapDispatchToProps = {
+    login: login
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

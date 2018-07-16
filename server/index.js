@@ -9,10 +9,16 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 //Initializes the Database
 const massive  = require('massive');
+<<<<<<< HEAD
 ///Define the server 
 const app =  express();
 //Installing Nodemailer
 const nodemailer = require('nodemailer');
+=======
+//Connects session to database.
+const pgSession = require('connect-pg-simple')(session);
+//
+>>>>>>> 57091446fdff24589a5083cdef6aa41090d3ffda
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
 massive(process.env.CONNECTION_STRING).then(database => {
@@ -39,8 +45,15 @@ app.use(bodyParser.json());
 //Initialize our session
 app.use(session({
     secret: process.env.SESSION_SECRET,
+    //If the session is import then initialize the store for the session
+    store: session && new pgSession({
+        //Uses the connection string to connect to database
+        conString: process.env.CONNECTION_STRING,
+        //Insert this table.
+        tableName: 'session'
+    }),
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     //Age of the session
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 14
@@ -62,6 +75,9 @@ app.put('/api/group/:id', group.updateGroup);
 app.delete('/api/group/:id', group.deleteGroup);
 app.patch('/api/group/:id/add_member', group.addMember);
 app.patch('/api/group/:id/remove_member', group.removeMember);
+
+//Dashboard Group Endpionts 
+app.get('/api/groups/admin/:id', group.readUserAdminGroups);
 
 //Event Endpoints
 app.get('/api/events', event.readEvent);

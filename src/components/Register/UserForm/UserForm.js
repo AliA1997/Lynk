@@ -1,5 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+
+import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import './UserForm.css';
 
@@ -41,15 +43,8 @@ const UserForm = (props) => {
             defaultValue="Hello World"
             margin="normal"
           />
-           <TextField 
-            required 
-            id='profile_picture'
-            value={profile_picture}
-            type='file'
-            onChange={e => props.handleUpload(e.target.files)}
-            autoComplete='file'
-            margin='normal'
-            />         
+          <Avatar alt={username} src={profile_picture} className='profile-image' style={{height: '10em', width: '10em'}}/>
+          <input type='file' onChange={e => props.handleUpload(e.target.files)} />      
             <TextField
               required
               id="ages"

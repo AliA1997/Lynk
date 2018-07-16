@@ -13,7 +13,15 @@ export default class CreateGroup extends Component {
             groupImage: '',
             currentMemberSelected: '',
             groupMembers: [],
+            users: []
         }
+    }
+    componentDidMount() {
+        ///Get all the users so you can insert them into the dropdown.
+        axios.get("/api/users/dropdown").then(res =>{
+            console.log('users--------------------', res.data.users)
+            this.setState({users: res.data.users});
+        }).catch(err => console.log('Get users dropdown error', err));
     }
     handleGroupName = (val) => {
         //Handle changes in the group name input field
@@ -28,10 +36,14 @@ export default class CreateGroup extends Component {
         this.setState({currentMemberSelected: val})        
     }
     addGroupMember = (val) => {
+        //Copy the users to pick from .
+        let copyOfUsers = this.state.users.slice();
         //Copy of the array, so your add to it.
         let copyOfArr = this.state.groupMembers.slice();
+        //Filter out the picked user based on the value passed in.
+        let pickedUser = copyOfUsers.filter(user => user.username === val)[0];
         //Push to the copy of the array.
-        copyOfArr.push(val);
+        copyOfArr.push(pickedUser);
         this.setState({groupMembers: copyOfArr});
     }
     removeGroupMember = (val) => {
@@ -85,10 +97,10 @@ export default class CreateGroup extends Component {
         }).catch(err => console.log(err, 'Create Group Database Error--------------'));
     }
     render() {
-        const { groupName, groupDescription, groupImage, groupMembers, currentMemberSelected } = this.state;
+        const { groupName, groupDescription, groupImage, groupMembers, currentMemberSelected, users } = this.state;
         return (
             <div className='create-group-form'>
-                    <GroupForm groupImage={groupImage} groupImageUpload={this.groupImageUpload}
+                    <GroupForm groupImage={groupImage} groupImageUpload={this.groupImageUpload}  users={users}
                     groupName={groupName} groupDescription={groupDescription} groupMembers={groupMembers} currentMemberSelected={currentMemberSelected}
                     create={this.createGroup} handleName={this.handleGroupName} handleDescription={this.handleGroupDescription}
                     handleCurrentMember={this.handleCurrentGroupMember} add={this.addGroupMember} remove={this.removeGroupMember}/>

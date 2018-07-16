@@ -10,7 +10,7 @@ import './EventForm.css';
 const EventForm = (props) => {
     const { eventName, eventTopic, eventImage, eventDate, eventLocation, currentEventAttendeeSelected, eventAttendeeList } = props;
     return (
-        <div>
+        <div className='create-event-div'>
             <h4>Create Event</h4>
             <form className='create-event-form'>
                 <TextField

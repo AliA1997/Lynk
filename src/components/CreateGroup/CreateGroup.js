@@ -87,13 +87,11 @@ export default class CreateGroup extends Component {
     render() {
         const { groupName, groupDescription, groupImage, groupMembers, currentMemberSelected } = this.state;
         return (
-            <div>
-                <div className='create-group-form'>
+            <div className='create-group-form'>
                     <GroupForm groupImage={groupImage} groupImageUpload={this.groupImageUpload}
                     groupName={groupName} groupDescription={groupDescription} groupMembers={groupMembers} currentMemberSelected={currentMemberSelected}
                     create={this.createGroup} handleName={this.handleGroupName} handleDescription={this.handleGroupDescription}
                     handleCurrentMember={this.handleCurrentGroupMember} add={this.addGroupMember} remove={this.removeGroupMember}/>
-                </div>
             </div>
         );
     }

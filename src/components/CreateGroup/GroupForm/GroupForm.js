@@ -3,12 +3,13 @@ import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import './GroupForm.css';
 
 
 const GroupForm = (props) => {
     const { groupName, groupDescription, groupImage, groupMembers, currentMemberSelected } = props;
     return (
-        <div>
+        <div className='create-group-div'>
             <h4>Create Group</h4>
             <form>
                 <TextField
@@ -44,7 +45,7 @@ const GroupForm = (props) => {
                     Create Group 
                 </Button> 
             </form>
-            <div className='attendee-list'>
+            <div className='group-members-list'>
                 <h3>Members</h3>
                 {groupMembers && groupMembers.map(attendee => <p>{attendee}</p>)}
             </div>

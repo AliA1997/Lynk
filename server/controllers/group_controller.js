@@ -19,6 +19,17 @@ module.exports = {
             res.status(200).json({groups});
         }).catch(err => console.log(err, 'Read User Admin Groups Error------------'));
     },
+    readUserGroups(req, res) {
+        //Assign variable to database instance.
+        const db = req.app.get('db');
+        //Destruct the id from the request param.
+        const { id } = req.params;
+        //Read User Groups  
+        db.read_user_groups(req.session.user).then(groups => {
+            //Return groups to the frontend.
+            res.status(200).json({groups});
+        }).catch(err => console.log(err, 'Read User Groups Error-------------------'));
+    },
     createGroup(req,res) {
         //Assign a variable that holds your database instance.
         const db = req.app.get('db');

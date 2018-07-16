@@ -82,6 +82,8 @@ app.patch('/api/group/:id/remove_member', group.removeMember);
 
 //Dashboard Group Endpionts 
 app.get('/api/groups/admin/:id', group.readUserAdminGroups);
+app.get('/api/groups/user', group.readUserGroups);
+
 
 //Event Endpoints
 app.get('/api/events', event.readEvent);

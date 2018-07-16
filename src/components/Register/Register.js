@@ -18,6 +18,7 @@ export default class Register extends Component {
             profile_picture: ''
         }
     }
+
     handleName = (val) => {
         this.setState({name: val});
     }

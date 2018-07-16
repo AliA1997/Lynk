@@ -9,8 +9,10 @@ import FaInfoCircle from 'react-icons/lib/fa/info-circle';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Navbar from '../Navbar/Navbar';
-import './Header.css';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { StepLabel } from '../../../../node_modules/@material-ui/core';
+import './Header.css';
 
 class Header extends Component {
     constructor() {
@@ -21,6 +23,7 @@ class Header extends Component {
     }
     elementSelect(elem) {
         let elementSelected  = document.getElementById(elem);
+        let elementSelectedDescription = document.getElementById(`${elem}-label`);
         let activeElement = document.querySelector('.active');
         if(activeElement) {
                 activeElement.classList.remove('active');
@@ -28,9 +31,12 @@ class Header extends Component {
         console.log('elementSelected-----------------', elementSelected);
 
        if(elementSelected.classList.contains('active')) {
+           elementSelectedDescription.style.display = 'none';
            elementSelected.classList.remove('active');
-       } else {
-        elementSelected.classList.add('active');
+        } else {
+            elementSelected.classList.add('active');
+            elementSelectedDescription.style.display = 'inline-block';           
+           elementSelected.style.border = '2px solid black';            
        }
        return;
     
@@ -59,25 +65,50 @@ class Header extends Component {
                     <div>
                         <div style={{display: hamburgerClicked ? 'grid' : 'none'}} className="mobile mobile-navbar">
                             <Button onClick={() => this.elementSelect('home')} id="home" 
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/2', gridRow: '2/2'}}>
+                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1', gridRow: '2/2', height: '100%', width: '100%'}}>
                                 <MdHome style={{fontSize: '3em'}} />
                             </Button>
+                            <StepLabel style={{display: 'none', gridRow: '2/2', gridColumn: '2/4', width: '100%', height: '100%'}} id='home-label'>
+                                <Link to='/contact'>
+                                    Home
+                                </Link>    
+                            </StepLabel>
                             <Button onClick={() => this.elementSelect('group')} id="group"
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/2', gridRow: '3/3'}}>
+                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1', gridRow: '3/3', height: '100%', width: '100%'}}>
                                 <MdGroup style={{fontSize: '3em'}} />
                             </Button>
+                            <StepLabel style={{display: 'none', gridRow: '3/3', gridColumn: '2/4', width: '100%', height: '100%'}} id='group-label'>
+                                <Link to='/contact'>
+                                    Groups
+                                </Link>
+                            </StepLabel>
                             <Button onClick={() => this.elementSelect('event')} id="event"
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/2',  gridRow: '4/4'}}>
+                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1',  gridRow: '4/4', height: '100%', width: '100%'}}>
                                 <MdEventSeat style={{fontSize: '3em'}} />
                             </Button>
+                            <StepLabel style={{display: 'none', gridRow: '4/4', gridColumn: '2/4', width: '100%', height: '100%'}} id='event-label'>
+                                <Link to='/events'>
+                                    Events
+                                </Link>
+                            </StepLabel>
                             <Button onClick={() => this.elementSelect('about')} id="about"
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/2',  gridRow: '5/5'}}>
+                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1',  gridRow: '5/5', height: '100%', width: '100%'}}>
                                 <FaInfoCircle style={{fontSize: '3em'}} />
                             </Button>
+                            <StepLabel style={{display: 'none', gridRow: '5/5', gridColumn: '2/4', width: '100%', height: '100%'}} id='about-label'>
+                                <Link to='/about'>
+                                    About
+                                </Link>
+                            </StepLabel>
                             <Button onClick={() => this.elementSelect('contact')} id="contact"
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/2',  gridRow: '6/6'}}>
+                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1',  gridRow: '6/6', height: '100%', width: '100%'}}>
                                 <MdEmail style={{fontSize: '3em'}}/>
                             </Button>
+                            <StepLabel style={{display: 'none', gridRow: '6/6', gridColumn: '2/4', width: '100%', height: '100%'}} id='contact-label'>
+                                <Link to='/contact'>
+                                    Contact
+                                </Link>
+                            </StepLabel>
                         </div>
                     </div>
                 </div>

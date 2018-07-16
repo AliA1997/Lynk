@@ -30,15 +30,8 @@ const GroupForm = (props) => {
                 />
                 <Avatar alt={groupName} src={groupImage} style={{height: '10em', width: '10em'}} />  
                 <input type='file' placeholder='Group Image' onChange={e => props.groupImageUpload(e.target.files)} />         
-                <TextField
-                required
-                list="members"
-                label="Current Member"
-                onChange={e => props.handleCurrentMember(e.target.value)}
-                value={currentMemberSelected}
-                margin="normal"
-                />
-                <datalist name='members'>
+                <input type='text' list="members" placeholder="Add members" />
+                <datalist id='members'>
                     {users.map((user, i) => <option key={i} value={user.username}>{user.username}</option>)}
                 </datalist>
                 <MdAdd className='add-icon' onClick={() => currentMemberSelected && props.add(currentMemberSelected)}/>

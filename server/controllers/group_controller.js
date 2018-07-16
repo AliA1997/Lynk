@@ -3,7 +3,7 @@ module.exports = {
         //Assign a variable that holds your database instance .
         const db = req.app.get('db');
         //Runs the sql file that reads the groups.
-        db.read_all_group().then(groups => {
+        db.read_all_groups().then(groups => {
             ///Return the groups to the frontend.
             res.status(200).json({groups});
         }).catch(err => console.log(err, 'Read All Groups Error------------'));

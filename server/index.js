@@ -2,6 +2,7 @@
 require('dotenv').config();
 //Initializes the server
 const express = require('express');
+const app = express();
 //Middlewares   
 //Initiallizes the req.body, so without it, the req.body will not be defined.
 const bodyParser = require('body-parser');
@@ -9,16 +10,9 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 //Initializes the Database
 const massive  = require('massive');
-<<<<<<< HEAD
-///Define the server 
-const app =  express();
-//Installing Nodemailer
-const nodemailer = require('nodemailer');
-=======
 //Connects session to database.
 const pgSession = require('connect-pg-simple')(session);
 //
->>>>>>> 57091446fdff24589a5083cdef6aa41090d3ffda
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
 massive(process.env.CONNECTION_STRING).then(database => {
@@ -65,8 +59,8 @@ app.use(session({
 app.get('/api/upload', cloudinary.upload);
 
 //User Endpoints 
-// app.post('/api/login', user.login);
-// app.post('/api/register', user.register);
+app.post('/api/login', user.login);
+app.post('/api/register', user.register);
 
 //Group Endpoints 
 app.get('/api/groups', group.readGroup);

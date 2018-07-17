@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import UserForm from './UserForm/UserForm';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 //Import the css file.
 import './Register.css';
 
 const CLOUDINARY_URL ='https://api.cloudinary.com/v1_1/lynk00/image/upload';
 
-export default class Register extends Component {
+class Register extends Component {
     constructor() {
         super();
         this.state = {
@@ -74,6 +76,8 @@ export default class Register extends Component {
         axios.post('/api/register', newUser).then(res => {
             //Redirects user.
             alert('Registered Successfully!');
+            this.props.history.push('/dashboard');
+            
         }).catch(err => console.log(err, 'Register Axios Error--------------'));
         console.log('register button clicked------------------');
     }
@@ -88,3 +92,5 @@ export default class Register extends Component {
         );
     }
 }
+
+export default withRouter(connect()(Register));

@@ -2,7 +2,6 @@
 require('dotenv').config();
 //Initializes the server
 const express = require('express');
-const app = express();
 //Middlewares   
 //For hosting.
 const cors = require('cors');
@@ -15,13 +14,10 @@ const massive  = require('massive');
 //Connects session to database.
 const pgSession = require('connect-pg-simple')(session);
 //
-<<<<<<< HEAD
-=======
 ///Define the server 
 const app =  express();
 //Installing Nodemailer
 const nodemailer = require('nodemailer');
->>>>>>> 454adfaf23cda550bd6183254f5a40da4774f127
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
 massive(process.env.CONNECTION_STRING).then(database => {
@@ -71,10 +67,7 @@ app.use(cors());
 app.get('/api/upload', cloudinary.upload);
 
 //User Endpoints 
-<<<<<<< HEAD
-=======
 app.get('/api/user-data', user.readUserData);
->>>>>>> 454adfaf23cda550bd6183254f5a40da4774f127
 app.post('/api/login', user.login);
 app.post('/api/register', user.register);
 

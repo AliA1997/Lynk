@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import GroupForm from './GroupForm/GroupForm';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import './CreateGroup.css';
 import axios from 'axios';
 
 const CLOUDINARY_URL ='https://api.cloudinary.com/v1_1/lynk00/image/upload';
-export default class CreateGroup extends Component {
+class CreateGroup extends Component {
     constructor() {
         super();
         this.state = {
@@ -93,6 +95,7 @@ export default class CreateGroup extends Component {
         const newGroup = { groupName, groupDescription, groupImage,  groupMembers };
         axios.post('/api/groups', newGroup).then(res => {
             console.log(res.data.group);
+            this.props.history.push('/dashboard');
             alert('Group Created-----------');
         }).catch(err => console.log(err, 'Create Group Database Error--------------'));
     }
@@ -110,3 +113,5 @@ export default class CreateGroup extends Component {
         );
     }
 }
+
+export default withRouter(connect()(CreateGroup));

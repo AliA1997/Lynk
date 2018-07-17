@@ -10,10 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Navbar from '../Navbar/Navbar';
 import GroupCarousel from '../GroupCarousel/GroupCarousel';
-import axios from'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { StepLabel } from '../../../../node_modules/@material-ui/core';
 import './Header.css';
 
 class Header extends Component {

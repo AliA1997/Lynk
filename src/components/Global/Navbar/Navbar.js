@@ -25,7 +25,7 @@ import { Avatar } from '../../../../node_modules/@material-ui/core';
 //         marginRight: 20,
 //     },
 
-// }
+/// }
 
 class Navbar extends Component {
     constructor() {

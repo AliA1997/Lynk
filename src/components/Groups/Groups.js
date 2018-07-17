@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import GroupCard from './GroupCard/GroupCard';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-export default class Groups extends Component {
+class Groups extends Component {
     constructor(){
         super();
 
@@ -12,22 +13,29 @@ export default class Groups extends Component {
     }
 
     componentDidMount() {
-        //Axios call setting state with groups array
-        //If there is no isDashboard prop.
-        if(!this.props.isDashboard) {
-            axios.get('/api/groups').then(res => {
-                //Gets all default groups
-                this.setState({groups: res.data.groups})
-            }).catch(err => console.log('Get Groups Error-------------', err));
-        } else {
-            axios.get(`/api/groups/admin/1`).then(res => {
-                //Get all groups that the user is in charge of.
-                this.setState({groups: res.data.groups});
-            }).catch(err => console.log('Get User Admin Groups------------', err));
-        }
+        //Perform a setTimeout
+        setTimeout(() => {
+            //Axios call setting state with groups array
+            //If there is no isDashboard prop.
+            if(!this.props.isDashboard) {
+                axios.get('/api/groups').then(res => {
+                    //Gets all default groups
+                    this.setState({groups: res.data.groups})
+                }).catch(err => console.log('Get Groups Error-------------', err));
+            } else {
+                //Destructiong the user
+                const { user } = this.props;
+                axios.get(`/api/groups/admin/${user.id}`).then(res => {
+                    //Get all groups that the user is in charge of.
+                    this.setState({groups: res.data.groups});
+                }).catch(err => console.log('Get User Admin Groups------------', err));
+            }
+        }, 1000);
     }
 
-    
+    componentWillUnmount() {
+        clearTimeout();
+    }
     render() {
         //Destructuring groups from this.state
         const{ groups } = this.state;
@@ -46,3 +54,11 @@ export default class Groups extends Component {
 Groups.defaultProps = {
     isDashboard: false
 }
+
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(Groups)

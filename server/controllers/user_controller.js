@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-// //Used to hash
-const bcrypt = require('bcrypt');
-// //THe amount of times your hashing it.
-const saltRounds = 12;
-// ///Exporting the object with the methods.   
-module.exports = {
-=======
 //Used to hash
 const bcrypt = require('bcryptjs');
 //THe amount of times your hashing it.
@@ -16,7 +8,6 @@ module.exports = {
         //Read the data from the req.session.user
         res.status(200).json({user: req.session.user});
     },
->>>>>>> 454adfaf23cda550bd6183254f5a40da4774f127
     login(req, res) {
     // Destructuring username and password from req.body
        const { username, password } = req.body;
@@ -41,15 +32,10 @@ module.exports = {
            } else {
                res.status(404).json({message: '404 login failed'})
            }
-<<<<<<< HEAD
-       }).catch(err => console.log(err, 'find_user database error'))  
-
-=======
        }).catch(err => console.log(err, 'find_user database error'))
 
        
 
->>>>>>> 454adfaf23cda550bd6183254f5a40da4774f127
     },
     
     register(req, res) {
@@ -68,10 +54,7 @@ module.exports = {
                 req.session.save();
                 res.status(200).json({user: req.session.user});
             }).catch(err => console.log(err, "Register error"))
-<<<<<<< HEAD
-=======
 
->>>>>>> 454adfaf23cda550bd6183254f5a40da4774f127
         }).catch(err => console.log(err, "Hashing error"))
     }
 }

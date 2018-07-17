@@ -43,6 +43,11 @@ class Home extends Component {
                     <h4>Login</h4>
                     <Login username={username} password={password}
                     login={this.login}  handleUsername={this.handleLoginUsername}  handlePassword={this.handleLoginPassword} />
+                    <Button variant='outlined' color='primary'>
+                        <Link to='/login'>
+                            Login
+                        </Link>
+                    </Button>
                 </div>
             </div>
         );

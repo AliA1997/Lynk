@@ -21,11 +21,11 @@ import EventSearch from './components/EventSearch/EventSearch';
 export default (
     <Switch>
         <Route exact path='/' component={Home} />
-        <Route path='/register' component={Register} />
-        <Route path='/login' component={LoginPage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route path='/dashboard/create_group' component={CreateGroup} />
         <Route path='/dashboard/create_event' component={CreateEvent} />
+        <Route path='/register' component={Register} />
+        <Route path='/login' component={LoginPage} />
         <Route path='/groups' component={GroupSearch} />
         <Route path='/groups/:id' component={Group} />
         <Route path='/events' component={EventSearch} />

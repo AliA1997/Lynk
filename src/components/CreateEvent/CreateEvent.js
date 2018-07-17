@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import EventForm from './EventForm/EventForm';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import './CreateEvent.css';
 
 const CLOUDINARY_URL ='https://api.cloudinary.com/v1_1/lynk00/image/upload';
 
-export default class Create_Event extends Component {
+
+class Create_Event extends Component {
     constructor() {
         super();
         this.state = {
@@ -15,8 +17,24 @@ export default class Create_Event extends Component {
             eventImage: '',
             eventLocation: '',
             currentEventAttendeeSelected: '',
+            userGroups: '',
+            groupSelected: '',
             eventAttendeeList: []
         }
+    }
+    componentDidMount() {
+        const { user } = this.props;
+        console.log('user-----------', user);
+        if(user) {
+            axios.get(`/api/groups/admin/${user.id}`).then(res => {
+                console.log('res.data.groups------------', res.data.groups);
+                this.setState({userGroups: res.data.groups});
+            }).catch(err => console.log('Get Groups Error----------', err));
+        }
+    }
+
+    handleGroupSelect = (val) => {
+        this.setState({groupSelected: val});
     }
     handleEventName = (val) => {
         //Handle changes in the event name input field
@@ -40,17 +58,21 @@ export default class Create_Event extends Component {
     }
     
     addAttendee = (val) => {
+        //Copy the members array
+        const copyOfGroupMembers = this.state.groupSelected.group_members.slice();
         //Copy the array, so you can add to it.
-        let copyOfArr = this.state.eventAttendeeList.slice();
+        const copyOfArr = this.state.eventAttendeeList.slice();
+        //Filtered Member 
+        const groupMemberSelected = copyOfGroupMembers.filter(member => member.username === val)[0];
         //Push to the copy of the array.
-        copyOfArr.push(val);
+        copyOfArr.push(groupMemberSelected);
         this.setState({eventAttendeeList: copyOfArr});
     }
     removeAttendee = (val) => {
         //Copy array, so you can remove from it.
         let copyOfArr = this.state.eventAttendeeList.slice();
         //Get the index of the value to be remove.
-        let removeGroupMemberIndex = copyOfArr.findIndex(attendee => attendee === val);
+        let removeGroupMemberIndex = copyOfArr.findIndex(attendee => attendee.username === val);
         //Remove value from array based on the index.
         copyOfArr.splice(removeGroupMemberIndex, 1);
         //Then set the state of the group members to the copy of array.
@@ -63,7 +85,7 @@ export default class Create_Event extends Component {
             console.log('files', files[0])
             axios.get('/api/upload').then(response => {
             console.log(response.data)
-            
+        
             //form data for signed uploads
     
             let formData = new FormData();
@@ -98,11 +120,13 @@ export default class Create_Event extends Component {
     }
     render() {
         //Destruct the event props from the props.
-        const { currentMemberSelected, eventName, eventTopic, eventImage, eventDate, eventLocation, currentEventAttendeeSelected, eventAttendeeList } = this.state;
+        const { currentMemberSelected, eventName, eventTopic, eventImage, eventDate, eventLocation, userGroups, groupSelected, 
+             currentEventAttendeeSelected, eventAttendeeList } = this.state;
         return (
             <div>
                 <div className='create-event-form'>
-                        <EventForm eventImage={eventImage} eventImageUpload={this.eventImageUpload} eventName={eventName} eventDate={eventDate} eventTopic={eventTopic} 
+                        <EventForm userGroups={userGroups} groupSelected={groupSelected} handleSelect={this.handleGroupSelect} remove={this.removeAttendee} add={this.addAttendee}
+                        eventImage={eventImage} eventImageUpload={this.eventImageUpload} eventName={eventName} eventDate={eventDate} eventTopic={eventTopic} 
                         eventLocation={eventLocation} currentMemberSelected={currentMemberSelected} currentEventAttendee={currentEventAttendeeSelected} 
                         eventMembers={eventAttendeeList} create={this.createEvent} handleName={this.handleEventName} handleTopic={this.handleEventTopic}
                         handleDate={this.handleEventDate} handleLocation={this.handleEventLocation} handleCurrentAttendee={this.handleCurrentEventAttendee} />
@@ -112,3 +136,11 @@ export default class Create_Event extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(Create_Event)

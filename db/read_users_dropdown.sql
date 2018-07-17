@@ -1,0 +1,1 @@
+SELECT name, username, email, profile_picture, age FROM users;

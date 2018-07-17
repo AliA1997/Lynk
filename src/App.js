@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { login } from './ducks/reducer';
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import indigo from '@material-ui/core/colors/indigo';
 import pink from '@material-ui/core/colors/pink';
 import red from '@material-ui/core/colors/red';
-import logo from './logo.svg';
 import routes  from './routes';
-import Navbar from './components/Global/Navbar/Navbar';
+import Header from './components/Global/Header/Header';
 import './App.css';
 
 // All the following keys are optional.
@@ -26,14 +28,31 @@ const theme = createMuiTheme({
   },
 });
 class App extends Component {
+  componentDidMount() {
+    //Destruct the login dispatcher from the reducer.
+    const { login } = this.props;
+    //Perform an axios call for the session, everytime app rerenders
+    axios.get('/api/user-data')
+    .then(res => {
+      console.log('user data------------', res.data.user);
+      //If the data coming back is not undefined set the session to the user state in the reducer.
+      if(res.data.user) {
+        login(res.data.user);
+      }
+    }).catch(err => console.log("Get user data axios error---------------", err));
+  }
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <Navbar />
+        <Header />
         {routes}
       </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = {
+  login: login
+}
+
+export default connect(null, mapDispatchToProps)(App);

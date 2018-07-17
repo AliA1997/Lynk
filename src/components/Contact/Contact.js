@@ -34,8 +34,7 @@ export default class Contact extends Component {
         // event.preventDefault();
         const {name, email, text } = this.state
         console.log(this.state)
-        let body = {name: name, email: this.state.email, text: this.state.text}
-        setTimeout(() => console.log(body), 1000)
+        let body = {name: name, email: email, text: text}
         axios.post('/api/contactform', body).then(response => {
             console.log('=======>response', response.data)
         }).catch(error => {

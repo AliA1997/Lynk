@@ -19,17 +19,41 @@ module.exports = {
             res.status(200).json({groups});
         }).catch(err => console.log(err, 'Read User Admin Groups Error------------'));
     },
+    // readUserGroups(req, res) {
+    //     //Assign variable to database instance.
+    //     const db = req.app.get('db');
+    //     //Destruct the id from the request param.
+    //     const { id } = req.params;
+    //     const { name, username, email, profile_picture, age } = req.session.user;
+    //     const userToLookFor = { name, username, email, profile_picture, age };
+    //     console.log('req.session.user------------', userToLookFor);
+    //     //Read User Groups  
+    //     db.read_user_groups([userToLookFor]).then(groups => {
+    //         //Return groups to the frontend.
+    //         res.status(200).json({groups});
+    //     }).catch(err => console.log(err, 'Read User Groups Error-------------------'));
+    // },
+    readUsersDropdown(req, res) {
+        //Assign variable to database instance.
+        const db = req.app.get('db');
+        //Destruct the id from the request param.
+        const { id } = req.params;
+        //Read Users for dropdown
+        db.read_users_dropdown().then(users => {
+            //Return users to the frontend
+            res.status(200).json({users});
+        }).catch(err => console.log(err, 'Read Users Dropdown-------------------'));
+    },
     createGroup(req,res) {
         //Assign a variable that holds your database instance.
         const db = req.app.get('db');
         //Destruct the id from teh req.session.user.
-        // const { id } = req.session.user;
+        const { id } = req.session.user;
         //Destruct the values that will be used to create a new group.
         const { groupName, groupDescription, groupImage, groupMembers } = req.body;
-        let group_image = 'image';
         //Assigning the new group the values we destructured.
         const newGroup = { group_name: groupName, group_description: groupDescription, group_image: groupImage, 
-            group_members: groupMembers, group_admin: 1 };
+            group_members: groupMembers, group_admin: id };
         console.log('group admin-------', newGroup.group_admin);
         db.create_group(newGroup).then(groups => {
             //Return the group

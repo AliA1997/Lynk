@@ -8,7 +8,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './Navbar.css';
+import { Avatar } from '../../../../node_modules/@material-ui/core';
 
 //Define inline styles for the component
 const styles = {
@@ -25,7 +27,7 @@ const styles = {
 
 }
 
-export default class  extends Component {
+class Navbar extends Component {
     constructor() {
         super();
         this.state = {
@@ -35,14 +37,14 @@ export default class  extends Component {
     }
     handleMenu = event => {
         this.setState({ anchorEl: event.currentTarget });
-      };
+    }
     
-      handleClose = () => {
-        this.setState({ anchorEl: null });
-      };
-    
+    handleClose = () => {
+    this.setState({ anchorEl: null });
+    }
     render() {
         const { auth, anchorEl } = this.state;
+        const { user } = this.props;
         const open = Boolean(anchorEl);
         return (
             <div className='navbar'>
@@ -52,8 +54,8 @@ export default class  extends Component {
                     <MenuIcon />
                     </IconButton>
                     <Typography variant="title" color="inherit">
-                        <Link to='/'>
-                            Lynk
+                        <Link to='/' className='nav-link'>
+                            Lynkup
                         </Link>
                     </Typography>
                     <Typography variant="title" color="inherit">
@@ -89,7 +91,7 @@ export default class  extends Component {
                         onClick={this.handleMenu}
                         color="inherit"
                         >
-                        <AccountCircle />
+                        {user && user.profile_picture ? <Avatar src={user.profile_picture} /> : <AccountCircle />}
                         </IconButton>
                         <Menu
                         id="menu-appbar"
@@ -121,3 +123,11 @@ export default class  extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    };
+}
+
+export default connect(mapStateToProps)(Navbar);

@@ -4,6 +4,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 //Middlewares   
+//For hosting.
+const cors = require('cors');
 //Initiallizes the req.body, so without it, the req.body will not be defined.
 const bodyParser = require('body-parser');
 //Initializes the session
@@ -13,6 +15,13 @@ const massive  = require('massive');
 //Connects session to database.
 const pgSession = require('connect-pg-simple')(session);
 //
+<<<<<<< HEAD
+=======
+///Define the server 
+const app =  express();
+//Installing Nodemailer
+const nodemailer = require('nodemailer');
+>>>>>>> 454adfaf23cda550bd6183254f5a40da4774f127
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
 massive(process.env.CONNECTION_STRING).then(database => {
@@ -27,13 +36,13 @@ const chat = require('./controllers/chat_controller');
 const event = require('./controllers/event_controller');
 const group = require('./controllers/group_controller');
 const nm = require('./controllers/nodemailer_controller');
+const search = require('./controllers/search_controller');
 //
 
-//Initialize our bodyParser data.
+///Use express.static to render public files from the build folder for hosting
+app.use(express.static(`${__dirname}/../build`));
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
+//Initialize our bodyParser data.
 app.use(bodyParser.json());
 
 //Initialize our session
@@ -54,11 +63,18 @@ app.use(session({
     }
 }));
 
+app.use(cors());
+
+
 
 //Cloudinary Endpoints 
 app.get('/api/upload', cloudinary.upload);
 
 //User Endpoints 
+<<<<<<< HEAD
+=======
+app.get('/api/user-data', user.readUserData);
+>>>>>>> 454adfaf23cda550bd6183254f5a40da4774f127
 app.post('/api/login', user.login);
 app.post('/api/register', user.register);
 
@@ -70,14 +86,24 @@ app.delete('/api/group/:id', group.deleteGroup);
 app.patch('/api/group/:id/add_member', group.addMember);
 app.patch('/api/group/:id/remove_member', group.removeMember);
 
-//Dashboard Group Endpionts 
+
+//Dashboard Group Endpoints 
 app.get('/api/groups/admin/:id', group.readUserAdminGroups);
+// app.get('/api/groups/user', group.readUserGroups);
+app.get('/api/users/dropdown', group.readUsersDropdown);
+
 
 //Event Endpoints
 app.get('/api/events', event.readEvent);
 app.post('/api/events', event.createEvent);
 app.put('/api/event/:id', event.updateEvent);
 app.delete('/api/event/:id', event.deleteEvent);
+
+//Search Endpoints 
+//Search Group Endpoints
+app.get('/api/groups/search', search.searchGroup);
+//Search Event Endpoints 
+app.get('/api/events/search', search.searchEvent);
 
 //Chat Endpoints
 app.get('/api/chats', chat.readChat);
@@ -86,6 +112,13 @@ app.post('/api/chats', chat.createChat);
 //Contact Endpoints
 app.post('/api/contactform', nm.sendEmail);
 // app.post('/api/test', nm.test);
+
+
+///FOr all paths 
+const path = require('path')
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 ///Server listening on port 4000.
 app.listen(4000, () => console.log('Listening on Port: 4000'));

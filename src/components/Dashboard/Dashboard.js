@@ -18,7 +18,7 @@ export default class Dashboard extends Component {
             eventAttendeeList: [],
         }
     }
-    
+
     
     render() {
         

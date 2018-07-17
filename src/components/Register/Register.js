@@ -83,8 +83,8 @@ class Register extends Component {
     }
     render() {
         return (
-            <div>
-                Register 
+            <div className="register-container-div">
+                <h4>Register</h4>
                 {/* Use the spread operator to automatically assign all the properties of an object.*/}
                 <UserForm {...this.state} handleUsername={this.handleUsername} handleName={this.handleName} register={this.register} 
                 handlePassword={this.handlePassword} handleEmail={this.handleEmail} handleAge={this.handleAge} handleUpload={this.handleUpload}/>

@@ -19,17 +19,20 @@ module.exports = {
             res.status(200).json({groups});
         }).catch(err => console.log(err, 'Read User Admin Groups Error------------'));
     },
-    readUserGroups(req, res) {
-        //Assign variable to database instance.
-        const db = req.app.get('db');
-        //Destruct the id from the request param.
-        const { id } = req.params;
-        //Read User Groups  
-        db.read_user_groups(req.session.user).then(groups => {
-            //Return groups to the frontend.
-            res.status(200).json({groups});
-        }).catch(err => console.log(err, 'Read User Groups Error-------------------'));
-    },
+    // readUserGroups(req, res) {
+    //     //Assign variable to database instance.
+    //     const db = req.app.get('db');
+    //     //Destruct the id from the request param.
+    //     const { id } = req.params;
+    //     const { name, username, email, profile_picture, age } = req.session.user;
+    //     const userToLookFor = { name, username, email, profile_picture, age };
+    //     console.log('req.session.user------------', userToLookFor);
+    //     //Read User Groups  
+    //     db.read_user_groups([userToLookFor]).then(groups => {
+    //         //Return groups to the frontend.
+    //         res.status(200).json({groups});
+    //     }).catch(err => console.log(err, 'Read User Groups Error-------------------'));
+    // },
     readUsersDropdown(req, res) {
         //Assign variable to database instance.
         const db = req.app.get('db');

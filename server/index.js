@@ -80,9 +80,9 @@ app.patch('/api/group/:id/add_member', group.addMember);
 app.patch('/api/group/:id/remove_member', group.removeMember);
 
 
-//Dashboard Group Endpionts 
+//Dashboard Group Endpoints 
 app.get('/api/groups/admin/:id', group.readUserAdminGroups);
-app.get('/api/groups/user', group.readUserGroups);
+// app.get('/api/groups/user', group.readUserGroups);
 app.get('/api/users/dropdown', group.readUsersDropdown);
 
 

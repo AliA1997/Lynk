@@ -9,6 +9,8 @@ import FaInfoCircle from 'react-icons/lib/fa/info-circle';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Navbar from '../Navbar/Navbar';
+import GroupCarousel from '../GroupCarousel/GroupCarousel';
+import axios from'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { StepLabel } from '../../../../node_modules/@material-ui/core';
@@ -21,6 +23,7 @@ class Header extends Component {
             hamburgerClicked: false
         }
     }
+
     elementSelect(elem) {
         let elementSelected  = document.getElementById(elem);
         let elementSelectedDescription = document.getElementById(`${elem}-label`);
@@ -45,7 +48,7 @@ class Header extends Component {
         //Destructure the user props from the reducer from this.props;
         const { user } = this.props;
         //Destructure the hamburgerClicked from this.state;
-        const { hamburgerClicked } = this.state;
+        const { hamburgerClicked, userGroups } = this.state;
         return (
             <div>
                 <div className='desktop'>
@@ -111,6 +114,7 @@ class Header extends Component {
                             </StepLabel>
                         </div>
                     </div>
+                    <GroupCarousel groups={user && user.groups} />
                 </div>
                 <hr/>
             </div>

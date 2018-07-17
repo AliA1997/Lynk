@@ -1,1 +1,1 @@
-SELECT * FROM groups WHERE $1::JSONB = ANY(group_members);
+SELECT * FROM groups WHERE $1 = ANY(group_members);

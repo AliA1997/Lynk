@@ -1,30 +1,47 @@
-// import React, { Component } from 'react';
-// import Avatar from '@material-ui/core/Avatar';
+import React, { Component } from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import { connect } from 'react-redux';
+import './GroupCarousel.css';
 
-// export default class GroupCarousel extends Component {
-//     constructor() {
-//         super();
-//         this.state = {
-//             indexOfGroup: 5
-//         }
-//     }
-//     rightArrowClick() {
-//         this.setState({
-//             indexOfGroup: (this.state.indexOfGroup + 5) > this.props.userGroups.length ? 0 : (this.state.indexOfGroup + 5)
-//         });
-//     }
-//     leftArrowClick() {
-//         this.setState({
-//             indexOfGroup: (this.state.indexOfGroup - 5) < 0 ? 0 : (this.state.indexOfGroup - 5)
-//         });
-//     }
-//     render() {
-//         const { userGroups } = this.props;
-//         const { indexOfGroup } = this.state; 
-//         return (
-//             <div>
-//                 {userGroups.map(group => i < indexOfGroup ? <Avatar src={group.group_image} alt={group.group_name} /> : null)}
-//             </div>
-//         );
-//     }
-// }
+class GroupCarousel extends Component {
+    constructor() {
+        super();
+        this.state = {
+            currentIndex: 0,
+            displayGroups: []
+        }
+    }
+    componentDidMount() {
+        const { currentIndex } = this.state;
+        const { groups } = this.props;
+        let arr = [];
+        if(groups) {
+            console.log('groups-----------', groups);
+            for(let i = 0; i < currentIndex + 5; i++) {
+                if(groups[i]) {
+                    arr.push(groups[i])
+                } else {
+                    this.setState({displayArray: arr});
+                    break;   
+                }
+            }
+        }
+    }
+    render() {
+        // const { groups } = this.props;
+        const { displayGroups } = this.state;
+        return (
+            <div className='slide-container'>
+                {displayGroups && displayGroups.map((group, i) => <Avatar key={i} image={group.group_image} alt={group.group_name} />)}
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(GroupCarousel)

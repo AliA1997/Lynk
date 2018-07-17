@@ -27,6 +27,7 @@ const theme = createMuiTheme({
     tonalOffset: 0.2,
   },
 });
+
 class App extends Component {
   componentDidMount() {
     //Destruct the login dispatcher from the reducer.

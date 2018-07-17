@@ -1,5 +1,5 @@
 //Used to hash
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 //THe amount of times your hashing it.
 const saltRounds = 12;
 ///Exporting the object with the methods.   

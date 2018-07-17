@@ -10,6 +10,7 @@ import Contact from './components/Contact/Contact';
 import Dashboard from './components/Dashboard/Dashboard';
 import Home from './components/Home/Home';
 import Register from './components/Register/Register';
+import LoginPage from './components/LoginPage/LoginPage';
 import CreateGroup from './components/CreateGroup/CreateGroup';
 import CreateEvent from './components/CreateEvent/CreateEvent';
 import Group from './components/Group/Group';
@@ -20,10 +21,11 @@ import EventSearch from './components/EventSearch/EventSearch';
 export default (
     <Switch>
         <Route exact path='/' component={Home} />
-        <Route path='/register' component={Register} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route path='/dashboard/create_group' component={CreateGroup} />
         <Route path='/dashboard/create_event' component={CreateEvent} />
+        <Route path='/register' component={Register} />
+        <Route path='/login' component={LoginPage} />
         <Route path='/groups' component={GroupSearch} />
         <Route path='/groups/:id' component={Group} />
         <Route path='/events' component={EventSearch} />

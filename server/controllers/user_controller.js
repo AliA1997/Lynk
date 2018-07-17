@@ -34,9 +34,6 @@ module.exports = {
                res.status(404).json({message: '404 login failed'})
            }
        }).catch(err => console.log(err, 'find_user database error'))
-
-       
-
     },
     
     register(req, res) {
@@ -55,7 +52,6 @@ module.exports = {
                 req.session.save();
                 res.status(200).json({user: req.session.user});
             }).catch(err => console.log(err, "Register error"))
-
         }).catch(err => console.log(err, "Hashing error"))
     }
 }

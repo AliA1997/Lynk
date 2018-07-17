@@ -2,7 +2,6 @@
 require('dotenv').config();
 //Initializes the server
 const express = require('express');
-
 //Middlewares   
 //For hosting.
 const cors = require('cors');

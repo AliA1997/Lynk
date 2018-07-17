@@ -1,0 +1,22 @@
+.create-event-div {
+    display: grid;
+    grid-template-rows: 10% 70% 20%;
+    grid-template-columns: 10% 80% 10%;
+}
+.create-event-div > h4 {
+    grid-row: 1/1;
+    grid-column: 2/2;
+}
+.create-event-form {
+    grid-column: 2/2;
+    grid-row: 2/2;
+    display: grid;
+}
+
+.create-event-div > .attendee-list {
+    grid-column: 2/2; 
+    grid-row: 3/3;
+}
+.create-event-div > .attendee-list > * {
+    width: 100%;
+}

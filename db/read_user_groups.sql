@@ -1,0 +1,1 @@
+SELECT * FROM groups WHERE $1 = ANY(group_members);

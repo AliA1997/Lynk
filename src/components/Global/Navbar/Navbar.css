@@ -1,0 +1,10 @@
+.nav-link {
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+}
+.nav-sublink {
+    font-weight: 800;
+    color: indigo;
+}

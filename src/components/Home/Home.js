@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import Login from './Login/Login';
-import Button from './@material-ui/core/Button';
+//Redirects the user 
+import { withRouter, Link } from 'react-router-dom';
+//Connects the component to the store.
+import { connect } from 'react-redux';
+//Import the components from material-ui
+import { login } from '../../ducks/reducer';
+import Button from '@material-ui/core/Button';
+//image
+import lynk from '../../Images/lynk.jpg'
 
-export default class Home extends Component {
+
+
+class Home extends Component {
     // constructor() {
     //     super();
-    //     this.state = {
-    //         username: '', 
-    //         password: ''
-    //     }
+
     // }
     // handleLoginUsername = (val) => {
     //     this.setState({username: val});
@@ -22,20 +28,39 @@ export default class Home extends Component {
     //     const loginInfo = { username, password };
     //     axios.post('/api/login', loginInfo)
     //     .then(res => {
-    //         alert(res.data.message);
+    //         this.props.login(res.data.user);
+    //         alert('Login Successfully');
+    //         this.props.history.push('dashboard');
     //     }).catch(err => console.log('Login Error---------------', err));
     // }
     render() {
-        const { username, password } = this.state;
+        // const { username, password } = this.state;
         return (
             <div>
-                Home
-                <Button variant='outlined' color='primary'>
-                <Link to='/login'>
-                    Login
-                </Link>
-            </Button> />
+                <div className='image'>
+                    <img src={lynk} alt="pic for now"/>
+                </div>
+                <div className='b'>
+                hi
+                    <Button variant='outlined' color='primary'>
+                        <Link to='/login'>
+                            Login
+                        </Link>
+                    </Button>
+                </div>
             </div>
         );
     }
 }
+//Map the state to props
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    };
+}
+//Map the dispatcher to props.
+const mapDispatchToProps = {
+    login: login
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

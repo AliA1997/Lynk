@@ -1,9 +1,13 @@
 //Used to hash
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 //THe amount of times your hashing it.
 const saltRounds = 12;
 ///Exporting the object with the methods.   
 module.exports = {
+    readUserData(req, res) {
+        //Read the data from the req.session.user
+        res.status(200).json({user: req.session.user});
+    },
     login(req, res) {
     // Destructuring username and password from req.body
        const { username, password } = req.body;
@@ -20,6 +24,7 @@ module.exports = {
                 if(doPasswordsMatch){
                        delete userData.password;
                        req.session.user = userData;
+                       req.session.save();
                        res.status(200).json({user: req.session.user})
                    }
                }).catch(err => console.log(err, 'Bcrypt compare error')) 
@@ -28,11 +33,24 @@ module.exports = {
                res.status(404).json({message: '404 login failed'})
            }
        }).catch(err => console.log(err, 'find_user database error'))
-
-       
-
     },
+    
     register(req, res) {
+        //Destructuring name, username, email, password, age from req.body
+        const{ name, username, email, password, profile_picture, age } = req.body;
+        //Setting db to requests database folder(?)
+        const db = req.app.get('db');
 
+        bcrypt.hash(password, saltRounds).then(hashedpassword => {
+            //Creating newUser variable containing name, username, email, password, age
+            const newUser = {name, username, email, profile_picture, password: hashedpassword, age};
+            //Running register sql file and passing newUser as argument
+            db.register(newUser).then(user => {
+                req.session.user = user[0];
+                //Save the session.
+                req.session.save();
+                res.status(200).json({user: req.session.user});
+            }).catch(err => console.log(err, "Register error"))
+        }).catch(err => console.log(err, "Hashing error"))
     }
 }

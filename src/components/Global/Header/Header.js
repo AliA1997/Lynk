@@ -91,7 +91,8 @@ class Header extends Component {
                     <div>
                         <div style={{display: hamburgerClicked ? 'grid' : 'none'}} className="mobile mobile-navbar">
                             <Button onClick={() => this.elementSelect('home')} id="home" 
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1', gridRow: '2/2', height: '100%', width: '100%'}}>
+                            style={{zIndex: 6, background: homeClicked ?  '#fff' : 'transparent',
+                             border: '2px solid #fff', gridColumn: '1/1', gridRow: '2/2', height: '100%', width: '100%'}}>
                                 <MdHome style={{fontSize: '3em'}} />
                             </Button>
                             <Typography style={{display: homeClicked ?'flex' : 'none', 
@@ -101,7 +102,8 @@ class Header extends Component {
                                 </Link>    
                             </Typography>
                             <Button onClick={() => this.elementSelect('group')} id="group"
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1', gridRow: '3/3', height: '100%', width: '100%'}}>
+                            style={{zIndex: 6, background: groupsClicked ?  '#fff' : 'transparent',
+                             border: '2px solid #fff', gridColumn: '1/1', gridRow: '3/3', height: '100%', width: '100%'}}>
                                 <MdGroup style={{fontSize: '3em'}} />
                             </Button>
                             <Typography style={{display: groupsClicked ?'flex' : 'none', 
@@ -111,7 +113,8 @@ class Header extends Component {
                                 </Link>
                             </Typography>
                             <Button onClick={() => this.elementSelect('event')} id="event"
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1',  gridRow: '4/4', height: '100%', width: '100%'}}>
+                            style={{zIndex: 6, background: eventsClicked ?  '#fff' : 'transparent',
+                             border: '2px solid #fff', gridColumn: '1/1',  gridRow: '4/4', height: '100%', width: '100%'}}>
                                 <MdEventSeat style={{fontSize: '3em'}} />
                             </Button>
                             <Typography style={{display: eventsClicked ?'flex' : 'none', 
@@ -121,7 +124,8 @@ class Header extends Component {
                                 </Link>
                             </Typography>
                             <Button onClick={() => this.elementSelect('about')} id="about"
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1',  gridRow: '5/5', height: '100%', width: '100%'}}>
+                            style={{zIndex: 6, background: aboutClicked ?  '#fff' : 'transparent',
+                             border: '2px solid #fff', gridColumn: '1/1',  gridRow: '5/5', height: '100%', width: '100%'}}>
                                 <FaInfoCircle style={{fontSize: '3em'}} />
                             </Button>
                             <Typography style={{display: aboutClicked ?'flex' : 'none', 
@@ -131,7 +135,8 @@ class Header extends Component {
                                 </Link>
                             </Typography>
                             <Button onClick={() => this.elementSelect('contact')} id="contact"
-                            style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1',  gridRow: '6/6', height: '100%', width: '100%'}}>
+                            style={{zIndex: 6, background: contactClicked ?  '#fff' : 'transparent',
+                             border: '2px solid #fff', gridColumn: '1/1',  gridRow: '6/6', height: '100%', width: '100%'}}>
                                 <MdEmail style={{fontSize: '3em'}}/>
                             </Button>
                             <Typography style={{display: contactClicked ?'flex' : 'none', 

@@ -23,17 +23,16 @@ class Create_Event extends Component {
         }
     }
     componentDidMount() {
-        setTimeout(() => {
-            const { user } = this.props;
-            console.log('user-----------', user);
-            if(user) {
-                axios.get(`/api/groups/admin/${user.id}`).then(res => {
-                    console.log('res.data.groups------------', res.data.groups);
-                    this.setState({userGroups: res.data.groups});
-                }).catch(err => console.log('Get Groups Error----------', err));
-            }
-        }, 2000);
+        const { user } = this.props;
+        console.log('user-----------', user);
+        if(user) {
+            axios.get(`/api/groups/admin/${user.id}`).then(res => {
+                console.log('res.data.groups------------', res.data.groups);
+                this.setState({userGroups: res.data.groups});
+            }).catch(err => console.log('Get Groups Error----------', err));
+        }
     }
+
     handleGroupSelect = (val) => {
         this.setState({groupSelected: val});
     }

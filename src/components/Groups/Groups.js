@@ -13,29 +13,23 @@ class Groups extends Component {
     }
 
     componentDidMount() {
-        //Perform a setTimeout
-        setTimeout(() => {
-            //Axios call setting state with groups array
-            //If there is no isDashboard prop.
-            if(!this.props.isDashboard) {
-                axios.get('/api/groups').then(res => {
-                    //Gets all default groups
-                    this.setState({groups: res.data.groups})
-                }).catch(err => console.log('Get Groups Error-------------', err));
-            } else {
-                //Destructiong the user
-                const { user } = this.props;
-                axios.get(`/api/groups/admin/${user.id}`).then(res => {
-                    //Get all groups that the user is in charge of.
-                    this.setState({groups: res.data.groups});
-                }).catch(err => console.log('Get User Admin Groups------------', err));
-            }
-        }, 1000);
+        //Axios call setting state with groups array
+        //If there is no isDashboard prop.
+        if(!this.props.isDashboard) {
+            axios.get('/api/groups').then(res => {
+                //Gets all default groups
+                this.setState({groups: res.data.groups})
+            }).catch(err => console.log('Get Groups Error-------------', err));
+        } else {
+            //Destructiong the user
+            const { user } = this.props;
+            axios.get(`/api/groups/admin/${user.id}`).then(res => {
+                //Get all groups that the user is in charge of.
+                this.setState({groups: res.data.groups});
+            }).catch(err => console.log('Get User Admin Groups------------', err));
+        }
     }
 
-    componentWillUnmount() {
-        clearTimeout();
-    }
     render() {
         //Destructuring groups from this.state
         const{ groups } = this.state;

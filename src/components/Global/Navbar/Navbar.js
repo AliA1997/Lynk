@@ -37,12 +37,11 @@ class Navbar extends Component {
     }
     handleMenu = event => {
         this.setState({ anchorEl: event.currentTarget });
-      };
+    }
     
-      handleClose = () => {
-        this.setState({ anchorEl: null });
-      };
-    
+    handleClose = () => {
+    this.setState({ anchorEl: null });
+    }
     render() {
         const { auth, anchorEl } = this.state;
         const { user } = this.props;

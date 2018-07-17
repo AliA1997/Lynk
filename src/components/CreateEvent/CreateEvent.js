@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventForm from './EventForm/EventForm';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import './CreateEvent.css';
@@ -115,6 +116,8 @@ class Create_Event extends Component {
         const { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList } = this.state;
         const newEvent = { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList };
         axios.post('/api/events', newEvent).then(res => {
+            ///Redirect after creating event.
+            this.props.history.push('/dashboard');
             alert('Event Created!!!');
         }).catch(err => console.log(err, 'Create Event Database Error-----------------'));
     }
@@ -143,4 +146,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Create_Event)
+export default withRouter(connect(mapStateToProps)(Create_Event));

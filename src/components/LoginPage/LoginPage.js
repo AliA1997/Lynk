@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import Login from './Login/Login';
 import { login } from '../../ducks/reducer';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
+import TiSocialGithub from 'react-icons/lib/ti/social-github-circular';
+import TiSocialGooglePlusCircular from 'react-icons/lib/ti/social-google-plus-circular';
 import './LoginPage.css';
 
 
@@ -20,6 +24,7 @@ class LoginPage extends Component {
     handleLoginPassword = (val) => {
         this.setState({password: val});
     }
+
     login = () => {
         //Destructure the username from the state, so it can be used in the login endpoint.
         const { username, password } = this.state;
@@ -38,8 +43,14 @@ class LoginPage extends Component {
                 <div className='login-page-container-div'>
                     <h4>Login</h4>
                     <div>
-                        <Login username={username} password={password} login={this.login}  
+                        <Login username={username} password={password} login={this.login} 
                         handleUsername={this.handleLoginUsername}  handlePassword={this.handleLoginPassword} />
+                    </div>
+                    <Link to='/register' style={{color: "indigo"}}>Don't have an account?</Link>
+                    <div className='social-media-login'>
+                        <TiSocialFacebookCircular style={{fontSize: '3em'}}/>
+                        <TiSocialGithub style={{fontSize: '3em'}} />
+                        <TiSocialGooglePlusCircular style={{fontSize: '3em'}} />
                     </div>
                 </div>
             </div>

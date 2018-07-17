@@ -75,9 +75,9 @@ class Register extends Component {
         const newUser = { name, username, profile_picture, email, password, age };
         axios.post('/api/register', newUser).then(res => {
             //Redirects user.
-            this.props.history.push('/dashboard');
             alert('Registered Successfully!');
-
+            this.props.history.push('/dashboard');
+            
         }).catch(err => console.log(err, 'Register Axios Error--------------'));
         console.log('register button clicked------------------');
     }

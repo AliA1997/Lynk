@@ -17,7 +17,7 @@
     left: 0;
     bottom: 0;
     z-index: 5;
-    grid-template-rows: 15% 15% 15% 15% 15% 15%;
+    grid-template-rows: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
     grid-template-columns: 20% 10% 70%;
     background: indigo;
 }
@@ -49,6 +49,9 @@
     height: 100%;
 }
 @media (min-width: 1260px) {
+    hr {
+        display: none;
+    }
     .desktop { 
         display: inherit;
     }

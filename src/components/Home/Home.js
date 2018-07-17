@@ -5,9 +5,8 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 //Import the components from material-ui
 import { login } from '../../ducks/reducer';
-import Login from './Login/Login';
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
+
 
 
 class Home extends Component {

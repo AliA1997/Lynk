@@ -18,6 +18,7 @@ module.exports = {
        db.find_user(username).then(users => {
            // Returning users and comparing userdata and password if users length is more than zero.
            if(users.length){
+            console.log('users---------', users); 
                const userData = users[0];
                bcrypt.compare(password, userData.password).then(doPasswordsMatch => {
                 // If password matches, deleting password and setting req.session.user to userData.  Return status 200 and user data if successful.   

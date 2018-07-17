@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { login } from './ducks/reducer';
 import axios from 'axios';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -26,6 +27,7 @@ const theme = createMuiTheme({
     tonalOffset: 0.2,
   },
 });
+
 class App extends Component {
   componentDidMount() {
     //Destruct the login dispatcher from the reducer.
@@ -54,4 +56,4 @@ const mapDispatchToProps = {
   login: login
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default withRouter(connect(null, mapDispatchToProps)(App));

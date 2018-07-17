@@ -15,7 +15,7 @@ const UserForm = (props) => {
     //Destructure all the props passed by the Register Parent Component.
     const { name, username, email, age, profile_picture, password } = props;
     return (
-        <form>
+        <form className='register-form'>
             <TextField
             required
             id="name"

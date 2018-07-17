@@ -45,13 +45,12 @@ module.exports = {
         //Assign a variable that holds your database instance.
         const db = req.app.get('db');
         //Destruct the id from teh req.session.user.
-        // const { id } = req.session.user;
+        const { id } = req.session.user;
         //Destruct the values that will be used to create a new group.
         const { groupName, groupDescription, groupImage, groupMembers } = req.body;
-        let group_image = 'image';
         //Assigning the new group the values we destructured.
         const newGroup = { group_name: groupName, group_description: groupDescription, group_image: groupImage, 
-            group_members: groupMembers, group_admin: 1 };
+            group_members: groupMembers, group_admin: id };
         console.log('group admin-------', newGroup.group_admin);
         db.create_group(newGroup).then(groups => {
             //Return the group

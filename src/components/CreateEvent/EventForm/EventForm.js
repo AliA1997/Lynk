@@ -1,18 +1,30 @@
 import React from 'react';
+//Import the Material UI elements to use.
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
-import Input from '@material-ui/core/Input';
+import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
+//Import the react icon used for adding attendees to list.
+import MdAdd from 'react-icons/lib/md/add';
 //Import the css file
 import './EventForm.css';
 
 
 const EventForm = (props) => {
-    const { eventName, eventTopic, eventImage, eventDate, eventLocation, currentEventAttendeeSelected, eventAttendeeList } = props;
+    //Destruct the props needed for the input fields.
+    const { eventName, eventTopic, eventImage, eventDate, eventLocation, userGroups, groupSelected,
+        currentEventAttendeeSelected, eventAttendeeList } = props;
     return (
         <div className='create-event-div'>
             <h4>Create Event</h4>
             <form className='create-event-form'>
+                <select
+                required 
+                onChange={e => props.handleSelect(e.target.value)}
+                >
+                <option selected value={null}>Please Select your group.</option>
+                {userGroups && userGroups.map((userGroup, i) => <option key={i}>{userGroup.group_name}</option>)}
+                </select>
                 <TextField
                 required
                 id="name"
@@ -55,16 +67,29 @@ const EventForm = (props) => {
                 value={currentEventAttendeeSelected}
                 margin="normal"
                 />
-                <datalist>
-                    {eventAttendeeList && eventAttendeeList.map(attendee => <option>{attendee}</option>)}
-                </datalist>
+                {/*Map over the member of the current group selected.*/}
+                <div className='select-attendees-div'>
+                    <input type='text' list="members" placeholder="Add members" />
+                    <datalist id='members'>
+                        {groupSelected && groupSelected.group_members && groupSelected.group_members.length && 
+                        groupSelected.group_members.map((groupMember, i) => <option key={i} value={groupMember.username}>{groupMember.username}</option>)}
+                    </datalist>
+                    <MdAdd className='add-icon' style={{fontSize: '2em'}} 
+                    onClick={() => currentEventAttendeeSelected && props.add(currentEventAttendeeSelected)}/>
+                </div>
                 <Button variant='outlined' color='primary' onClick={() => props.create()}>
                     Create Event 
                 </Button>
             </form>    
             <div className='attendee-list'>
                 <h3>Attendees</h3>
-                {eventAttendeeList && eventAttendeeList.map(attendee => <p>{attendee}</p>)}
+                {eventAttendeeList && eventAttendeeList.map((attendee, i) => <div key={i}>
+                                                                                <Chip
+                                                                                avatar={<Avatar src={attendee.profile_picture}/>}
+                                                                                label={attendee.username}
+                                                                                onDelete={() => props.remove(attendee.username)} 
+                                                                                />
+                                                                             </div>)}
             </div>
         </div>
     );

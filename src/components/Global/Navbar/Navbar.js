@@ -13,19 +13,19 @@ import './Navbar.css';
 import { Avatar } from '../../../../node_modules/@material-ui/core';
 
 //Define inline styles for the component
-const styles = {
-    root: {
-        flexGrow: 1,
-    },
-    flex: {
-        flex: 1,
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
-    },
+// const styles = {
+//     root: {
+//         flexGrow: 1,
+//     },
+//     flex: {
+//         flex: 1,
+//     },
+//     menuButton: {
+//         marginLeft: -12,
+//         marginRight: 20,
+//     },
 
-}
+// }
 
 class Navbar extends Component {
     constructor() {

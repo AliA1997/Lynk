@@ -1,11 +1,10 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 
 
 const EditGroup = (props) => {
-    const { editName, groupImage, groupDescription, groupName, editDescription, editImage } = props;
+    const { editName, groupImage, groupName, editDescription } = props;
     return (
         <div>
             <form>

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 //Import the components from material-ui
 import { login } from '../../ducks/reducer';
 import Button from '@material-ui/core/Button';
+import "../Home/Home.css";
 //image
 import lynk from '../../Images/lynk.jpg'
 
@@ -37,16 +38,22 @@ class Home extends Component {
         // const { username, password } = this.state;
         return (
             <div>
-                <div className='image'>
+                <div className='landing-image'>
                     <img src={lynk} alt="pic for now"/>
                 </div>
                 <div className='b'>
-                hi
-                    <Button variant='outlined' color='primary'>
-                        <Link to='/login'>
-                            Login
-                        </Link>
-                    </Button>
+                    <h1>Join families and friends to LynkUp</h1>
+                    <h2>- Create public and private events</h2>
+                    <h2>- Create groups and chat</h2>
+                    <h2>- Schedule your events with our calender</h2>
+                    <h1>Sign up Now</h1>
+                    <div className='button-login'>
+                        <Button variant='outlined' color='primary'>
+                            <Link to='/login' className='login'>
+                                Login/Signup
+                            </Link>
+                        </Button>
+                    </div>
                 </div>
             </div>
         );

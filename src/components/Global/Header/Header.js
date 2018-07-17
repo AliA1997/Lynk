@@ -25,30 +25,53 @@ class Header extends Component {
     }
 
     elementSelect(elem) {
-        let elementSelected  = document.getElementById(elem);
-        let elementSelectedDescription = document.getElementById(`${elem}-label`);
-        let activeElement = document.querySelector('.active');
-        if(activeElement) {
-                activeElement.classList.remove('active');
-        }
-        console.log('elementSelected-----------------', elementSelected);
-
-       if(elementSelected.classList.contains('active')) {
-           elementSelectedDescription.style.display = 'none';
-           elementSelected.classList.remove('active');
+        if(elem === 'home') {
+            this.setState({
+                homeClicked: !this.state.homeClicked,
+                groupsClicked: false,
+                eventsClicked: false,
+                aboutClicked: false,
+                contactClicked: false,
+            });
+        } else if(elem === 'group') {
+            this.setState({
+                groupsClicked: !this.state.groupsClicked,
+                homeClicked: false,
+                eventsClicked: false,
+                aboutClicked: false,
+                contactClicked: false,
+            }); 
+        } else if(elem === 'event') {
+            this.setState({
+                eventsClicked: !this.state.eventsClicked,
+                homeClicked: false,
+                groupsClicked: false,
+                aboutClicked: false,
+                contactClicked: false,
+            });
+        } else if(elem === 'about') {
+            this.setState({
+                aboutClicked: !this.state.aboutClicked,
+                homeClicked: false,
+                groupsClicked: false,
+                eventsClicked: false,
+                contactClicked: false,
+            });
         } else {
-            elementSelected.classList.add('active');
-            elementSelectedDescription.style.display = 'inline-block';           
-           elementSelected.style.border = '2px solid black';            
-       }
-       return;
-    
+            this.setState({
+                contactClicked: !this.state.contactClicked,
+                homeClicked: false,
+                groupsClicked: false,
+                eventsClicked: false,
+                aboutClicked: false,
+            });
+        }
     }
     render() {
         //Destructure the user props from the reducer from this.props;
         const { user } = this.props;
         //Destructure the hamburgerClicked from this.state;
-        const { hamburgerClicked, userGroups } = this.state;
+        const { hamburgerClicked, homeClicked, groupsClicked, eventsClicked, aboutClicked, contactClicked } = this.state;
         return (
             <div>
                 <div className='desktop'>
@@ -71,47 +94,52 @@ class Header extends Component {
                             style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1', gridRow: '2/2', height: '100%', width: '100%'}}>
                                 <MdHome style={{fontSize: '3em'}} />
                             </Button>
-                            <StepLabel style={{display: 'none', gridRow: '2/2', gridColumn: '2/4', width: '100%', height: '100%'}} id='home-label'>
-                                <Link to='/contact'>
+                            <Typography style={{display: homeClicked ?'flex' : 'none', 
+                            gridRow: '2/2', gridColumn: '2/4', width: '100%', height: '100%'}} id='home-label'>
+                                <Link to='/' className='mobile-nav-link'>
                                     Home
                                 </Link>    
-                            </StepLabel>
+                            </Typography>
                             <Button onClick={() => this.elementSelect('group')} id="group"
                             style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1', gridRow: '3/3', height: '100%', width: '100%'}}>
                                 <MdGroup style={{fontSize: '3em'}} />
                             </Button>
-                            <StepLabel style={{display: 'none', gridRow: '3/3', gridColumn: '2/4', width: '100%', height: '100%'}} id='group-label'>
-                                <Link to='/contact'>
+                            <Typography style={{display: groupsClicked ?'flex' : 'none', 
+                            gridRow: '3/3', gridColumn: '2/4', width: '100%', height: '100%'}} id='group-label'>
+                                <Link to='/groups' className='mobile-nav-link'>
                                     Groups
                                 </Link>
-                            </StepLabel>
+                            </Typography>
                             <Button onClick={() => this.elementSelect('event')} id="event"
                             style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1',  gridRow: '4/4', height: '100%', width: '100%'}}>
                                 <MdEventSeat style={{fontSize: '3em'}} />
                             </Button>
-                            <StepLabel style={{display: 'none', gridRow: '4/4', gridColumn: '2/4', width: '100%', height: '100%'}} id='event-label'>
-                                <Link to='/events'>
+                            <Typography style={{display: eventsClicked ?'flex' : 'none', 
+                            gridRow: '4/4', gridColumn: '2/4', width: '100%', height: '100%'}} id='event-label'>
+                                <Link to='/events' className='mobile-nav-link'>
                                     Events
                                 </Link>
-                            </StepLabel>
+                            </Typography>
                             <Button onClick={() => this.elementSelect('about')} id="about"
                             style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1',  gridRow: '5/5', height: '100%', width: '100%'}}>
                                 <FaInfoCircle style={{fontSize: '3em'}} />
                             </Button>
-                            <StepLabel style={{display: 'none', gridRow: '5/5', gridColumn: '2/4', width: '100%', height: '100%'}} id='about-label'>
-                                <Link to='/about'>
+                            <Typography style={{display: aboutClicked ?'flex' : 'none', 
+                            gridRow: '5/5', gridColumn: '2/4', width: '100%', height: '100%'}} id='about-label'>
+                                <Link to='/about' className='mobile-nav-link'>
                                     About
                                 </Link>
-                            </StepLabel>
+                            </Typography>
                             <Button onClick={() => this.elementSelect('contact')} id="contact"
                             style={{zIndex: 6, background: '#fff', border: '2px solid #fff', gridColumn: '1/1',  gridRow: '6/6', height: '100%', width: '100%'}}>
                                 <MdEmail style={{fontSize: '3em'}}/>
                             </Button>
-                            <StepLabel style={{display: 'none', gridRow: '6/6', gridColumn: '2/4', width: '100%', height: '100%'}} id='contact-label'>
-                                <Link to='/contact'>
+                            <Typography style={{display: contactClicked ?'flex' : 'none', 
+                            gridRow: '6/6', gridColumn: '2/4', width: '100%', height: '100%'}} id='contact-label'>
+                                <Link to='/contact' className='mobile-nav-link'>
                                     Contact
                                 </Link>
-                            </StepLabel>
+                            </Typography>
                         </div>
                     </div>
                     <GroupCarousel groups={user && user.groups} />

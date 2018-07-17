@@ -54,7 +54,7 @@ class Navbar extends Component {
                     <MenuIcon />
                     </IconButton>
                     <Typography variant="title" color="inherit">
-                        <Link to='/'>
+                        <Link to='/' className='nav-link'>
                             Lynkup
                         </Link>
                     </Typography>

@@ -36,6 +36,18 @@
 .active-description {
     display: inline-block;
 }
+/* Navlink styling */
+.mobile-nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.mobile.mobile-navbar > p {
+    width: 100%;
+    height: 100%;
+}
 @media (min-width: 1260px) {
     .desktop { 
         display: inherit;

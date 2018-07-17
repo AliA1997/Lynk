@@ -1,36 +1,40 @@
 import React, { Component } from 'react';
 import Login from './Login/Login';
+import Button from './@material-ui/core/Button';
 
 export default class Home extends Component {
-    constructor() {
-        super();
-        this.state = {
-            username: '', 
-            password: ''
-        }
-    }
-    handleLoginUsername = (val) => {
-        this.setState({username: val});
-    }
-    handleLoginPassword = (val) => {
-        this.setState({password: val});
-    }
-    login = () => {
-        //Destructure the username from the state, so it can be used in the login endpoint.
-        const { username, password } = this.state;
-        const loginInfo = { username, password };
-        axios.post('/api/login', loginInfo)
-        .then(res => {
-            alert(res.data.message);
-        }).catch(err => console.log('Login Error---------------', err));
-    }
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         username: '', 
+    //         password: ''
+    //     }
+    // }
+    // handleLoginUsername = (val) => {
+    //     this.setState({username: val});
+    // }
+    // handleLoginPassword = (val) => {
+    //     this.setState({password: val});
+    // }
+    // login = () => {
+    //     //Destructure the username from the state, so it can be used in the login endpoint.
+    //     const { username, password } = this.state;
+    //     const loginInfo = { username, password };
+    //     axios.post('/api/login', loginInfo)
+    //     .then(res => {
+    //         alert(res.data.message);
+    //     }).catch(err => console.log('Login Error---------------', err));
+    // }
     render() {
         const { username, password } = this.state;
         return (
             <div>
                 Home
-                <Login username={username} password={password}
-                login={this.login}  handleUsername={this.handleLoginUsername}  handlePassword={this.handleLoginPassword} />
+                <Button variant='outlined' color='primary'>
+                <Link to='/login'>
+                    Login
+                </Link>
+            </Button> />
             </div>
         );
     }

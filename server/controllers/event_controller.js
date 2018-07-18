@@ -51,6 +51,21 @@ module.exports = {
             res.status(200).json({events})
         }).catch(err => console.log(err, 'Read events error'))
         
+    },
+
+    removeAttendee(){
+        const db = req.app.patch('db');
+        const {id} = req.params;
+        const { attendee } = req.body;
+
+        const event_attendee = {
+            attendee,
+            id
+        }
+
+        db.delete_attendee(event_attendee).then(event => {
+            res.status(200).json({event})
+        }).catch(err => console.log(err, 'Delete Attendee error'))
     }
 
 }

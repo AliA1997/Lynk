@@ -91,6 +91,7 @@ app.get('/api/events', event.readEvent);
 app.post('/api/events', event.createEvent);
 app.put('/api/event/:id', event.updateEvent);
 app.delete('/api/event/:id', event.deleteEvent);
+app.patch('/api/event/:id/remove_attendee', event.removeAttendee);
 
 //Search Endpoints 
 //Search Group Endpoints

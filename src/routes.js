@@ -29,7 +29,7 @@ export default (
         <Route path='/register' component={Register} />
         <Route path='/login' component={LoginPage} />
         <Route path='/groups' component={GroupSearch} />
-        <Route path='/groups/:id' component={Group} />
+        <Route exact path='/groups/:id' component={Group} />
         <Route path='/events' component={EventSearch} />
         <Route path='/about' component={About} />
         <Route path='/contact' component={Contact} />

@@ -3,10 +3,10 @@ import GroupCard from './GroupCard/GroupCard';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
+
 class Groups extends Component {
     constructor(){
         super();
-
         this.state= {
             groups: []
         }

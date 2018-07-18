@@ -17,7 +17,7 @@ export default class GroupSearch extends Component {
         .then(res => {
             if(res.data.groups) {
                 //I have 2 arrays on with the default events. and search events. 
-                this.setState({defaultEvents: res.data.groups, searchgroups: res.data.events});
+                this.setState({defaultEvents: res.data.groups, searchGroups: res.data.groups});
             }
         }).catch(err => console.log('Event Search-------------------------', err));
     }

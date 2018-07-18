@@ -8,6 +8,6 @@ import { store, persistor } from './ducks/store';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<R><Provider store={store}><PersistGate persistor={persistor}><App /></PersistGate></Provider></R>,
+ReactDOM.render(<Provider store={store}><PersistGate persistor={persistor}><R><App /></R></PersistGate></Provider>,
      document.getElementById('root'));
 registerServiceWorker();

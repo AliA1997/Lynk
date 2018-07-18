@@ -37,11 +37,11 @@ class Home extends Component {
     render() {
         // const { username, password } = this.state;
         return (
-            <div>
+            <div className='home-page-div'>
                 <div className='landing-image'>
                     <img src={lynk} alt="pic for now"/>
                 </div>
-                <div className='b'>
+                <div className='landing-page-description'>
                     <h1>Join families and friends to LynkUp</h1>
                     <h2>- Create public and private events</h2>
                     <h2>- Create groups and chat</h2>
@@ -49,7 +49,7 @@ class Home extends Component {
                     <h1>Sign up Now</h1>
                     <div className='button-login'>
                         <Button variant='outlined' color='primary'>
-                            <Link to='/login' className='login'>
+                            <Link to='/login' style={{color: 'indigo'}}>
                                 Login/Signup
                             </Link>
                         </Button>

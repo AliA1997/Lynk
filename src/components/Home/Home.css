@@ -1,5 +1,8 @@
+@media(min-width: 1200px){
+
 .landing-image {
     /* background: hotpink; */
+    padding-top: 2%;
     display: flex;
     justify-content: center;
     opacity: 0.5;
@@ -27,4 +30,5 @@ h2 {
 
 .login {
     color: black;
+}
 }

@@ -13,11 +13,12 @@ const session = require('express-session');
 const massive  = require('massive');
 //Connects session to database.
 const pgSession = require('connect-pg-simple')(session);
-//
 ///Define the server 
 const app =  express();
 //Installing Nodemailer
 const nodemailer = require('nodemailer');
+//Requiring Socket.IO
+const io = require('socket.io');
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
 massive(process.env.CONNECTION_STRING).then(database => {
@@ -61,8 +62,6 @@ app.use(session({
 
 app.use(cors());
 
-
-
 //Cloudinary Endpoints 
 app.get('/api/upload', cloudinary.upload);
 
@@ -70,6 +69,8 @@ app.get('/api/upload', cloudinary.upload);
 app.get('/api/user-data', user.readUserData);
 app.post('/api/login', user.login);
 app.post('/api/register', user.register);
+//Verify Email endpoints
+app.patch('/api/users/:id/verify_email', user.verifyEmail);
 
 //Group Endpoints 
 app.get('/api/groups', group.readGroup);

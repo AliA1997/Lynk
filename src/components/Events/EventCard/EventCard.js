@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
+import placeholderImage from '../../../Images/default-placeholder.png';
 import axios from 'axios';
 import './EventCard.css';
 
@@ -113,12 +114,12 @@ export default class EventCard  extends Component {
             <Card>
                     {/* Displaying the event_image, event_name, event_topic, event_date, event_location from props*/}
                     <CardHeader 
-                    avatar={<Avatar src= {event_image} alt={event_name}/>}
+                    avatar={<Avatar alt={event_name} src={event_image || placeholderImage} />}
                     title={event_name}
                     subtitle={event_topic}
                     />
                     <CardMedia 
-                        image={event_image}
+                        image={event_image || placeholderImage}
                         title={event_name}
                     />
                     <CardContent>

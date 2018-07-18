@@ -14,6 +14,7 @@ class CreateGroup extends Component {
             groupDescription: '',
             groupImage: '',
             currentMemberSelected: '',
+            isPrivate: false,
             groupMembers: [],
             users: []
         }
@@ -32,6 +33,9 @@ class CreateGroup extends Component {
     handleGroupDescription = (val) => {
         //Handle changes in the group description input field
         this.setState({groupDescription: val})        
+    }
+    handleIsPrivate = () => {
+        this.setState({isPrivate: !this.state.isPrivate});
     }
     handleCurrentGroupMember = (val) => {
         //Handle changes in the current group member input field
@@ -90,9 +94,9 @@ class CreateGroup extends Component {
     }
     createGroup = () => {
         ///Destruct the groupName, groupDescription, and groupMembers from the state.
-        const { groupName, groupDescription, groupImage, groupMembers } = this.state;
+        const { groupName, groupDescription, groupImage, groupMembers, isPrivate } = this.state;
         //Assign a new group to the properties of the object.
-        const newGroup = { groupName, groupDescription, groupImage,  groupMembers };
+        const newGroup = { groupName, groupDescription, groupImage,  groupMembers, isPrivate };
         axios.post('/api/groups', newGroup).then(res => {
             console.log(res.data.group);
             this.props.history.push('/dashboard');
@@ -100,13 +104,13 @@ class CreateGroup extends Component {
         }).catch(err => console.log(err, 'Create Group Database Error--------------'));
     }
     render() {
-        const { groupName, groupDescription, groupImage, groupMembers, currentMemberSelected, users } = this.state;
+        const { groupName, groupDescription, groupImage, groupMembers, currentMemberSelected, isPrivate, users } = this.state;
         return (
             <div>
                 <div className='create-group-form'>
-                        <GroupForm groupImage={groupImage} groupImageUpload={this.groupImageUpload}  users={users}
+                        <GroupForm groupImage={groupImage} groupImageUpload={this.groupImageUpload}  users={users} handlePrivate={this.handleIsPrivate}
                         groupName={groupName} groupDescription={groupDescription} groupMembers={groupMembers} currentMemberSelected={currentMemberSelected}
-                        create={this.createGroup} handleName={this.handleGroupName} handleDescription={this.handleGroupDescription}
+                        create={this.createGroup} handleName={this.handleGroupName} handleDescription={this.handleGroupDescription} isPrivate={isPrivate}
                         handleCurrentMember={this.handleCurrentGroupMember} add={this.addGroupMember} remove={this.removeGroupMember}/>
                 </div>
             </div>

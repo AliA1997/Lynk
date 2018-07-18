@@ -125,7 +125,6 @@ export default class EventCard  extends Component {
                     <CardContent>
                         <Typography component="p">Event Location: {event_location}</Typography>
                     </CardContent>
-
                     
                     {this.props.isDashboard && <Button variant='outlined' onClick={() => this.editEvent(id)}>Edit</Button>}
 

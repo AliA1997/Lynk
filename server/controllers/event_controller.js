@@ -52,7 +52,7 @@ module.exports = {
         }).catch(err => console.log(err, 'Read events error'))
         
     },
-
+    
     addAttendee(){
         const db = req.app.patch('db');
         const { id } = req.params;
@@ -62,10 +62,18 @@ module.exports = {
             attendee,
             id
         }
-
         db.add_attendee(event_attendee).then(event => {
             res.status(200).json({event})
         }).catch(err => console.log(err, "Add attendee error"))
+    },
+    removeAttendee(){
+        const db = req.app.patch('db');
+        const {id} = req.params;
+        const { attendee } = req.body;
+
+        db.delete_attendee(event_attendee).then(event => {
+            res.status(200).json({event})
+        }).catch(err => console.log(err, 'Delete Attendee error'))
     }
 
 }

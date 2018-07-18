@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Weather from '../../Global/WeatherDisplay/WeatherDisplay';
 import './Navbar.css';
 
 //Define inline styles for the component
@@ -116,6 +117,7 @@ class Navbar extends Component {
                     )}
                 </Toolbar>
                 </AppBar>
+                <Weather />
         </div>
         );
     }

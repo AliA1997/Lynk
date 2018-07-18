@@ -106,7 +106,6 @@ app.post('/api/chats', chat.createChat);
 app.post('/api/contactform', nm.sendEmail);
 // app.post('/api/test', nm.test);
 
-
 ///FOr all paths 
 const path = require('path')
 app.get('*', (req, res)=>{
@@ -115,3 +114,7 @@ app.get('*', (req, res)=>{
 
 ///Server listening on port 4000.
 app.listen(4000, () => console.log('Listening on Port: 4000'));
+
+
+//33.448377 lat
+//-112.074037 long

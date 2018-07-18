@@ -8,20 +8,23 @@ require('dotenv').config()
 module.exports = {
     sendEmail: (req, res) => {
         console.log('body1', req.body)
-         const { name, email, text } = req.body
-         console.log('req.body', name, email, text)
-         let transporter = nodemailer.createTransport({
+        const { name, email, text } = req.body
+        console.log('req.body', name, email, text)
+        // // Generate test SMTP service account from ethereal.email
+        // // Only needed if you don't have a real mail account for testing
+        let transporter = nodemailer.createTransport({
              service: "gmail",
              auth: {
                  user: process.env.NODE_MAILER_EMAIL,
                  pass: process.env.NODE_MAILER_PASS
-             },
-             tls: {
-                 rejectUnauthorized: false
-             }
-         })
-         console.log('transporter', transporter)
-    
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            })
+        console.log('transporter', transporter)
+        
+        // setup email data with unicode symbols
         let mailOptions = {
             from: name + ' ' + process.env.NODE_MAILER_EMAIL,
             to: process.env.NODE_MAILER_EMAIL,
@@ -38,15 +41,36 @@ module.exports = {
                  transporter.close()
              }
          })
+    },
+    sendVerificationMail(username, email, verificationLink) {
+        //Assign the transporter variable that is assigned to a new transporter instance initialized via createTransport({})
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.NODE_MAILER_EMAIL,
+                pass: process.env.NODE_MAILER_PASS
+            },
+            tls: {
+                rejectUnauthorized: false 
+            }
+        });
+        console.log('transporter---------------', transporter);
+        //Setup email data with unicode symbols
+        let mailOptions = {
+            from: process.env.NODE_MAILER_EMAIL,
+            to: email,
+            subject: 'Verify Account',
+            html: `<div>
+                    <h1>Welcome ${username}! </h1>
+                    <h3>Please Verify Account</h3>
+                    <a href="${window.location.origin}/${verificationLink}" style={color: indigo, text_decoration: none}>Verify Account</a>
+                  </div>
+            `
+        }
     }
-//     test: (req, res) => {
-//         console.log('body', req.body)
-//     }
  }
 
 
-// // Generate test SMTP service account from ethereal.email
-// // Only needed if you don't have a real mail account for testing
 // nodemailer.createTestAccount((err, account) => {
 //     // create reusable transporter object using the default SMTP transport
 //     let transporter = nodemailer.createTransport({
@@ -59,7 +83,6 @@ module.exports = {
 //         }
 //     });
 
-//     // setup email data with unicode symbols
 //     let mailOptions = {
 //         from: '"Fred Foo 👻" <foo@example.com>', // sender address
 //         to: 'bar@example.com, baz@example.com', // list of receivers

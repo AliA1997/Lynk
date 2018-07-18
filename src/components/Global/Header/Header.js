@@ -13,7 +13,7 @@ import Navbar from '../Navbar/Navbar';
 import GroupCarousel from '../GroupCarousel/GroupCarousel';
 import WeatherDisplay from '../WeatherDisplay/WeatherDisplay';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './Header.css';
 
 class Header extends Component {
@@ -190,5 +190,5 @@ const mapStateToProps = state => {
         user: state.user
     }
 }
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));
 

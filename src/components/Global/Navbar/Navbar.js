@@ -4,13 +4,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Avatar from '@material-ui/core/Avatar';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Navbar.css';
-import { Avatar } from '../../../../node_modules/@material-ui/core';
 
 //Define inline styles for the component
 // const styles = {
@@ -50,9 +50,6 @@ class Navbar extends Component {
             <div className='navbar'>
                 <AppBar position="static">
                 <Toolbar>
-                    <IconButton color="inherit" aria-label="Menu">
-                    <MenuIcon />
-                    </IconButton>
                     <Typography variant="title" color="inherit">
                         <Link to='/' className='nav-link'>
                             Lynkup

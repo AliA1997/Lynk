@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventCard from './EventCard/EventCard';
+import Loading from '../Global/Loading/Loading';
 import axios from 'axios';
 
 export default class Events extends Component {

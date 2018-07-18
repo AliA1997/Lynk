@@ -13,17 +13,20 @@ const session = require('express-session');
 const massive  = require('massive');
 //Connects session to database.
 const pgSession = require('connect-pg-simple')(session);
-//
 ///Define the server 
 const app =  express();
 //Installing Nodemailer
 const nodemailer = require('nodemailer');
+
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
 massive(process.env.CONNECTION_STRING).then(database => {
     //Then assign the database, directory of the sql files to the server.
     app.set('db', database);
 }).catch(err => console.log(err, 'Database Connection Error'))
+//Requiring the UsersClass file
+const{ Users } = require('./helpers/UsersClass');
+
 
 //Controller Files 
 const user = require("./controllers/user_controller");
@@ -60,8 +63,6 @@ app.use(session({
 }));
 
 app.use(cors());
-
-
 
 //Cloudinary Endpoints 
 app.get('/api/upload', cloudinary.upload);
@@ -116,4 +117,13 @@ app.get('*', (req, res)=>{
 });
 
 ///Server listening on port 4000.
-app.listen(4000, () => console.log('Listening on Port: 4000'));
+const server = app.listen(4000, () => console.log('Listening on Port: 4000'));
+
+const io = require('socket.io')(server);
+
+setTimeout(() => {
+    //Requiring Socket.IO
+    const socket = require('./socket/socket')(io, Users);
+    }, 0)
+
+

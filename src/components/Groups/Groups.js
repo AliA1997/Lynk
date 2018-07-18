@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import GroupCard from './GroupCard/GroupCard';
 import axios from 'axios';
 import { connect } from 'react-redux';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Loading from '../Global/Loading/Loading';
 
 class Groups extends Component {
     constructor(){
         super();
         this.state= {
-            groups: []
+            groups: [],
+            loading: true
         }
     }
 
@@ -18,14 +20,14 @@ class Groups extends Component {
         if(!this.props.isDashboard) {
             axios.get('/api/groups').then(res => {
                 //Gets all default groups
-                this.setState({groups: res.data.groups})
+                this.setState({groups: res.data.groups, loading: false})
             }).catch(err => console.log('Get Groups Error-------------', err));
         } else {
             //Destructiong the user
             const { user } = this.props;
             axios.get(`/api/groups/admin/${user.id}`).then(res => {
                 //Get all groups that the user is in charge of.
-                this.setState({groups: res.data.groups});
+                this.setState({groups: res.data.groups, loading: false});
             }).catch(err => console.log('Get User Admin Groups------------', err));
         }
     }
@@ -34,16 +36,20 @@ class Groups extends Component {
     }
     render() {
         //Destructuring groups from this.state
-        const{ groups } = this.state;
-        return (
-            <div> 
-                {this.props.isDashboard ? <h1>Groups in Charge</h1> : <h1>Groups</h1>}
-                <div>
-            {/* Mapping over groups array and returning GroupCard with spread operator passing each property of group*/}
-                    {groups.length && groups.map((group, i) => <GroupCard key={i} {...group} isDashboard={this.props.isDashboard} reRenderGroups={this.reRenderGroups}/>)}
+        const{ groups, loading } = this.state;
+        if(!loading) {
+            return (
+                <div> 
+                    {this.props.isDashboard ? <h1>Groups in Charge</h1> : <h1>Groups</h1>}
+                    <div>
+                {/* Mapping over groups array and returning GroupCard with spread operator passing each property of group*/}
+                        {groups.length && groups.map((group, i) => <GroupCard key={i} {...group} isDashboard={this.props.isDashboard} reRenderGroups={this.reRenderGroups}/>)}
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return <Loading />
+        }
     }
 }
 //Define the default props.

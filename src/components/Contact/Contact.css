@@ -1,0 +1,62 @@
+.textsss > h1, h2 {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.textsss > h1 {
+    padding-top: 2%;
+    padding-bottom: 1%;
+    font-size: 350%;
+}
+
+.textsss > h2 {
+    font-size: 100%;
+    padding-bottom: 2%;
+}
+
+fieldset {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    width: 50%;
+    border: 5% black solid;
+}
+
+.label-name, .label-message {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    /* border: 1px solid black;
+    background: hotpink; */
+}
+
+.label-name {
+    padding-bottom: 1px;
+}
+
+.label-name > input {
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 38%;
+}
+
+.label-message > textarea {
+    padding: 1%;
+    width: 100%;
+}
+
+.label-message > label {
+    padding-right: 1%;
+}
+
+.submit-button {
+    padding-top: 1%;
+}
+
+.submit-button > button {
+    margin-left: 90%;
+    background: white;
+    border: 5% solid black;
+    /* opacity: 0.5; */
+}

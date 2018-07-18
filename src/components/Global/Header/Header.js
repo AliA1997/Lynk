@@ -37,6 +37,7 @@ class Header extends Component {
             //Console log the latitude and longitude from the response to check if it has data.
             // console.log('lat-------------------', res.data.results[0].geometry.location.lat)
             // console.log('long--------------', res.data.results[0].geometry.location.lng)
+            
         }).catch(err => console.log('Google Geolocation Error---------', err));
     }
     elementSelect(elem) {

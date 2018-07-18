@@ -40,7 +40,10 @@ class Navbar extends Component {
     }
     
     handleClose = () => {
-    this.setState({ anchorEl: null });
+        this.setState({ anchorEl: null });
+    }
+    link = (path) => {
+        this.props.history.push(path);
     }
     render() {
         const { auth, anchorEl } = this.state;

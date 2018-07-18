@@ -27,7 +27,7 @@ const About = () => {
             <div className="about-paul">
             <div className="ali-text">
                 <h2>Paul Quiroz</h2>
-                <p>Ex-sherif, Paul decided it was time for a career change.  He's unknown in age but this old dog is easily able to keep up the pace with the young guys. He also started as a student at DevMountain.  It was his idea and the idea of his loving wife that allowed us to create this website.</p>
+                <p>After spending 10 years with the Maricopa County Sheriff’s Office, Paul felt it was time for a change.  It was at this point that he embarked on a new adventure as a Web Dev student at DevMountain.  Together with his partners, they began to develop Lynkup with the hopes of making the planning, organizing and communication of groups and their events easier for everyone. </p>
                 </div>
                 <img src={paul} id="paul" alt="this is paul"/>
             </div>

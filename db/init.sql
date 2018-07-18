@@ -8,7 +8,9 @@ CREATE TABLE users (
     password TEXT,
     groups JSONB[],
     events JSONB[],
-    is_admin BOOLEAN
+    is_admin BOOLEAN,
+    verified BOOLEAN,
+    verification_link TEXT
 );
 ------- User Sql statements.
 --- Registers the User.
@@ -29,7 +31,8 @@ CREATE TABLE groups (
     group_description TEXT,
     group_image TEXT,
     group_members JSONB[],
-    group_admin INTEGER References users(id) ON UPDATE CASCADE ON DELETE CASCADE
+    group_admin INTEGER References users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    is_private BOOLEAN
 );
 --------- Groups Sql statements.
 -- Create group:

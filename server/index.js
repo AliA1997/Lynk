@@ -70,6 +70,8 @@ app.get('/api/upload', cloudinary.upload);
 app.get('/api/user-data', user.readUserData);
 app.post('/api/login', user.login);
 app.post('/api/register', user.register);
+//Verify Email endpoints
+app.patch('/api/users/:id/verify_email', user.verifyEmail);
 
 //Group Endpoints 
 app.get('/api/groups', group.readGroup);

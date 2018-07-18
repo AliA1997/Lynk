@@ -63,10 +63,19 @@ module.exports = {
             html: `<div>
                     <h1>Welcome ${username}! </h1>
                     <h3>Please Verify Account</h3>
-                    <a href="${window.location.origin}/${verificationLink}" style={color: indigo, text_decoration: none}>Verify Account</a>
+                    <a href="http://localhost:3000/verified/${verificationLink}" style={color: indigo, text_decoration: none}>Verify Account</a>
                   </div>
             `
         }
+        //Now send the mail.
+        transporter.sendMail(mailOptions, (err, data) => {
+            if(err) {
+                console.log('Send Verification Email Error-------------', err);
+            } else {
+                console.log('mailData------------', data);
+                transporter.close();
+            } 
+        })
     }
  }
 

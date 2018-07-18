@@ -1,0 +1,19 @@
+.account-verified-text {
+    animation-name: changeText;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes changeText {
+    0% {color: rgb(12, 12, 12)}
+    10% {color: rgb(100, 12, 12)}
+    20% {color: rgb(100, 12, 200)}
+    30% {color: rgb(20, 12, 200)}
+    40% {color: rgb(200, 12, 200)}
+    50% {color: rgb(100, 100, 20)}
+    60% {color: rgb(10, 100, 30)}
+    70% {color: rgb(12, 200, 43)}
+    80% {color: rgb(200, 240, 23)}
+    90% {color: rgb(200, 240, 200)}
+    100% {color: rgb(220, 240, 240)}
+}

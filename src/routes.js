@@ -16,11 +16,13 @@ import CreateEvent from './components/CreateEvent/CreateEvent';
 import Group from './components/Group/Group';
 import GroupSearch from './components/GroupSearch/GroupSearch';
 import EventSearch from './components/EventSearch/EventSearch';
+import VerificationPage from './components/VerificationPage/VerificationPage';
 
 //Export a default do does not have to be named.
 export default (
     <Switch>
         <Route exact path='/' component={Home} />
+        <Route path='/verified/:verification_link' component={VerificationPage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route path='/dashboard/create_group' component={CreateGroup} />
         <Route path='/dashboard/create_event' component={CreateEvent} />

@@ -14,6 +14,7 @@ import GroupCarousel from '../GroupCarousel/GroupCarousel';
 import WeatherDisplay from '../WeatherDisplay/WeatherDisplay';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+import axios from 'axios';
 import './Header.css';
 
 class Header extends Component {
@@ -29,7 +30,15 @@ class Header extends Component {
             contactClicked: false,
         }
     }
-
+    componentDidMount() {
+        //Do an axios request to the google api.
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=+Phoenix,+AZ&key=${process.env.REACT_APP_GOOGLE_KEY}`)
+        .then(res => {
+            //Console log the latitude and longitude from the response to check if it has data.
+            // console.log('lat-------------------', res.data.results[0].geometry.location.lat)
+            // console.log('long--------------', res.data.results[0].geometry.location.lng)
+        }).catch(err => console.log('Google Geolocation Error---------', err));
+    }
     elementSelect(elem) {
         if(elem === 'home') {
             this.setState({

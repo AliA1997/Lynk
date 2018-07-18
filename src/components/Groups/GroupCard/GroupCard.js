@@ -12,6 +12,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
 //Import axios that is responsible for talking with the backend.
 import axios from 'axios';
 //Import the css file for styling.
@@ -153,6 +154,11 @@ export default class GroupCard extends Component {
                         image={group_image || placeholderImage}
                         title={group_name}
                     />
+                    {group_members && group_members.length && group_members.map((member, i) => <Chip
+                                                                                                avatar={<Avatar src={member.profile_picture}/>}
+                                                                                                label={member.email}
+                                                                                                onDelete={() => console.log('member--------', member)}
+                                                                                                />)}
                     <CardContent>
                         <Typography component='p'>{group_description}</Typography>
                     </CardContent>

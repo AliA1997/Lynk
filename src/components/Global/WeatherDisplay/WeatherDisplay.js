@@ -9,7 +9,10 @@ export default class WeatherDisplay extends Component {
         super(props)
         this.state= {
             lat: null,
-            long: null
+            long: null,
+            temp: '',
+            summary: '',
+            place: ''
         }
     }
 
@@ -24,6 +27,11 @@ export default class WeatherDisplay extends Component {
             if (lat && long ){
                 axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${process.env.REACT_APP_SKY_KEY}/${lat},${long}`).then(res => {
                     console.log('somethings here', res)
+                    this.setState({
+                        place: res.data.timezone,
+                        temp: res.data.currently.temperature,
+                        summary: res.data.currently.summary,
+                    })
                 }).catch(error => {
                     console.log('theres an error here in the weather', error)
                 })
@@ -41,7 +49,11 @@ export default class WeatherDisplay extends Component {
         return (
             <div className='weather-display-div'>
                 <div>
-                    <label></label>
+                    {this.state.place}
+                    <h2>{this.state.summary}</h2>
+                </div>
+                <div className='temp'>
+                    <h1>{this.state.temp}</h1>
                 </div>
                 {/* <Typography>Display the Weather!!</Typography> */}
             </div>

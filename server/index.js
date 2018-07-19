@@ -75,7 +75,8 @@ app.post('/api/register', user.register);
 app.patch('/api/users/:id/verify_email', user.verifyEmail);
 
 //Group Endpoints 
-app.get('/api/groups', group.readGroup);
+app.get('/api/group/:id', group.readGroup)
+app.get('/api/groups', group.readGroups);
 app.post('/api/groups', group.createGroup);
 app.put('/api/group/:id', group.updateGroup);
 app.delete('/api/group/:id', group.deleteGroup);
@@ -90,12 +91,12 @@ app.get('/api/users/dropdown', group.readUsersDropdown);
 
 
 //Event Endpoints
-app.get('/api/events', event.readEvent);
+app.get('/api/events', event.readEvents);
+app.get('/api/event/:id', event.readEvent);
 app.post('/api/events', event.createEvent);
 app.put('/api/event/:id', event.updateEvent);
 app.delete('/api/event/:id', event.deleteEvent);
 app.patch('/api/event/:id/add_attendee', event.addAttendee);
-
 app.patch('/api/event/:id/remove_attendee', event.removeAttendee);
 
 //Search Endpoints 
@@ -112,7 +113,7 @@ app.post('/api/chats', chat.createChat);
 app.post('/api/contactform', nm.sendEmail);
 // app.post('/api/test', nm.test);
 
-///FOr all paths 
+///For all paths 
 const path = require('path')
 app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname, '../build/index.html'));

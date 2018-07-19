@@ -70,7 +70,7 @@ CREATE TABLE events (
     event_date TEXT,
     event_location TEXT,
     event_attendee_list JSONB[],
-    group_id INTEGER References groups(id) ON UPDATE CASCADE ON DELETE CASCADE
+    group_id INTEGER REFERENCES groups(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 -------- Events Sql statements.
 -- Create new event:

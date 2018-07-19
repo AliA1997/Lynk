@@ -14,7 +14,7 @@ class Create_Event extends Component {
         this.state = {
             eventName: '',
             eventTopic: '',
-            eventDate: '',
+            eventDate: new Date(),
             eventImage: '',
             eventLocation: '',
             currentEventAttendeeSelected: '',
@@ -35,7 +35,9 @@ class Create_Event extends Component {
     }
 
     handleGroupSelect = (val) => {
-        this.setState({groupSelected: val});
+        const { groupSelected, userGroups } = this.state;
+        const filteredGroup = userGroups.filter(group => group.group_name === val)[0];
+        this.setState({groupSelected: filteredGroup.id});
     }
     handleEventName = (val) => {
         //Handle changes in the event name input field
@@ -45,9 +47,12 @@ class Create_Event extends Component {
         //Handle changes in the event topic input field
         this.setState({eventTopic: val})        
     }
-    handleEventDate = (val) => {
-        //Handle changes in the event date input field
-        this.setState({eventDate: val})        
+    //Functions used for clicked next and previous for date, 
+    //and therefore needed to binded, so become arrow functions.
+    //When Date is clicked
+    onDateClick = date => {
+        this.setState({eventDate: date});
+        console.log('date--------------',  date);
     }
     handleEventLocation = (val) => {
         //Handle changes in the event location input field
@@ -113,8 +118,8 @@ class Create_Event extends Component {
     
     createEvent = () => {
         ///Destruct the eventName, eventDescription, eventDate, eventLocation, and eventAttendeeeList from the state.
-        const { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList } = this.state;
-        const newEvent = { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList };
+        const { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList, groupSelected } = this.state;
+        const newEvent = { eventName, eventTopic, eventImage, eventDate, eventLocation, eventAttendeeList, groupId: +groupSelected };
         axios.post('/api/events', newEvent).then(res => {
             ///Redirect after creating event.
             this.props.history.push('/dashboard');
@@ -130,7 +135,7 @@ class Create_Event extends Component {
                 <div className='create-event-form'>
                         <EventForm userGroups={userGroups} groupSelected={groupSelected} handleSelect={this.handleGroupSelect} remove={this.removeAttendee} add={this.addAttendee}
                         eventImage={eventImage} eventImageUpload={this.eventImageUpload} eventName={eventName} eventDate={eventDate} eventTopic={eventTopic} 
-                        eventLocation={eventLocation} currentMemberSelected={currentMemberSelected} currentEventAttendee={currentEventAttendeeSelected} 
+                        eventLocation={eventLocation} currentMemberSelected={currentMemberSelected} currentEventAttendee={currentEventAttendeeSelected} onDateClick={this.onDateClick}
                         eventMembers={eventAttendeeList} create={this.createEvent} handleName={this.handleEventName} handleTopic={this.handleEventTopic}
                         handleDate={this.handleEventDate} handleLocation={this.handleEventLocation} handleCurrentAttendee={this.handleCurrentEventAttendee} />
 

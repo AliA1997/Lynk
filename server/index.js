@@ -116,21 +116,8 @@ app.get('*', (req, res)=>{
 });
 
 ///Server listening on port 4000.
-<<<<<<< HEAD
-const server = app.listen(4000, () => console.log('Listening on Port: 4000'));
-
-const io = require('socket.io')(server);
-
-setTimeout(() => {
-    //Requiring Socket.IO
-    const socket = require('./socket/socket')(io, Users);
-    }, 0)
-
-
-=======
 app.listen(4000, () => console.log('Listening on Port: 4000'));
 
 
 //33.448377 lat
 //-112.074037 long
->>>>>>> weather-1

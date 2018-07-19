@@ -6,6 +6,7 @@ import './CreateGroup.css';
 import axios from 'axios';
 
 const CLOUDINARY_URL ='https://api.cloudinary.com/v1_1/lynk00/image/upload';
+//When performing testing also perform it the component as well
 class CreateGroup extends Component {
     constructor() {
         super();

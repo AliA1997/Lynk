@@ -27,7 +27,7 @@ const GroupForm = (props) => {
                 required
                 multiline
                 rowsMax="5"        
-                id="name"
+                id="description"
                 label="Group Description"
                 onChange={e => props.handleDescription(e.target.value)}
                 value={groupDescription}

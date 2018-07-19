@@ -1,3 +1,7 @@
+.weather-display-div {
+    width: 100%;
+    text-align:right;
+}
 .weather-display-div > div {
     display: inline-block;
     padding-right: 1em;

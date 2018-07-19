@@ -115,9 +115,9 @@ class Navbar extends Component {
                         </Menu>
                     </div>
                     )}
+                    <WeatherDisplay />
                 </Toolbar>
                 </AppBar>
-                <WeatherDisplay />
         </div>
         );
     }

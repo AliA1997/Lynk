@@ -39,10 +39,8 @@ export default class WeatherDisplay extends Component {
 
     render() {
         return (
-            <div className='weather-display-div'>
-                <div>
-                    <label></label>
-                </div>
+            <div className='weather-display-div'>             
+                 
                 {/* <Typography>Display the Weather!!</Typography> */}
             </div>
         );

@@ -1,4 +1,5 @@
 import React from 'react';
+import Calendar from '../../Global/Calendar/Calendar';
 //Import the Material UI elements to use.
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
@@ -43,11 +44,11 @@ const EventForm = (props) => {
                 />        
                 <Avatar alt={eventName} src={eventImage} style={{height: '10em', width: '10em'}} />  
                 <input type='file' placeholder='Event Image' onChange={e => props.eventImageUpload(e.target.files)} /> 
+                <Calendar onDateClick={props.onDateClick} eventDate={eventDate} />
                 <TextField
                 required
                 id="date"
-                type="date"
-                onChange={e => props.handleDate(e.target.value)}
+                label="Event Date"
                 value={eventDate}
                 margin="normal"
                 />

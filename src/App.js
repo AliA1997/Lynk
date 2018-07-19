@@ -9,6 +9,7 @@ import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 import routes  from './routes';
 import Header from './components/Global/Header/Header';
+import Footer from './components/Global/Footer/Footer';
 import './App.css';
 
 // All the following keys are optional.
@@ -47,6 +48,7 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Header />
         {routes}
+        <Footer />
       </MuiThemeProvider>
     );
   }

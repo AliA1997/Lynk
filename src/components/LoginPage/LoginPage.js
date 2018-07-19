@@ -3,6 +3,8 @@ import Login from './Login/Login';
 import { login } from '../../ducks/reducer';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+//import facebook login
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import axios from 'axios';
 import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 import TiSocialGithub from 'react-icons/lib/ti/social-github-circular';
@@ -36,6 +38,20 @@ class LoginPage extends Component {
             this.props.history.push('dashboard');
         }).catch(err => console.log('Login Error---------------', err));
     }
+    facebookLogin = (response) => {
+        alert(JSON.stringify(response.id));
+        let newUser = {
+            facebookId: response.id,
+            name: response.name, 
+            email: response.email,
+            profile_picture: response.picture.data.url
+        }
+        axios.post('/api/facebook-login', newUser).then(res => {
+            alert(res.data.message);
+            this.props.login(res.data.user);
+        }).catch(err => console.log('facebook login error-----------------', err));
+    }
+
     render() {
         const { username, password } = this.state;
         return (
@@ -48,7 +64,15 @@ class LoginPage extends Component {
                     </div>
                     <Link to='/register' style={{color: "indigo"}}>Don't have an account?</Link>
                     <div className='social-media-login'>
-                        <TiSocialFacebookCircular style={{fontSize: '3em'}}/>
+
+                        <FacebookLogin 
+                            appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+                            autoLoad={true}
+                            textButton='Login'
+                            fields="name,email,picture"
+                            callback={this.facebookLogin} 
+                            render={renderProps => <TiSocialFacebookCircular onClick={renderProps.facebookLogin} style={{fontSize: '3em'}}/>}
+                        />
                         <TiSocialGithub style={{fontSize: '3em'}} />
                         <TiSocialGooglePlusCircular style={{fontSize: '3em'}} />
                     </div>

@@ -36,6 +36,7 @@ const event = require('./controllers/event_controller');
 const group = require('./controllers/group_controller');
 const nm = require('./controllers/nodemailer_controller');
 const search = require('./controllers/search_controller');
+const socialMedia = require('./controllers/social_media_controller');
 //
 
 ///Use express.static to render public files from the build folder for hosting
@@ -71,6 +72,7 @@ app.get('/api/upload', cloudinary.upload);
 app.get('/api/user-data', user.readUserData);
 app.post('/api/login', user.login);
 app.post('/api/register', user.register);
+app.post('/api/facebook-login', socialMedia.facebookLogin);
 //Verify Email endpoints
 app.patch('/api/users/:id/verify_email', user.verifyEmail);
 

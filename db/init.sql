@@ -10,7 +10,8 @@ CREATE TABLE users (
     events JSONB[],
     is_admin BOOLEAN,
     verified BOOLEAN,
-    verification_link TEXT
+    verification_link TEXT,
+    social_media_id TEXT
 );
 ------- User Sql statements.
 --- Registers the User.

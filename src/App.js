@@ -45,11 +45,13 @@ class App extends Component {
   }
   render() {
     return (
-      <MuiThemeProvider theme={theme}>
-        <Header />
-        {routes}
-        <Footer />
-      </MuiThemeProvider>
+      <div className="parent-className">
+        <MuiThemeProvider theme={theme}>
+          <Header />
+          {routes}
+          <Footer />
+        </MuiThemeProvider>
+      </div>
     );
   }
 }

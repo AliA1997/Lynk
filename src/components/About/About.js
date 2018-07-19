@@ -19,14 +19,14 @@ const About = () => {
             <div className="about-ali">
                 <img src={ali} id="ali" alt="this is ali"/>
                 <div className="ali-text">
-                <h2>Ali Alhaddad</h2>
-                <p>Ali started out as student at DevMountain.  He's a 21 born in LA, California.  He's ambitious worker which is why he became the leader of this project.</p>
+                <h3>Ali Alhaddad (Lead Junior Developer, CEO)</h3>
+                <p>Ali started out as student at DevMountain.  He's a 21 born in LA, California.  He's ambitious worker which is why he became the leader of this project.  With his go getter attitude he pushed his way working hard day and night to complete his tasks.</p>
                 </div>
             </div>
             <br/>
             <div className="about-paul">
             <div className="ali-text">
-                <h2>Paul Quiroz</h2>
+                <h3>Paul Quiroz (Junior Developer, CEO)</h3>
                 <p>After spending 10 years with the Maricopa County Sheriff’s Office, Paul felt it was time for a change.  It was at this point that he embarked on a new adventure as a Web Dev student at DevMountain.  Together with his partners, they began to develop Lynkup with the hopes of making the planning, organizing and communication of groups and their events easier for everyone. </p>
                 </div>
                 <img src={paul} id="paul" alt="this is paul"/>
@@ -35,8 +35,8 @@ const About = () => {
             <div className="about-bryce">
                 <img src={bryce} id="bryce" alt=""/>
             <div className="ali-text">
-                <h2>Bryson Akau</h2>
-                <p>ALOHA!!! Hawaiian from hawaii, Just like the other two Bryson started out at DevMountain.  He's a 28 year old junior developer but has a lot to offer the LynkUp family.</p>
+                <h3>Bryson Akau (Junior Junior Developer, CEO)</h3>
+                <p>ALOHA!!! Bryson jumping from job to job doing different tasks from house keeping to being a network technician thought it was time to follow his dream to go into Web Development.  He joined DevMountain and ended up working with two fantastic guys doing this project.</p>
                 </div>
             </div>
         </div>

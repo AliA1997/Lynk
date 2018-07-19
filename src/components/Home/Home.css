@@ -1,6 +1,7 @@
 .home-page-div {
     text-align: center;
     display: grid;
+    min-height: 90vh;
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 80% 20%;
 }
@@ -19,7 +20,7 @@
     grid-column: 2/2;
 }
 .landing-image > img {
-    width: 100%;
+    width: 65%;
     margin-left: auto;
     margin-right: auto;
 }

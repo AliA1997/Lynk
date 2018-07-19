@@ -111,6 +111,7 @@ export default class EventCard  extends Component {
         const{ id, event_name, event_topic, event_date, event_location, event_attendee_list, event_image} = this.props;
         const { doEdit } = this.state;
         return (
+            <div className="eventCard-parent">
             <Card>
                     {/* Displaying the event_image, event_name, event_topic, event_date, event_location from props*/}
                     <CardHeader 
@@ -145,6 +146,7 @@ export default class EventCard  extends Component {
 
                 </div>
             </Card>
+            </div>
         
         );
     }

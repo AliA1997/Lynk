@@ -106,7 +106,7 @@ class CreateGroup extends Component {
     render() {
         const { groupName, groupDescription, groupImage, groupMembers, currentMemberSelected, isPrivate, users } = this.state;
         return (
-            <div>
+            <div className='parent-className'>
                 <div className='create-group-form'>
                         <GroupForm groupImage={groupImage} groupImageUpload={this.groupImageUpload}  users={users} handlePrivate={this.handleIsPrivate}
                         groupName={groupName} groupDescription={groupDescription} groupMembers={groupMembers} currentMemberSelected={currentMemberSelected}

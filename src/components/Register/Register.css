@@ -3,6 +3,7 @@
     grid-template-columns: 10% 80% 10%;
     grid-template-rows: 10% 70% 20%;
     width: 100%;
+    min-height: 81.4vh;
 }
 
 .register-container-div > *{

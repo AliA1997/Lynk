@@ -1,3 +1,7 @@
+.login-parent {
+    min-height: 81.4vh;
+}
+
 .login-page-container-div {
     display: grid;
     grid-template-columns: 2.5% 95% 2.5%;

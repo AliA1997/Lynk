@@ -139,7 +139,7 @@ export default class GroupCard extends Component {
      const{ group_name, group_description, id, group_members, group_image, is_private } = this.props;
      const { doEdit, editGroupName } = this.state;
         return (
-             <div>
+             <div className='groupCard-parent'>
                     <Card>
                     <Link to={`/groups/${id}`} style={{textDecoration: 'none'}}>
                         {/*Displaying the group_name and group_description from props */}

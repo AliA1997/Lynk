@@ -39,7 +39,7 @@ class LoginPage extends Component {
     render() {
         const { username, password } = this.state;
         return (
-            <div>
+            <div className='login-parent'>
                 <div className='login-page-container-div'>
                     <h4>Login</h4>
                     <div>

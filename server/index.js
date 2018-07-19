@@ -94,6 +94,9 @@ app.get('/api/events', event.readEvent);
 app.post('/api/events', event.createEvent);
 app.put('/api/event/:id', event.updateEvent);
 app.delete('/api/event/:id', event.deleteEvent);
+app.patch('/api/event/:id/add_attendee', event.addAttendee);
+
+app.patch('/api/event/:id/remove_attendee', event.removeAttendee);
 
 //Search Endpoints 
 //Search Group Endpoints
@@ -116,7 +119,6 @@ app.get('*', (req, res)=>{
 });
 
 ///Server listening on port 4000.
-<<<<<<< HEAD
 const server = app.listen(4000, () => console.log('Listening on Port: 4000'));
 
 const io = require('socket.io')(server);
@@ -127,10 +129,3 @@ setTimeout(() => {
     }, 0)
 
 
-=======
-app.listen(4000, () => console.log('Listening on Port: 4000'));
-
-
-//33.448377 lat
-//-112.074037 long
->>>>>>> weather-1

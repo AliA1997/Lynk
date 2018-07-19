@@ -10,8 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Weather from '../../Global/WeatherDisplay/WeatherDisplay';
 import './Navbar.css';
+import WeatherDisplay from '../../Global/WeatherDisplay/WeatherDisplay';
 
 //Define inline styles for the component
 // const styles = {
@@ -117,7 +117,7 @@ class Navbar extends Component {
                     )}
                 </Toolbar>
                 </AppBar>
-                <Weather />
+                <WeatherDisplay />
         </div>
         );
     }

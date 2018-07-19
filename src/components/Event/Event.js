@@ -8,7 +8,9 @@ export default class Event extends Component {
         super();
 
         this.state = {
-            currentEvent: ''
+            currentEvent: '', 
+            lat: null,
+            long: null
         }
     }
 
@@ -16,11 +18,23 @@ export default class Event extends Component {
         axios.get(`/api/event/${this.props.match.params.id}`).then(res => {
             this.setState({currentEvent: res.data.event[0]});
             console.log(res.data.event, 'event data-------');
+            let locations = this.state.currentEvent.event_location.split(', ')
+            axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=+${locations[0]},+${locations[1]}&key=${process.env.REACT_APP_GOOGLE_KEY}`)
+            .then(res => { 
+                this.setState({
+                    lat: res.data.results[0].geometry.location.lat,
+                    long: res.data.results[0].geometry.location.lng
+                });
+                console.log('location info------------', res.data.results[0].geometry.location.lat, res.data.results[0].geometry.location.lng)
+            }).catch(err => console.log('Get event location error----------', err))
         }).catch(err => console.log('Get event error-------', err));
+
     }
 
     render() {
         const{ event_name, event_topic, event_image, event_date, event_location, event_attendee_list } = this.state.currentEvent;
+        const{ lat, long } = this.state
+        console.log(lat, long)
         return (
             <div>
                 <div>

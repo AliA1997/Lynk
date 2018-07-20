@@ -1,0 +1,1 @@
+INSERT INTO users (name, email, profile_picture, social_media_id) VALUES (${name}, ${email}, ${profile_picture}, ${id});

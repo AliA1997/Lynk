@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
+import GroupChat from './GroupChat/GroupChat';
 import axios from 'axios';
 
 export default class Group extends Component {
     constructor() {
         super();
         this.state = {
-            currentHouse: ''
+            currentGroup: ''
         }
     }
     componentDidMount() {
         axios.get(`/api/group/${this.props.match.params.id}`)
         .then(res => {
-            this.setState({currentHouse: res.data.house});
-        }).catch(err => console.log('Get Individual House Error-----------', err));
+            this.setState({currentGroup: res.data.group});
+        }).catch(err => console.log('Get Individual Group Error-----------', err));
     }
     render() {
-        const { group_name, group_description, group_image, group_members, username } = this.state.currentHouse;
+        const { group_name, group_description, group_image, group_members, username } = this.state.currentGroup;
         return (
             <div>
                 <div>
@@ -29,8 +30,9 @@ export default class Group extends Component {
                         <p>{group_description}</p>
                     </div>
                     <div className='group-members-div'>
-                        {group_members.length && group_members.map(member => <p>{member}</p>)}
+                        {group_members && group_members.length && group_members.map(member => <p>{member}</p>)}
                     </div>
+                    <GroupChat />
                 </div>
             </div>
         );

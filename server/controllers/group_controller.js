@@ -14,7 +14,7 @@ module.exports = {
         const { id } = req.params;
 
         db.read_group(id).then(group => {
-            res.status(200).json({group});
+            res.status(200).json({group: group[0]});
         }).catch(err => console.log(err, 'Read group error-------'))
     },
     

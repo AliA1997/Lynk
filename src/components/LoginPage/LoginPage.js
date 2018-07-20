@@ -67,7 +67,7 @@ class LoginPage extends Component {
 
                         <FacebookLogin 
                             appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-                            autoLoad={true}
+                            autoLoad={true}q
                             textButton='Login'
                             fields="name,email,picture"
                             callback={this.facebookLogin} 

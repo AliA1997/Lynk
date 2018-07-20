@@ -57,8 +57,9 @@ module.exports = {
     readEvent(req, res){
         const db = req.app.get('db');
         const { id } = req.params;
-
+        console.log('id__------------', id);
         db.read_event(id).then(event => {
+            console.log(event);
             res.status(200).json({event})
         }).catch(err => console.log(err, 'Read event error'))
     },

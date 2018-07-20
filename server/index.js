@@ -127,6 +127,6 @@ const io = require('socket.io')(server);
 setTimeout(() => {
     //Requiring Socket.IO
     const socket = require('./socket/socket')(io, Users);
-    }, 0)
+}, 0)
 
 

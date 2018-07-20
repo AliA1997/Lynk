@@ -18,6 +18,7 @@ const GroupForm = (props) => {
                 <TextField
                 required
                 id="name"
+                className="create-group-name"
                 label="Group Name"
                 onChange={e => props.handleName(e.target.value)}
                 value={groupName}
@@ -28,6 +29,7 @@ const GroupForm = (props) => {
                 multiline
                 rowsMax="5"        
                 id="name"
+                className="create-group-description"
                 label="Group Description"
                 onChange={e => props.handleDescription(e.target.value)}
                 value={groupDescription}

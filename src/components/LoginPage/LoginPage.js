@@ -51,7 +51,20 @@ class LoginPage extends Component {
             this.props.login(res.data.user);
         }).catch(err => console.log('facebook login error-----------------', err));
     }
-
+    googleLogin = (response) => {
+        const { email, name, imageUrl, googleId } = res.profileObj;
+        let newUser = {
+            googleId: googleId,
+            email: email,
+            name: name,
+            profile_picture: imageUrl
+        }
+        console.log('newUser---------------', newUser);
+        axios.post('/api/google-login', newUser).then(res => {
+            alert(res.data.message);
+            this.props.login(res.data.user);
+        }).catch(err => console.log('google login error-------------------', err));
+    }
     render() {
         const { username, password } = this.state;
         return (

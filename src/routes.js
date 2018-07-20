@@ -14,6 +14,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import CreateGroup from './components/CreateGroup/CreateGroup';
 import CreateEvent from './components/CreateEvent/CreateEvent';
 import Group from './components/Group/Group';
+import Event from './components/Event/Event';
 import GroupSearch from './components/GroupSearch/GroupSearch';
 import EventSearch from './components/EventSearch/EventSearch';
 import VerificationPage from './components/VerificationPage/VerificationPage';
@@ -28,9 +29,10 @@ export default (
         <Route path='/dashboard/create_event' component={CreateEvent} />
         <Route path='/register' component={Register} />
         <Route path='/login' component={LoginPage} />
-        <Route path='/groups' component={GroupSearch} />
-        <Route exact path='/groups/:id' component={Group} />
-        <Route path='/events' component={EventSearch} />
+        <Route exact path='/groups' component={GroupSearch} />
+        <Route path='/groups/:id' component={Group} />
+        <Route exact path='/events' component={EventSearch} />
+        <Route path='/events/:id' component={Event} />
         <Route path='/about' component={About} />
         <Route path='/contact' component={Contact} />
     </Switch>

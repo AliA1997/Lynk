@@ -1,5 +1,5 @@
 module.exports = {
-    readGroup(req, res) {
+    readGroups(req, res) {
         //Assign a variable that holds your database instance .
         const db = req.app.get('db');
         //Runs the sql file that reads the groups.
@@ -8,6 +8,16 @@ module.exports = {
             res.status(200).json({groups});
         }).catch(err => console.log(err, 'Read All Groups Error------------'));
     },
+
+    readGroup(req, res){
+        const db = req.app.get('db');
+        const { id } = req.params;
+
+        db.read_group(id).then(group => {
+            res.status(200).json({group: group[0]});
+        }).catch(err => console.log(err, 'Read group error-------'))
+    },
+    
     readUserAdminGroups(req, res) {
         //Assign variable to database instance.
         const db = req.app.get('db');

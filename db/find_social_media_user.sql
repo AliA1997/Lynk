@@ -1,0 +1,1 @@
+SELECT * FROM users WHERE social_media_id = $1;

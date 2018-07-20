@@ -1,0 +1,1 @@
+SELECT events.*, groups.group_name, groups.group_image FROM events JOIN groups ON events.group_id = groups.id WHERE events.id = $1;

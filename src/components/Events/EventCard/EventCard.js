@@ -8,6 +8,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import placeholderImage from '../../../Images/default-placeholder.png';
+//Import link for react-router-dom'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './EventCard.css';
 
@@ -111,7 +113,10 @@ export default class EventCard  extends Component {
         const{ id, event_name, event_topic, event_date, event_location, event_attendee_list, event_image} = this.props;
         const { doEdit } = this.state;
         return (
+            <div className="eventCard-parent">
             <Card>
+                <Link to={`/events/${id}`} style={{textDecoration: 'none'}}>
+
                     {/* Displaying the event_image, event_name, event_topic, event_date, event_location from props*/}
                     <CardHeader 
                     avatar={<Avatar alt={event_name} src={event_image || placeholderImage} />}
@@ -125,7 +130,7 @@ export default class EventCard  extends Component {
                     <CardContent>
                         <Typography component="p">Event Location: {event_location}</Typography>
                     </CardContent>
-                    
+                </Link>
                     {this.props.isDashboard && <Button variant='outlined' onClick={() => this.editEvent(id)}>Edit</Button>}
 
                     {this.props.isDashboard && <Button variant='outlined' onClick={() => this.deleteEvent(id)}>Delete</Button>}
@@ -145,6 +150,7 @@ export default class EventCard  extends Component {
 
                 </div>
             </Card>
+            </div>
         
         );
     }

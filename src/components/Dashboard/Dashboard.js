@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Dashboard.css'
 import Groups from '../Groups/Groups';
 
 ///Dashboard components.
@@ -23,7 +24,7 @@ export default class Dashboard extends Component {
     render() {
         
         return (
-            <div>
+            <div className='dashboard-className'>
                 <h1>Dashboard</h1>
                 <div>
                     <div className='dashboard-event-form-div'>

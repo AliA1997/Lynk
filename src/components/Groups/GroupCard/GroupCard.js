@@ -102,11 +102,11 @@ export default class GroupCard extends Component {
     }
     //Handle the responsible for editing groups.
     editGroup = (id) => {
-        //Destructure the doEdit, and the editGroupName, editGroupDescription, editGroupImage from the state.
+        //Destruct the doEdit, and the editGroupName, editGroupDescription, editGroupImage from the state.
         const { doEdit, editGroupName, editGroupDescription, editGroupImage, editIsPrivate } = this.state;
         //Destruct the props 
         const{ group_name, group_description,  group_image } = this.props;
-        //Assign the new group to the values destrcuted from state.
+        //Assign the new group to the values destructed from state.
         const newGroup = { id, group_name: editGroupName ? editGroupName : group_name, 
                             group_description: editGroupDescription ? editGroupDescription : group_description,
                             group_image: editGroupImage ? editGroupImage : group_image,
@@ -123,7 +123,7 @@ export default class GroupCard extends Component {
             this.setState({doEdit: !this.state.doEdit});
         }
     }
-    //Handling add new memebers to the currentGroup via the patch request.
+    //Handling add new members to the currentGroup via the patch request.
     addMembers = (id, member) => {
         axios.patch(`/api/group/${id}/add_member`, member).then(res => {
             this.setState({groups: res.data.groups});
@@ -139,7 +139,7 @@ export default class GroupCard extends Component {
      const{ group_name, group_description, id, group_members, group_image, is_private } = this.props;
      const { doEdit, editGroupName } = this.state;
         return (
-             <div>
+             <div className='groupCard-parent'>
                     <Card>
                     <Link to={`/groups/${id}`} style={{textDecoration: 'none'}}>
                         {/*Displaying the group_name and group_description from props */}

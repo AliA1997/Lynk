@@ -36,6 +36,7 @@ const event = require('./controllers/event_controller');
 const group = require('./controllers/group_controller');
 const nm = require('./controllers/nodemailer_controller');
 const search = require('./controllers/search_controller');
+const socialMedia = require('./controllers/social_media_controller');
 //
 
 ///Use express.static to render public files from the build folder for hosting
@@ -71,11 +72,13 @@ app.get('/api/upload', cloudinary.upload);
 app.get('/api/user-data', user.readUserData);
 app.post('/api/login', user.login);
 app.post('/api/register', user.register);
+app.post('/api/facebook-login', socialMedia.facebookLogin);
 //Verify Email endpoints
 app.patch('/api/users/:id/verify_email', user.verifyEmail);
 
 //Group Endpoints 
-app.get('/api/groups', group.readGroup);
+app.get('/api/group/:id', group.readGroup)
+app.get('/api/groups', group.readGroups);
 app.post('/api/groups', group.createGroup);
 app.put('/api/group/:id', group.updateGroup);
 app.delete('/api/group/:id', group.deleteGroup);
@@ -90,12 +93,12 @@ app.get('/api/users/dropdown', group.readUsersDropdown);
 
 
 //Event Endpoints
-app.get('/api/events', event.readEvent);
+app.get('/api/events', event.readEvents);
+app.get('/api/event/:id', event.readEvent);
 app.post('/api/events', event.createEvent);
 app.put('/api/event/:id', event.updateEvent);
 app.delete('/api/event/:id', event.deleteEvent);
 app.patch('/api/event/:id/add_attendee', event.addAttendee);
-
 app.patch('/api/event/:id/remove_attendee', event.removeAttendee);
 
 //Search Endpoints 
@@ -112,7 +115,7 @@ app.post('/api/chats', chat.createChat);
 app.post('/api/contactform', nm.sendEmail);
 // app.post('/api/test', nm.test);
 
-///FOr all paths 
+///For all paths 
 const path = require('path')
 app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname, '../build/index.html'));
@@ -126,6 +129,6 @@ const io = require('socket.io')(server);
 setTimeout(() => {
     //Requiring Socket.IO
     const socket = require('./socket/socket')(io, Users);
-    }, 0)
+}, 0)
 
 

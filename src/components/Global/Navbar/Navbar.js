@@ -58,7 +58,7 @@ class Navbar extends Component {
                     </Typography>
                     <Typography variant="title" color="inherit">
                         <Link to='/dashboard' className='nav-link'>
-                            My Dashboard
+                            Dashboard
                         </Link>
                     </Typography>
                     <Typography variant="title" color="inherit">

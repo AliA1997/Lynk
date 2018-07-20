@@ -45,7 +45,7 @@ module.exports = {
 
     },
 
-    readEvent(req, res){
+    readEvents(req, res){
         const db = req.app.get('db');
 
         db.read_all_events().then(events => {
@@ -54,6 +54,16 @@ module.exports = {
         
     },
     
+    readEvent(req, res){
+        const db = req.app.get('db');
+        const { id } = req.params;
+        console.log('id__------------', id);
+        db.read_event(id).then(event => {
+            console.log(event);
+            res.status(200).json({event})
+        }).catch(err => console.log(err, 'Read event error'))
+    },
+
     addAttendee(){
         const db = req.app.patch('db');
         const { id } = req.params;

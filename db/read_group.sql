@@ -1,0 +1,1 @@
+SELECT groups.*, users.username, users.profile_picture FROM groups JOIN users ON users.id = groups.group_admin WHERE groups.id = $1;

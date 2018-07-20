@@ -36,7 +36,8 @@ const About = () => {
                 <img src={bryce} id="bryce" alt=""/>
             <div className="ali-text">
                 <h3>Bryson Akau (Junior Junior Developer, CEO)</h3>
-                <p>ALOHA!!! Bryson jumping from job to job doing different tasks from house keeping to being a network technician thought it was time to follow his dream to go into Web Development.  He joined DevMountain and ended up working with two fantastic guys doing this project.</p>
+                {/* <p>ALOHA!!! Bryson jumping from job to job doing different tasks from house keeping to being a network technician thought it was time to follow his dream to go into Web Development.  He joined DevMountain and ended up working with two fantastic guys doing this project.</p> */}
+                <p>Bryson ( Son Bryson), born Hawaiian, is a male Saiyan and student at DevMountain working with his friends on Lynkup. Bryson is a Saiyan originally sent to Earth as an infant with the mission to destroy it, an accident alters his memory, allowing him to grow up to become Earth's greatest defender as a Web Developer, as well as the informal leader of the Dev Team. Throughout his life, he constantly strives and trains to be the greatest Web warrior possible, which has kept the Earth and the universe safe from destruction many times</p>
                 </div>
             </div>
         </div>

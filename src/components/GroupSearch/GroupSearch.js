@@ -39,7 +39,7 @@ export default class GroupSearch extends Component {
         if(!loading){
         return (
                 <div>
-                    <div>
+                    <div className='group-search-div'>
                         <h2>Search Groups</h2>
                         <Search type='Groups' handleChange={this.handleSearch} />
                         {searchGroups && searchGroups.length ? searchGroups.map((group, i) => <GroupCard key={i} {...group} />) 

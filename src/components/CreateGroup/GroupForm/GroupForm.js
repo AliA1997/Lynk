@@ -42,7 +42,7 @@ const GroupForm = (props) => {
                 <input type='file' placeholder='Group Image' onChange={e => props.groupImageUpload(e.target.files)} />         
                 {/*Map over all the users.*/}
                 <div className='select-members-div'>
-                    <input type='text' list="members" placeholder="Add members" />
+                    <input className= 'add-member-input' type='text' list="members" placeholder="Add members" />
                     <datalist id='members'>
                         {users.map((user, i) => <option key={i} value={user.username}>{user.username}</option>)}
                     </datalist>
@@ -51,7 +51,7 @@ const GroupForm = (props) => {
                         onClick={() => currentMemberSelected && props.add(currentMemberSelected)}/>
                     </Button>
                 </div>
-                <Button variant='outlined' color='primary' onClick={() => props.create()}>
+                <Button variant='outlined' className='create-group-button' color='primary' onClick={() => props.create()}>
                     Create Group 
                 </Button> 
             </form>

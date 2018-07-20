@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login/Login';
 import { login } from '../../ducks/reducer';
 import { Link, withRouter } from 'react-router-dom';
+import GoogleLogin from 'react-google-login';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
@@ -36,6 +37,15 @@ class LoginPage extends Component {
             this.props.history.push('dashboard');
         }).catch(err => console.log('Login Error---------------', err));
     }
+    googleLogin = (res) => {
+        console.log(res);
+        const { email, name, imageUrl, googleId } = res.profileObj;
+        const newUser = { email, name, imageUrl, googleId };
+        console.log('newUser---------------', newUser); 
+    }
+    rejectedLogin = (res) => {
+        console.log('Login Rejected-----------------', res);
+    }
     render() {
         const { username, password } = this.state;
         return (
@@ -50,7 +60,14 @@ class LoginPage extends Component {
                     <div className='social-media-login'>
                         <TiSocialFacebookCircular style={{fontSize: '3em'}}/>
                         <TiSocialGithub style={{fontSize: '3em'}} />
-                        <TiSocialGooglePlusCircular style={{fontSize: '3em'}} />
+                        <GoogleLogin
+                            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                            onSuccess={this.googleLogin}
+                            onFailure={this.rejectedLogin}
+                            style={{width: '4em', background: 'transparent', border: '0.1px solid transparent'}}
+                        >
+                            <TiSocialGooglePlusCircular style={{fontSize: '3.5em'}} />
+                        </GoogleLogin>
                     </div>
                 </div>
             </div>

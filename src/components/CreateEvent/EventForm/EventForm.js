@@ -28,6 +28,7 @@ const EventForm = (props) => {
                 </select>
                 <TextField
                 required
+                className='create-event-name-div'
                 id="name"
                 label="Event Name"
                 onChange={e => props.handleName(e.target.value)}
@@ -36,6 +37,7 @@ const EventForm = (props) => {
                 />
                 <TextField
                 required
+                className='create-event-topic-div'
                 id="topic"
                 label="Event Topic"
                 onChange={e => props.handleTopic(e.target.value)}
@@ -47,6 +49,7 @@ const EventForm = (props) => {
                 <Calendar onDateClick={props.onDateClick} eventDate={eventDate} />
                 <TextField
                 required
+                className='create-event-date-div'
                 id="date"
                 label="Event Date"
                 value={eventDate}
@@ -54,6 +57,7 @@ const EventForm = (props) => {
                 />
                 <TextField
                 required
+                className='create-event-location-div'
                 id="location"
                 label="Event Location"
                 onChange={e => props.handleLocation(e.target.value)}
@@ -62,6 +66,7 @@ const EventForm = (props) => {
                 />
                 <TextField
                 required
+                className='create-event-add-attendee-div'
                 id="attendees"
                 label="Current Attendee"
                 onChange={e => props.handleCurrentAttendee(e.target.value)}
@@ -78,7 +83,7 @@ const EventForm = (props) => {
                     <MdAdd className='add-icon' style={{fontSize: '2em'}} 
                     onClick={() => currentEventAttendeeSelected && props.add(currentEventAttendeeSelected)}/>
                 </div>
-                <Button variant='outlined' color='primary' onClick={() => props.create()}>
+                <Button variant='outlined' color='primary' onClick={() => props.create()} className='create-event-button'>
                     Create Event 
                 </Button>
             </form>    

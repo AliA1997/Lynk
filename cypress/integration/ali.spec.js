@@ -18,7 +18,13 @@ describe('Check if a event is created', () => {
     });
     it('create the event', () => {
         cy.visit(createEventUrl);
-        // cy.get('.create-event-form > select').select('')
-        // cy.get('.create-event-form > div:first-child > div > input').type('Test Event Name');
+        // cy.get('.create-event-form > select').select('Portland Meetup');
+        cy.get('.create-event-form > .create-event-name-div > div > input').type('Test Event Name');
+        cy.get('.create-event-form > .create-event-topic-div > div > input').type('Test Event Topic');
+        cy.get('.create-event-form > .create-event-date-div > div > input').type('Test Event Date');
+        cy.get('.create-event-form > .create-event-location-div > div > input').type('Test Location');
+        cy.get('.create-event-form > .create-event-add-attendee-div > div > input').type('Test Add Attendee');
+        cy.get('.create-event-form > .create-event-button').click();
+        cy.server().route('POST', '/api/events', {eventName: 'New England Patriots Event', eventTopic: 'Football', eventImage: 'askfjs;kf', eventDate: 'adfasf', eventLocation: 'Boston, MA', groupId: 39}) 
     });
 })

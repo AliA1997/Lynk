@@ -48,7 +48,7 @@ class LoginPage extends Component {
                     </div>
                     <Link to='/register' style={{color: "indigo"}}>Don't have an account?</Link>
                     <div className='social-media-login'>
-                        <TiSocialFacebookCircular style={{fontSize: '3em'}}/>
+                        <TiSocialFacebookCircular id='facebook-login' style={{fontSize: '3em'}}/>
                         <TiSocialGithub style={{fontSize: '3em'}} />
                         <TiSocialGooglePlusCircular style={{fontSize: '3em'}} />
                     </div>

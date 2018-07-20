@@ -36,7 +36,7 @@ export default class EventSearch extends Component {
         if(!loading){
         return (
             <div>
-                <div>
+                <div className='event-search-div'>
                     <h2>Search Events</h2>
                     <Search type='Events' handleChange={this.handleSearch}/>
                     {searchEvents && searchEvents.length ? searchEvents.map((event, i) => <EventCard key={i} {...event} />) 

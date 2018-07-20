@@ -18,25 +18,10 @@ module.exports = (io, Users) => {
                         users.AddUserData(socket.handshake.session.user[0].id, socket.id, socket.handshake.session.user[0].name, socket.handshake.session.user[0].picture, connectionObj.room, connectionObj.type);
                         socket.join(connectionObj.room);
                         break;
-                    case 'private':
+                    case 'event':
                         users.AddUserData(socket.handshake.session.user[0].id, socket.id, socket.handshake.session.user[0].name, socket.handshake.session.user[0].picture, connectionObj.room, connectionObj.type);
 
                         socket.join(connectionObj.room);
-                        break;
-                    case 'random':
-                        let availableRooms = users.GetRandomRoomsAndUserCount().filter(room => room.users < 2);
-                        if(availableRooms.length){
-                            
-                            connectionObj.room = availableRooms[0].name;
-                            
-                            socket.join(availableRooms[0].name);
-                            io.emit('random', availableRooms[0].name);
-                            let userslist = users.GetRandomUserList(availableRooms[0].name, randomRoomsPairs)
-                            
-                            io.in(availableRooms[0].name).emit('users_list', userslist)
-                        }else{
-                            socket.join(connectionObj.room)
-                        }
                         break;
                     default:
                         console.log('default')

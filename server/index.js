@@ -17,6 +17,7 @@ const pgSession = require('connect-pg-simple')(session);
 const app =  express();
 //Installing Nodemailer
 const nodemailer = require('nodemailer');
+const socket = require('socket.io');
 
 //Connect to database with the connection string from your .env file.
 //And configure your server to it.
@@ -116,17 +117,15 @@ app.post('/api/contactform', nm.sendEmail);
 ///For all paths 
 const path = require('path')
 app.get('*', (req, res)=>{
-  res.sendFile(path.join(__dirname, '../build/index.html'));
+    res.sendFile(path.join(__dirname, '../build/index.html'));
 });
+
 
 ///Server listening on port 4000.
 const server = app.listen(4000, () => console.log('Listening on Port: 4000'));
 
-const io = require('socket.io')(server);
+io = require('socket.io')(server);
 
-setTimeout(() => {
-    //Requiring Socket.IO
-    const socket = require('./socket/socket')(io, Users);
-    }, 0)
-
+// Requiring Socket.IO
+require('./socket/socket')(io, Users);
 

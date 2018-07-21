@@ -4,7 +4,7 @@
 .event-page-div {
     display: grid;
     grid-template-columns: 15% 70% 15%;
-    grid-template-rows: 15% 15% 15% 15% 15% 15% 15%;
+    grid-template-rows: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
 }
 .event-page-div > * {
     grid-column: 2/2;
@@ -26,3 +26,4 @@
 .event-page-div > h3:nth-child(4) > *:nth-child(1) {
     margin-left: 50px;
 }
+

@@ -6,7 +6,7 @@ import placeholderImage from '../../Images/default-placeholder.png';
 import Loading from '../Global/Loading/Loading';
 import axios from 'axios';
 import './Event.css';
-
+import MapContainer from '../GoogleAPI/MapContainer';
 
 export default class Event extends Component {
     constructor(){
@@ -67,7 +67,10 @@ export default class Event extends Component {
 
                         <h3>Event Location:</h3>
                         <h3>{event_location}</h3>
-
+                        {/* <div className= 'map-container'>
+                           HELLLOOOOO <MapContainer/>
+                        </div> */}
+                        <h3>Event Attendees:</h3>
                         <div className='event-attendees'>
                             
                             {event_attendee_list && event_attendee_list.length && event_attendee_list.map(attendee => <p>{attendee}</p>)}

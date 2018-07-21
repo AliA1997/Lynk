@@ -5,6 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 //import facebook login
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 import TiSocialGithub from 'react-icons/lib/ti/social-github-circular';
@@ -52,18 +53,23 @@ class LoginPage extends Component {
         }).catch(err => console.log('facebook login error-----------------', err));
     }
     googleLogin = (response) => {
-        const { email, name, imageUrl, googleId } = res.profileObj;
+        const { profileObj } = response
         let newUser = {
-            googleId: googleId,
-            email: email,
-            name: name,
-            profile_picture: imageUrl
-        }
-        console.log('newUser---------------', newUser);
+            facebookId: profileObj.googleId,
+            name: profileObj.name, 
+            email: profileObj.email,
+            profile_picture: profileObj.imageUrl
+        };
         axios.post('/api/google-login', newUser).then(res => {
             alert(res.data.message);
             this.props.login(res.data.user);
-        }).catch(err => console.log('google login error-------------------', err));
+        }).catch(err => console.log('Google Login Error---------------', err));
+    }
+    rejectGoogleLogin = (response) => {
+        console.log("Reject Google Login---------------", response);
+    }
+    componentWillUnmount() {
+        clearTimeout();
     }
     render() {
         const { username, password } = this.state;
@@ -80,14 +86,21 @@ class LoginPage extends Component {
 
                         <FacebookLogin 
                             appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-                            autoLoad={true}q
+                            autoLoad={true}
                             textButton='Login'
                             fields="name,email,picture"
-                            callback={this.facebookLogin} 
+                            callback={(response) => this.facebookLogin(response)} 
                             render={renderProps => <TiSocialFacebookCircular onClick={renderProps.facebookLogin} style={{fontSize: '3em'}}/>}
                         />
                         <TiSocialGithub style={{fontSize: '3em'}} />
-                        <TiSocialGooglePlusCircular style={{fontSize: '3em'}} />
+                        <GoogleLogin
+                            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                            style={{height: '4em', width: '4em'}}
+                            onSuccess={this.googleLogin}
+                            onFailure={this.rejectGoogleLogin}
+                        >
+                        <TiSocialGooglePlusCircular style={{fontSize: '3.5em', background: 'transparent'}} />
+                        </GoogleLogin>
                     </div>
                 </div>
             </div>

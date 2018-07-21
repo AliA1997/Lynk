@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 import MdAdd from 'react-icons/lib/md/add';
 import MdCheck from 'react-icons/lib/md/check';
 import './GroupForm.css';
-import { isPrivate } from 'ip';
 
 const GroupForm = (props) => {
     //Destruct the props needed for the input fields

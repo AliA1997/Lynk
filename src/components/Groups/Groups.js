@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import GroupCard from './GroupCard/GroupCard';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Loading from '../Global/Loading/Loading';
 
 class Groups extends Component {

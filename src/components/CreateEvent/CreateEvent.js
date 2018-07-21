@@ -35,7 +35,7 @@ class Create_Event extends Component {
     }
 
     handleGroupSelect = (val) => {
-        const { groupSelected, userGroups } = this.state;
+        const { userGroups } = this.state;
         const filteredGroup = userGroups.filter(group => group.group_name === val)[0];
         this.setState({groupSelected: filteredGroup.id});
     }

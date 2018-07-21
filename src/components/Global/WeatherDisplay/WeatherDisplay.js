@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 //Import Typography from material-ui
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 import './WeatherDisplay.css';
 
 export default class WeatherDisplay extends Component {

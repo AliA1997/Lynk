@@ -10,7 +10,7 @@ import GoDashboard from 'react-icons/lib/go/dashboard';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Navbar from '../Navbar/Navbar';
-import GroupCarousel from '../GroupCarousel/GroupCarousel';
+// import GroupCarousel from '../GroupCarousel/GroupCarousel';
 import WeatherDisplay from '../WeatherDisplay/WeatherDisplay';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';

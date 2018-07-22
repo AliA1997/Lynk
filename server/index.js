@@ -89,7 +89,7 @@ app.patch('/api/group/:id/remove_member', group.removeMember);
 
 //Dashboard Group Endpoints 
 app.get('/api/groups/admin/:id', group.readUserAdminGroups);
-// app.get('/api/groups/user', group.readUserGroups);
+app.get('/api/groups/user/:id', group.readUserGroups);
 app.get('/api/users/dropdown', group.readUsersDropdown);
 
 
@@ -125,11 +125,11 @@ app.get('*', (req, res)=>{
 ///Server listening on port 4000.
 const server = app.listen(4000, () => console.log('Listening on Port: 4000'));
 
-const io = require('socket.io')(server);
+// const io = require('socket.io')(server);
 
-setTimeout(() => {
-    //Requiring Socket.IO
-    const socket = require('./socket/socket')(io, Users);
-}, 0)
+// setTimeout(() => {
+    //     //Requiring Socket.IO
+    //     require('./socket/socket')(io, Users);
+    // }, 0)
 
 

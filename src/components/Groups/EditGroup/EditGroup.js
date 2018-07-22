@@ -8,7 +8,7 @@ import MdAdd from 'react-icons/lib/md/add';
 
 const EditGroup = (props) => {
     const { editName, editGroupImage, groupImage, groupName, groupMembers,  editDescription, editIsPrivate, isPrivate, currentMemberSelected, users } = props;
-    console.log('editGroup Group Members------------', groupMembers);
+    // console.log('editGroup Group Members------------', groupMembers);
     return (
         <div>
             <form>

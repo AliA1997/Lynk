@@ -10,7 +10,7 @@ import GoDashboard from 'react-icons/lib/go/dashboard';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Navbar from '../Navbar/Navbar';
-// import GroupCarousel from '../GroupCarousel/GroupCarousel';
+import GroupCarousel from '../GroupCarousel/GroupCarousel';
 import WeatherDisplay from '../WeatherDisplay/WeatherDisplay';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
@@ -28,17 +28,27 @@ class Header extends Component {
             eventsClicked: false,
             aboutClicked: false,
             contactClicked: false,
+            userGroups: []
         }
     }
     componentDidMount() {
-        //Do an axios request to the google api.
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=+Phoenix,+AZ&key=${process.env.REACT_APP_GOOGLE_KEY}`)
-        .then(res => {
-            //Console log the latitude and longitude from the response to check if it has data.
-            // console.log('lat-------------------', res.data.results[0].geometry.location.lat)
-            // console.log('long--------------', res.data.results[0].geometry.location.lng)
-            
-        }).catch(err => console.log('Google Geolocation Error---------', err));
+        const { user } = this.props;
+        setTimeout(() => {
+            if(user) {
+                console.log('user---------------', user);
+                //Get the groups that currentUser login is a part of.
+                const userGroupsPromise = axios.get(`/api/groups/user/${user.id}`);
+                //Have groups the user is in charge of Promise
+                const userAdminGroupsPromise = axios.get(`/api/groups/admin/${user.id}`);
+                Promise.all([userGroupsPromise, userAdminGroupsPromise]).then(res => {
+                    // console.log('res.data.groups HEader-------------', res[1].data.groups);
+                    this.setState({userGroups: [...this.state.userGroups, ...res[0].data.groups, ...res[1].data.groups]})
+                }).catch(err => console.log('Get All Groups Error---------------', err));
+            }
+        }, 0);
+    }
+    componentWillUnmount() {
+        clearTimeout();
     }
     elementSelect(elem) {
         if(elem === 'home') {
@@ -101,7 +111,8 @@ class Header extends Component {
         //Destructure the user props from the reducer from this.props;
         const { user } = this.props;
         //Destructure the hamburgerClicked from this.state;
-        const { hamburgerClicked, dashboardClicked, homeClicked, groupsClicked, eventsClicked, aboutClicked, contactClicked } = this.state;
+        const { hamburgerClicked, dashboardClicked, homeClicked, groupsClicked, eventsClicked, aboutClicked, contactClicked, userGroups } = this.state;
+        console.log('userGroups---------------', userGroups);
         return (
             <div>
                 <div className='desktop'>
@@ -188,9 +199,9 @@ class Header extends Component {
                             <WeatherDisplay />
                         </div>
                     </div>
-                    {/* <GroupCarousel groups={user && user.groups} /> */}
                 </div>
                 <hr/>
+                {user && <GroupCarousel groups={userGroups} />}
             </div>
         );
     }

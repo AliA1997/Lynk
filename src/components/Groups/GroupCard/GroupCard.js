@@ -39,7 +39,7 @@ export default class GroupCard extends Component {
     componentDidMount() {
         ///Get all the users so you can insert them into the dropdown.
         axios.get("/api/users/dropdown").then(res =>{
-            console.log('users--------------------', res.data.users)
+            // console.log('users--------------------', res.data.users)
             this.setState({users: res.data.users});
         }).catch(err => console.log('Get users dropdown error', err));
     }
@@ -154,7 +154,7 @@ export default class GroupCard extends Component {
                         image={group_image || placeholderImage}
                         title={group_name}
                     />
-                    {group_members && group_members.length && group_members.map((member, i) => <Chip
+                    {group_members && group_members.length && group_members.map((member, i) => <Chip key={i}
                                                                                                 avatar={<Avatar src={member.profile_picture}/>}
                                                                                                 label={member.email}
                                                                                                 onDelete={() => console.log('member--------', member)}

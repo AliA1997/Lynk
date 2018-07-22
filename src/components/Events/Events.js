@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import EventCard from './EventCard/EventCard';
 import Loading from '../Global/Loading/Loading';
+//Material-ui Components
+import Typography from '@material-ui/core/Typography';
+//Connect the componenet to redux
+import { connect } from 'react-redux';
 import axios from 'axios';
 
-export default class Events extends Component {
+class Events extends Component {
     constructor(){
         super();
 
@@ -25,16 +29,34 @@ export default class Events extends Component {
                     loading: false
                 });
             }).catch(err => console.log('Get Events Error--------', err));
-        } else {
-            axios.get(`/api/events`).then(res => {
+        } else if(this.props.isDashboard && this.props.eventsUserAdmin) {
+            const { user } = this.props;
+            let arr = [];
+            axios.get(`/api/events/admin/${user.id}`).then(res => {
                 //Get all events that the user is in charge of.
+                for(let i = 0; i < 5; i++) {
+                    if(res.data.events[i]) arr.push(res.data.events[i]);
+                }
                 this.setState({
-                    events: res.data.events,
+                    events: arr,
+                    loading: false
+                });
+
+            }).catch(err => console.log('Get User Admin Events Error-------------', err));
+        } else if(this.props.isDashboard && this.props.eventsUserPartOf) {
+            const { user } = this.props;
+            let arr = [];
+            axios.get(`/api/events/user/${user.id}`).then(res => {
+                //Get all events that the user is in charge of.
+                for(let i = 0; i < 5; i++) {
+                    if(res.data.events[i]) arr.push(res.data.events[i]);
+                }
+                this.setState({
+                    events: arr,
                     loading: false
                 });
             }).catch(err => console.log('Get User Admin Events Error-------------', err));
-        };
-
+        }
       
     }
 
@@ -46,12 +68,10 @@ export default class Events extends Component {
             
             return (
                 <div>
-                    {this.props.isDashboard ? <h1>Events in Charge</h1> : <h1>Events</h1>}
                     <div>
                         {/* Mapping over events array and returning EventCard with spread operator passing each property of events*/}
-                        {events.length && groups.map((event, i) => <EventCard key={i} {...event}
-                        isDashboard={this.props.isDashboard}/>
-                        )}
+                        {events.length ? events.map((event, i) => <EventCard key={i} {...event}
+                        isDashboard={this.props.isDashboard}/> ) : <Typography>Sorry they are no events........ &#x1F622;</Typography>}
                     </div>
                 </div>
             );
@@ -63,5 +83,15 @@ export default class Events extends Component {
 
 //Define the default props.
 Events.defaultProps = {
-    isDashboard: false
+    isDashboard: false,
+    eventsUserAdmin: false,
+    eventsUserPartOf: false
 }
+
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(Events);

@@ -63,7 +63,28 @@ module.exports = {
             res.status(200).json({event})
         }).catch(err => console.log(err, 'Read event error'))
     },
-
+    readUserAdminEvents(req, res){
+        //Assign a db variable 
+        const db = req.app.get('db');
+        //Destruct id from the req.params
+        const { id } = req.params;
+        //
+        //
+        db.read_user_admin_events(id).then(events => {
+            res.status(200).json({events})
+        }).catch(err => console.log(err, 'Read Admin Groups errror----------------'));
+    },
+    readUserEvents(req, res){
+        //Assign to a db variable   
+        const db = req.app.get('db');
+        //Destruct the id from the req.params;
+        const { id } = req.params;
+        //
+        //
+        db.read_user_events(id).then(events => {
+            res.status(200).json({events});
+        }).catch(err => console.log(err, 'Read User Groups Error----------'));
+    },
     addAttendee(){
         const db = req.app.patch('db');
         const { id } = req.params;

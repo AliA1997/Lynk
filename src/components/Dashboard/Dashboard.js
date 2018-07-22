@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import placeholderImage from '../../Images/default-placeholder.png';
+// import GroupCarousel from '../Global/GroupCarousel/GroupCarousel';
 import Groups from '../Groups/Groups';
+import Events from '../Events/Events';
 //Material-UI Components
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
@@ -36,7 +38,7 @@ class Dashboard extends Component {
                 <hr />
                 <div className='dashboard-user-container-div'>
                     <div className='dashboard-user-div'>
-                        <Avatar style={{height: '15em', width: '15em'}}
+                        <Avatar className='dashboard-profile-image'
                         src={user.profile_picture || placeholderImage} alt={user.username + ' picture!'} />
                         {user.username && <Typography variant='outlined'>{user.username}</Typography>}
                         <Typography variant='outlined'>{user.email}</Typography>
@@ -49,14 +51,24 @@ class Dashboard extends Component {
                         </Typography>
                     </div>
                     <hr />
-                    <IoIosCogOutline style={{fontSize: '5em', widhr: '100%'}} color='primary'/>
+                    <IoIosCogOutline className='dashboard-edit-profile-icon'/>
                 </div>
                 <Typography><b>Groups you are part of.</b></Typography>
                 <hr />
                 <Groups isDashboard={true} groupsUserPartOf={true} />
+                <hr />
                 <Typography><b>Groups you run</b></Typography>
                 <hr />
                 <Groups isDashboard={true} groupsUserAdmin={true} />
+                <hr />
+                <Typography><b>Events you are part of.</b></Typography>
+                <hr />
+                <Events isDashboard={true} eventsUserAdmin={true} />
+                <hr />
+                <Typography><b>Events you run</b></Typography>
+                <hr />
+                <Events  isDashboard={true} eventsUserPartOf={true} />
+                <hr />
                 <div>
                     <button>
 

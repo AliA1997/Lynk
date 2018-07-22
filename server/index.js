@@ -2,6 +2,9 @@
 require('dotenv').config();
 //Initializes the server
 const express = require('express');
+///Assgn the server 
+const app =  express();
+//Use http  server for connecting to sockets.
 //Middlewares   
 //For hosting.
 const cors = require('cors');
@@ -9,12 +12,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 //Initializes the session
 const session = require('express-session');
+//Middleware for the socket using io.use()
+//Use socket.io-express-session assign a session object to the handshake.session.
+const socketSession = require('express-socket.io-session');
 //Initializes the Database
 const massive  = require('massive');
 //Connects session to database.
 const pgSession = require('connect-pg-simple')(session);
-///Define the server 
-const app =  express();
+//Server for socket.io 
+const server = require('http').Server(app);
+//Define the io for sockets.
+const io = require('socket.io')(server);
 //Installing Nodemailer
 const nodemailer = require('nodemailer');
 
@@ -63,6 +71,12 @@ app.use(session({
     }
 }));
 
+
+//Enable the middleware needed for session.
+io.use(socketSession(session, {
+    autoSave: true
+}))
+
 app.use(cors());
 
 //Cloudinary Endpoints 
@@ -92,6 +106,9 @@ app.get('/api/groups/admin/:id', group.readUserAdminGroups);
 app.get('/api/groups/user/:id', group.readUserGroups);
 app.get('/api/users/dropdown', group.readUsersDropdown);
 
+//Dashboard Events Endpoints 
+app.get('/api/events/admin/:id', event.readUserAdminEvents);
+app.get('/api/events/user/:id', event.readUserEvents);
 
 //Event Endpoints
 app.get('/api/events', event.readEvents);
@@ -123,13 +140,8 @@ app.get('*', (req, res)=>{
 });
 
 ///Server listening on port 4000.
-const server = app.listen(4000, () => console.log('Listening on Port: 4000'));
-
-// const io = require('socket.io')(server);
-
-// setTimeout(() => {
-    //     //Requiring Socket.IO
-    //     require('./socket/socket')(io, Users);
-    // }, 0)
-
-
+server.listen(4000, () => console.log('Listening on Port: 4000'));
+// io.listen(server)
+io.on('connection', (socket) => {
+    console.log('socket....id', socket.id);
+});

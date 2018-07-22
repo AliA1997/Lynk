@@ -26,7 +26,7 @@ export default class EventSearch extends Component {
         //Copy the array.
         let copyOfArr = this.state.defaultEvents.slice();
         //Filter the array.
-        copyOfArr = copyOfArr.filter(event => event === val);
+        copyOfArr = copyOfArr.filter(event => event.event_name.includes(val));
         //Set the state of the searchEvents.
         this.setState({searchEvents: copyOfArr});
     }

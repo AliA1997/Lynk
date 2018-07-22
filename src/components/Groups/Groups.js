@@ -58,7 +58,6 @@ class Groups extends Component {
         if(!loading) {
             return (
                 <div> 
-                    {this.props.isDashboard ? <h1>Groups in Charge</h1> : <h1>Groups</h1>}
                     <div>
                 {/* Mapping over groups array and returning GroupCard with spread operator passing each property of group*/}
                         {groups.length ? 

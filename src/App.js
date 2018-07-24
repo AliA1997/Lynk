@@ -5,6 +5,7 @@ import { login } from './ducks/reducer';
 import axios from 'axios';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import indigo from '@material-ui/core/colors/indigo';
+import amber from '@material-ui/core/colors/amber';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 import routes  from './routes';
@@ -18,6 +19,7 @@ const theme = createMuiTheme({
   palette: {
     primary: indigo,
     secondary: green,
+    default: amber,
     error: red,
     // Used by `getContrastText()` to maximize the contrast between the background and
     // the text.

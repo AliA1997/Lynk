@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 
 //
 //Components
+import Admin from './components/Admin/Admin';
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -23,6 +24,7 @@ import VerificationPage from './components/VerificationPage/VerificationPage';
 export default (
     <Switch>
         <Route exact path='/' component={Home} />
+        <Route path='/admin' component={Admin} />
         <Route path='/verified/:verification_link' component={VerificationPage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route path='/dashboard/create_group' component={CreateGroup} />

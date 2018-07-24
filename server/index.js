@@ -45,6 +45,7 @@ const group = require('./controllers/group_controller');
 const nm = require('./controllers/nodemailer_controller');
 const search = require('./controllers/search_controller');
 const socialMedia = require('./controllers/social_media_controller');
+const admin = require('./controllers/admin_controller');
 //
 
 ///Use express.static to render public files from the build folder for hosting
@@ -81,6 +82,13 @@ app.use(cors());
 
 //Cloudinary Endpoints 
 app.get('/api/upload', cloudinary.upload);
+
+//Admin Endpoints 
+app.get('/api/admin/users', admin.readUsers);
+app.delete('/api/admin/users/:id', admin.deleteUser);
+app.delete('/api/admin/groups/:id', admin.deleteGroup);
+app.delete('/api/admin/events/:id', admin.deleteEvent);
+
 
 //User Endpoints 
 app.get('/api/user-data', user.readUserData);

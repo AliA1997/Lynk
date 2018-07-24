@@ -79,66 +79,68 @@ io.use(socketSession(session, {
 
 app.use(cors());
 
-//Cloudinary Endpoints 
-app.get('/api/upload', cloudinary.upload);
+//have a setTImeout so all your middleware and database is initialize by the time it hit's setTimeout.
+setTimeout(() => {
+    //Cloudinary Endpoints 
+    app.get('/api/upload', cloudinary.upload);
 
-//User Endpoints 
-app.get('/api/user-data', user.readUserData);
-app.post('/api/login', user.login);
-app.post('/api/register', user.register);
-app.post('/api/facebook-login', socialMedia.facebookLogin);
-app.post('/api/google-login', socialMedia.googleLogin);
-//Verify Email endpoints
-app.patch('/api/users/:id/verify_email', user.verifyEmail);
+    //User Endpoints 
+    app.get('/api/user-data', user.readUserData);
+    app.post('/api/login', user.login);
+    app.post('/api/register', user.register);
+    app.post('/api/facebook-login', socialMedia.facebookLogin);
+    app.post('/api/google-login', socialMedia.googleLogin);
+    //Verify Email endpoints
+    app.patch('/api/users/:id/verify_email', user.verifyEmail);
 
-//Group Endpoints 
-app.get('/api/group/:id', group.readGroup)
-app.get('/api/groups', group.readGroups);
-app.post('/api/groups', group.createGroup);
-app.put('/api/group/:id', group.updateGroup);
-app.delete('/api/group/:id', group.deleteGroup);
-app.patch('/api/group/:id/add_member', group.addMember);
-app.patch('/api/group/:id/remove_member', group.removeMember);
+    //Group Endpoints 
+    app.get('/api/group/:id', group.readGroup)
+    app.get('/api/groups', group.readGroups);
+    app.post('/api/groups', group.createGroup);
+    app.put('/api/group/:id', group.updateGroup);
+    app.delete('/api/group/:id', group.deleteGroup);
+    app.patch('/api/group/:id/add_member', group.addMember);
+    app.patch('/api/group/:id/remove_member', group.removeMember);
 
 
-//Dashboard Group Endpoints 
-app.get('/api/groups/admin/:id', group.readUserAdminGroups);
-app.get('/api/groups/user/:id', group.readUserGroups);
-app.get('/api/users/dropdown', group.readUsersDropdown);
+    //Dashboard Group Endpoints 
+    app.get('/api/groups/admin/:id', group.readUserAdminGroups);
+    app.get('/api/groups/user/:id', group.readUserGroups);
+    app.get('/api/users/dropdown', group.readUsersDropdown);
 
-//Dashboard Events Endpoints 
-app.get('/api/events/admin/:id', event.readUserAdminEvents);
-app.get('/api/events/user/:id', event.readUserEvents);
+    //Dashboard Events Endpoints 
+    app.get('/api/events/admin/:id', event.readUserAdminEvents);
+    app.get('/api/events/user/:id', event.readUserEvents);
 
-//Event Endpoints
-app.get('/api/events', event.readEvents);
-app.get('/api/event/:id', event.readEvent);
-app.post('/api/events', event.createEvent);
-app.put('/api/event/:id', event.updateEvent);
-app.delete('/api/event/:id', event.deleteEvent);
-app.patch('/api/event/:id/add_attendee', event.addAttendee);
-app.patch('/api/event/:id/remove_attendee', event.removeAttendee);
+    //Event Endpoints
+    app.get('/api/events', event.readEvents);
+    app.get('/api/event/:id', event.readEvent);
+    app.post('/api/events', event.createEvent);
+    app.put('/api/event/:id', event.updateEvent);
+    app.delete('/api/event/:id', event.deleteEvent);
+    app.patch('/api/event/:id/add_attendee', event.addAttendee);
+    app.patch('/api/event/:id/remove_attendee', event.removeAttendee);
 
-//Search Endpoints 
-//Search Group Endpoints
-app.get('/api/groups/search', search.searchGroup);
-//Search Event Endpoints 
-app.get('/api/events/search', search.searchEvent);
+    //Search Endpoints 
+    //Search Group Endpoints
+    app.get('/api/groups/search', search.searchGroup);
+    //Search Event Endpoints 
+    app.get('/api/events/search', search.searchEvent);
 
-//Chat Endpoints
-app.get('/api/chats', chat.readChat);
-app.post('/api/chats', chat.createChat);
+    //Chat Endpoints
+    app.get('/api/chats', chat.readChat);
+    app.post('/api/chats', chat.createChat);
 
-//Contact Endpoints
-app.post('/api/contactform', nm.sendEmail);
-// app.post('/api/test', nm.test);
+    //Contact Endpoints
+    app.post('/api/contactform', nm.sendEmail);
+    // app.post('/api/test', nm.test);
 
-///For all paths 
-const path = require('path')
-app.get('*', (req, res)=>{
-  res.sendFile(path.join(__dirname, '../build/index.html'));
-});
-
+    ///For all paths 
+    const path = require('path')
+    app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+    });
+}, 200);
 ///Server listening on port 4000.
 server.listen(4000, () => console.log('Listening on Port: 4000'));
 // io.listen(server)

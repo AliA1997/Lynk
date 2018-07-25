@@ -15,7 +15,7 @@ import placeholderImage from '../../../Images/default-placeholder.png';
 
 
 const UserCard = (props) => {
-    const { profile_picture, username, name, email, groups, userWarning, deleteUser, doDeleteUser, doWarnUser } = props;
+    const { id, profile_picture, username, name, email, groups, userWarning, deleteUser, doDeleteUser, doWarnUser } = props;
     return (
         <Card>
             <CardHeader 
@@ -33,7 +33,7 @@ const UserCard = (props) => {
                     Name: {name}, Username: {username}, Email: {email}
                 </Typography>
             </CardContent>
-            <Button variant="contained" color="default" onClick={() => props.sendWarning()}>Send Warning</Button>
+            <Button variant="contained" color="default" onClick={() => props.sendWarning(id, email, username)}>Send Warning</Button>
             <TextField
                     required
                     multiline
@@ -45,7 +45,7 @@ const UserCard = (props) => {
                     margin="normal"
                     style={{display: doWarnUser ? 'inline-block' : 'none'}}
             />
-            <Button variant="contained" color="error" onClick={() => props.deleteUser()}>Delete</Button>
+            <Button variant="contained" color="error" onClick={() => props.deleteUser(id, email, username)}>Delete</Button>
             <TextField
                     required
                     multiline

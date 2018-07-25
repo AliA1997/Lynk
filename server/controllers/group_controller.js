@@ -34,15 +34,17 @@ module.exports = {
         const db = req.app.get('db');
         //Destruct the id from the request param.
         const { id } = req.params;
-        const { name, username, email, profile_picture, age } = req.session.user;
-        const userToLookFor = { name, username, email, profile_picture, age };
-        console.log('req.session.user------------', userToLookFor);
-        //Read User Groups  
-        db.read_user_groups([userToLookFor]).then(groups => {
-            console.log('groups--------------', groups);
-            //Return groups to the frontend.
-            res.status(200).json({groups});
-        }).catch(err => console.log(err, 'Read User Groups Error-------------------'));
+        if(req.session.user) {
+            const { name, username, email, profile_picture, age } = req.session.user;
+            const userToLookFor = { name, username, email, profile_picture, age };
+            console.log('req.session.user------------', userToLookFor);
+            //Read User Groups  
+            db.read_user_groups([userToLookFor]).then(groups => {
+                console.log('groups--------------', groups);
+                //Return groups to the frontend.
+                res.status(200).json({groups});
+            }).catch(err => console.log(err, 'Read User Groups Error-------------------'));
+        }
     },
     readUsersDropdown(req, res) {
         //Assign variable to database instance.

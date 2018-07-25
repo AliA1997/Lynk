@@ -79,68 +79,69 @@ io.use(socketSession(session, {
 }))
 
 app.use(cors());
+setTimeout(() => {
+    //Cloudinary Endpoints 
+    app.get('/api/upload', cloudinary.upload);
 
-//Cloudinary Endpoints 
-app.get('/api/upload', cloudinary.upload);
-
-//Admin Endpoints 
-app.get('/api/admin/users', admin.readUsers);
-app.delete('/api/admin/users/:id', admin.deleteUser);
-app.delete('/api/admin/groups/:id', admin.deleteGroup);
-app.delete('/api/admin/events/:id', admin.deleteEvent);
-
-
-//User Endpoints 
-app.get('/api/user-data', user.readUserData);
-app.post('/api/login', user.login);
-app.post('/api/register', user.register);
-app.post('/api/facebook-login', socialMedia.facebookLogin);
-app.post('/api/google-login', socialMedia.googleLogin);
-//Verify Email endpoints
-app.patch('/api/users/:id/verify_email', user.verifyEmail);
-
-//Group Endpoints 
-app.get('/api/group/:id', group.readGroup)
-app.get('/api/groups', group.readGroups);
-app.post('/api/groups', group.createGroup);
-app.put('/api/group/:id', group.updateGroup);
-app.delete('/api/group/:id', group.deleteGroup);
-app.patch('/api/group/:id/add_member', group.addMember);
-app.patch('/api/group/:id/remove_member', group.removeMember);
+    //Admin Endpoints 
+    app.get('/api/admin/users', admin.readUsers);
+    app.post('/api/admin/warning/users', admin.warnUser);
+    app.delete('/api/admin/users/:id', admin.deleteUser);
+    app.delete('/api/admin/groups/:id', admin.deleteGroup);
+    app.delete('/api/admin/events/:id', admin.deleteEvent);
 
 
-//Dashboard Group Endpoints 
-app.get('/api/groups/admin/:id', group.readUserAdminGroups);
-app.get('/api/groups/user/:id', group.readUserGroups);
-app.get('/api/users/dropdown', group.readUsersDropdown);
+    //User Endpoints 
+    app.get('/api/user-data', user.readUserData);
+    app.post('/api/login', user.login);
+    app.post('/api/register', user.register);
+    app.post('/api/facebook-login', socialMedia.facebookLogin);
+    app.post('/api/google-login', socialMedia.googleLogin);
+    //Verify Email endpoints
+    app.patch('/api/users/:id/verify_email', user.verifyEmail);
 
-//Dashboard Events Endpoints 
-app.get('/api/events/admin/:id', event.readUserAdminEvents);
-app.get('/api/events/user/:id', event.readUserEvents);
+    //Group Endpoints 
+    app.get('/api/group/:id', group.readGroup)
+    app.get('/api/groups', group.readGroups);
+    app.post('/api/groups', group.createGroup);
+    app.put('/api/group/:id', group.updateGroup);
+    app.delete('/api/group/:id', group.deleteGroup);
+    app.patch('/api/group/:id/add_member', group.addMember);
+    app.patch('/api/group/:id/remove_member', group.removeMember);
 
-//Event Endpoints
-app.get('/api/events', event.readEvents);
-app.get('/api/event/:id', event.readEvent);
-app.post('/api/events', event.createEvent);
-app.put('/api/event/:id', event.updateEvent);
-app.delete('/api/event/:id', event.deleteEvent);
-app.patch('/api/event/:id/add_attendee', event.addAttendee);
-app.patch('/api/event/:id/remove_attendee', event.removeAttendee);
 
-//Search Endpoints 
-//Search Group Endpoints
-app.get('/api/groups/search', search.searchGroup);
-//Search Event Endpoints 
-app.get('/api/events/search', search.searchEvent);
+    //Dashboard Group Endpoints 
+    app.get('/api/groups/admin/:id', group.readUserAdminGroups);
+    app.get('/api/groups/user/:id', group.readUserGroups);
+    app.get('/api/users/dropdown', group.readUsersDropdown);
 
-//Chat Endpoints
-app.get('/api/chats', chat.readChat);
-app.post('/api/chats', chat.createChat);
+    //Dashboard Events Endpoints 
+    app.get('/api/events/admin/:id', event.readUserAdminEvents);
+    app.get('/api/events/user/:id', event.readUserEvents);
 
-//Contact Endpoints
-app.post('/api/contactform', nm.sendEmail);
+    //Event Endpoints
+    app.get('/api/events', event.readEvents);
+    app.get('/api/event/:id', event.readEvent);
+    app.post('/api/events', event.createEvent);
+    app.put('/api/event/:id', event.updateEvent);
+    app.delete('/api/event/:id', event.deleteEvent);
+    app.patch('/api/event/:id/add_attendee', event.addAttendee);
+    app.patch('/api/event/:id/remove_attendee', event.removeAttendee);
+
+    //Search Endpoints 
+    //Search Group Endpoints
+    app.get('/api/groups/search', search.searchGroup);
+    //Search Event Endpoints 
+    app.get('/api/events/search', search.searchEvent);
+
+    //Chat Endpoints
+    app.get('/api/chats', chat.readChat);
+    app.post('/api/chats', chat.createChat);
+
+    //Contact Endpoints
+    app.post('/api/contactform', nm.sendEmail);``
+}, 0);
 // app.post('/api/test', nm.test);
-
 ///For all paths 
 const path = require('path')
 app.get('*', (req, res)=>{

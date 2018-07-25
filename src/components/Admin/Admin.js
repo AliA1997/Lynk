@@ -27,20 +27,28 @@ class Admin extends Component {
             this.setState({users: res.data.users});
         }).catch(err => console.log('Users Axios Error--------', err));
     }
-    handleUserWarning() {
+    handleUserWarning(id, email, username) {
         //Destruct the doWarnUser and userWarning from state.
         const { doWarnUser, userWarning } = this.state;
         if(doWarnUser && userWarning) {
-            
+            axios.post('/api/admin/warning/user', {id, email, username, reason: userWarning})
+            .then(res => {
+                alert(res.data.message);
+            }).catch(err => console.log('Delete User Database Error----------------', err));
         } else {
             this.setState({doWarnUser: !this.state.doWarnUser});
         }
     }
-    handleUserDelete() {
+    handleUserDelete(id, email, username) {
         //Destruct the doDeleteUser and deleteUser from state.
         const { doDeleteUser, deleteUser } = this.state;
         if(doDeleteUser && deleteUser) {
-
+            axios.delete(`/api/admin/users/${id}`, {
+                data: { id, email, username, reason: deleteUser }
+            })
+            .then(res => {
+                alert(res.data.message);
+            }).catch(err => console.log('Delete User Database Error----------------', err));
         } else {
             this.setState({doDeleteUser: !this.state.doDeleteUser});
         }
@@ -54,7 +62,7 @@ class Admin extends Component {
                 <div>
                 </div>
                 <div>
-                    {users && users.length ? users.map((user, i) => <UserCard key={i} {...user} {...this.state} />) : null}
+                    {users && users.length ? users.map(user => <UserCard key={user.id} {...user} {...this.state} />) : null}
                 </div>
             </div>
         );

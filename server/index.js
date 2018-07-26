@@ -151,7 +151,13 @@ app.get('*', (req, res)=>{
 ///Server listening on port 4000.
 server.listen(4000, () => console.log('Listening on Port: 4000'));
 // io.listen(server)
+let messages = [];
 io.on('connection', (socket) => {
     console.log('socket....id', socket.id);
+    socket.on('SEND_MESSAGE', function(data){
+        console.log('2', data)
+        messages.push(data)
+        io.emit('RECEIVE_MESSAGE', messages);
+  });
 });
 //

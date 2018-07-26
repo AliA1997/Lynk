@@ -1,15 +1,40 @@
+.groupchat-container {
+    width: 100%;
+}
+.groupchat-container > *:nth-child(3) {
+    width: 100%;
+}
+.groupchat-container > *:last-child {
+    width: 100%;
+}
 .groupchat-messages-container-div {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    width: 100%;
+    /* background: blue; */
+
+}
+.groupchat-messages-container-div > *:first-child {
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 .groupchat-users-container-div {
+    display: grid;
+    grid-template-rows: 20% 80%;
+    width: 100%;
+    /* background: red; */
+}
+.groupchat-users-container-div > *:first-child {
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 .groupchat-messages-container-div > .groupchat-messages-div {
     border: 1px solid indigo;
+    grid-row: 2/2;
     height: 50vh;
-    width: 70%;
+    width: 100%;
 }
 .groupchat-messages-container-div > p {
     height: 10vh;
@@ -17,7 +42,7 @@
 .groupchat-users-container-div > .groupchat-users-div {
     border: 1px solid indigo;
     height: 50vh;
-    width: 70%;
+    width: 100%;
 }
 .groupchat-users-container-div > p {
     height: 10vh;

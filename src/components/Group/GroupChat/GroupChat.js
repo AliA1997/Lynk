@@ -1,11 +1,13 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import './GroupChat.css';
 
 const GroupChat = (props) => {
-    const { users, messages } = props;
+    const { users, messages, messageBody } = props;
     return (
-        <div>
+        <div className="groupchat-container">
             <div className='groupchat-messages-container-div'>
                 <Typography>Messages</Typography>
                 <div className='groupchat-messages-div'>
@@ -18,6 +20,15 @@ const GroupChat = (props) => {
                     {users && users.length && users.map(user => <div>{user.name}</div>)}
                 </div>
             </div>
+            <TextField
+                required
+                id="name"
+                label="Send Message"
+                onChange={e => props.handleMessage(e.target.value)}
+                value={messageBody}
+                margin="normal"
+            />
+            <Button onClick={(e) => props.sendMessage(e)}>Send Message</Button>
         </div>
     );
 };

@@ -34,19 +34,19 @@ class Dashboard extends Component {
         const { user } = this.props;
         return (
             <div className='dashboard-className'>
-                <Typography variant='outlined' style={{textAlign: 'center'}}>Dashboard</Typography>
+                <Typography style={{textAlign: 'center'}}>Dashboard</Typography>
                 <hr />
                 <div className='dashboard-user-container-div'>
                     <div className='dashboard-user-div'>
                         <Avatar className='dashboard-profile-image'
                         src={user.profile_picture || placeholderImage} alt={user.username + ' picture!'} />
-                        {user.username && <Typography variant='outlined'>{user.username}</Typography>}
-                        <Typography variant='outlined'>{user.email}</Typography>
-                        <Typography variant='outlined'>{user.name}</Typography>
-                        <Typography variant='outlined'>
+                        {user.username && <Typography>{user.username}</Typography>}
+                        <Typography>{user.email}</Typography>
+                        <Typography>{user.name}</Typography>
+                        <Typography>
                             # Groups a user is part of: {user.groups && user.groups.length}
                         </Typography>
-                        <Typography variant='outlined'>
+                        <Typography>
                             # Events a user has went to: {user.events && user.events.length}
                         </Typography>
                     </div>

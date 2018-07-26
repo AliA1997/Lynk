@@ -56,6 +56,9 @@
     text-align: center;
 }
 @media (min-width: 1260px) {
+    .header-group-carousel-div {
+        display: none;
+    }
     hr {
         display: none;
     }

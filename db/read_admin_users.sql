@@ -1,0 +1,1 @@
+SELECT id, name, username, profile_picture, email, age, groups, events FROM users WHERE id != 7;

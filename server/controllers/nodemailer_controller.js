@@ -76,40 +76,70 @@ module.exports = {
                 transporter.close();
             } 
         })
+    },
+    sendDeleteNotification(email, username, reason) {
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.NODE_MAILER_EMAIL,
+                pass: process.env.NODE_MAILER_PASS
+            },
+            tls: {
+                rejectUnauthorized: false 
+            }
+        });
+        let mailOptions = {
+            from: process.env.NODE_MAILER_EMAIL,
+            to: email,
+            subject: 'Account to be deleted',
+            html: `<div style="color=red">
+                    <h1> ${username}! </h1>
+                    <h3>Account to be deleted!</h3>
+                    <p>For this reason: ${reason}</p>
+                  </div>
+            `
+        }
+        transporter.sendMail(mailOptions, (err, data) => {
+            if(err) {
+                console.log('Send Delete Notification Email-------------', err);
+            } else {
+                console.log('Message Send-----------------', data);
+                transporter.close();
+            }
+        })
+    },
+    sendWarningNotification(email, username, reason) {
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.NODE_MAILER_EMAIL,
+                pass: process.env.NODE_MAILER_PASS
+            },
+            tls: {
+                rejectUnauthorized: false 
+            }
+        });
+        let mailOptions = {
+            from: process.env.NODE_MAILER_EMAIL,
+            to: email,
+            subject: 'Warning about Account Status',
+            html: `<div style="background=gold">
+                    <h1>Warning ${username}! </h1>
+                    <h3>Warning</h3>
+                    <p>Warning: ${reason}</p>
+                  </div>
+            `
+        }
+        transporter.sendMail(mailOptions, (err, data) => {
+            if(err) {
+                console.log('Send Warning Notification Email-------------', err);
+            } else {
+                console.log('Message Sent-----------------', data);
+                transporter.close();
+            }
+        })
     }
  }
 
-
-// nodemailer.createTestAccount((err, account) => {
-//     // create reusable transporter object using the default SMTP transport
-//     let transporter = nodemailer.createTransport({
-//         host: 'smtp.ethereal.email',
-//         port: 587,
-//         secure: false, // true for 465, false for other ports
-//         auth: {
-//             user: account.user, // generated ethereal user
-//             pass: account.pass // generated ethereal password
-//         }
-//     });
-
-//     let mailOptions = {
-//         from: '"Fred Foo 👻" <foo@example.com>', // sender address
-//         to: 'bar@example.com, baz@example.com', // list of receivers
-//         subject: 'Hello ✔', // Subject line
-//         text: 'Hello world?', // plain text body
-//         html: '<b>Hello world?</b>' // html body
-//     };
-
-//     // send mail with defined transport object
-//     transporter.sendMail(mailOptions, (error, info) => {
-//         if (error) {
-//             return console.log(error);
-//         }
-//         console.log('Message sent: %s', info.messageId);
-//         // Preview only available when sending through an Ethereal account
-//         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-//         // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-//         // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-//     });
-// });

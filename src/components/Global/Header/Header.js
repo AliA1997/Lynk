@@ -33,19 +33,24 @@ class Header extends Component {
     }
     componentDidMount() {
         const { user } = this.props;
-        setTimeout(() => {
-            if(user) {
-                console.log('user---------------', user);
-                //Get the groups that currentUser login is a part of.
-                const userGroupsPromise = axios.get(`/api/groups/user/${user.id}`);
-                //Have groups the user is in charge of Promise
-                const userAdminGroupsPromise = axios.get(`/api/groups/admin/${user.id}`);
+        // setTimeout(() => {
+        if(user) {  
+            console.log('user if statement---------------', user);
+            //Get the groups that currentUser login is a part of.
+            console.log('user.id--------------', user.id);
+            const userGroupsPromise = axios.get(`/api/groups/user/${user}`);
+            //Have groups the user is in charge of Promise
+            const userAdminGroupsPromise = axios.get(`/api/groups/admin/${user.id}`);
+            setTimeout(() => {
                 Promise.all([userGroupsPromise, userAdminGroupsPromise]).then(res => {
-                    // console.log('res.data.groups HEader-------------', res[1].data.groups);
-                    this.setState({userGroups: [...this.state.userGroups, ...res[0].data.groups, ...res[1].data.groups]})
-                }).catch(err => console.log('Get All Groups Error---------------', err));
-            }
-        }, 0);
+                    console.log('res---------------', res)
+                // console.log('res.data.groups HEader-------------', res[1].data.groups);
+                this.setState({userGroups: [...this.state.userGroups, ...res[0].data.groups, ...res[1].data.groups]})
+            }).catch(err => console.log('Get All Groups Error---------------', err));
+            }, 0)
+        }
+        // }, 0);
+        // clearTimeout();
     }
     componentWillUnmount() {
         clearTimeout();
@@ -201,7 +206,7 @@ class Header extends Component {
                     </div>
                 </div>
                 <hr/>
-                {user && <GroupCarousel groups={userGroups} />}
+                {user && userGroups.length ? <div className='header-group-carousel-div'><GroupCarousel groups={userGroups} /></div> : null}
             </div>
         );
     }

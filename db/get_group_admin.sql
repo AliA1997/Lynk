@@ -1,0 +1,1 @@
+SELECT users.email FROM users JOIN groups ON users.id = groups.group_admin;

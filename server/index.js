@@ -79,13 +79,13 @@ io.use(socketSession(session, {
 }))
 
 app.use(cors());
-setTimeout(() => {
-    //Cloudinary Endpoints 
+// setTimeout(() => {
+    //Cloudinary Endpoints d
     app.get('/api/upload', cloudinary.upload);
 
     //Admin Endpoints 
     app.get('/api/admin/users', admin.readUsers);
-    app.post('/api/admin/warning/users', admin.warnUser);
+    app.post('/api/admin/warning/user', admin.warnUser);
     app.delete('/api/admin/users/:id', admin.deleteUser);
     app.delete('/api/admin/groups/:id', admin.deleteGroup);
     app.delete('/api/admin/events/:id', admin.deleteEvent);
@@ -112,7 +112,7 @@ setTimeout(() => {
 
     //Dashboard Group Endpoints 
     app.get('/api/groups/admin/:id', group.readUserAdminGroups);
-    app.get('/api/groups/user/:id', group.readUserGroups);
+    app.get('/api/groups/user/:user', group.readUserGroups);
     app.get('/api/users/dropdown', group.readUsersDropdown);
 
     //Dashboard Events Endpoints 
@@ -140,14 +140,14 @@ setTimeout(() => {
 
     //Contact Endpoints
     app.post('/api/contactform', nm.sendEmail);``
-}, 0);
+// }, 0);
 // app.post('/api/test', nm.test);
 ///For all paths 
 const path = require('path')
 app.get('*', (req, res)=>{
+    // path.join(__dirname, '../build/
   res.sendFile(path.join(__dirname, '../build/index.html'));
 });
-
 ///Server listening on port 4000.
 server.listen(4000, () => console.log('Listening on Port: 4000'));
 // io.listen(server)

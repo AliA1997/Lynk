@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 //import component you are gonna use
-import UserCard from './UserCard/UserCard';
+import UserCardContainer from './UserCardContainer/UserCardContainer';
+import Loading from '../Global/Loading/Loading';
 ///Iimport Material-ui componnents
 import Typography from '@material-ui/core/Typography';
 //Import axios to perform axios calls to backend.
@@ -13,59 +14,42 @@ class Admin extends Component {
         super();
         this.state = {
             users: [],
-            userWarning: '',
-            deleteUser: '',
-            doWarnUser: false,
-            doDeleteUser: false,
+            loading: true
         }
     }
     componentDidMount() {
-        axios.get('/api/admin/users').then(res => {
-            const { users } = this.state;
-            console.log('users---------', users);
-            //Set the users state to res.data.users
-            this.setState({users: res.data.users});
-        }).catch(err => console.log('Users Axios Error--------', err));
-    }
-    handleUserWarning(id, email, username) {
-        //Destruct the doWarnUser and userWarning from state.
-        const { doWarnUser, userWarning } = this.state;
-        if(doWarnUser && userWarning) {
-            axios.post('/api/admin/warning/user', {id, email, username, reason: userWarning})
-            .then(res => {
-                alert(res.data.message);
-            }).catch(err => console.log('Delete User Database Error----------------', err));
+        const { user } = this.props;
+        if(user.is_admin) {
+            axios.get('/api/admin/users').then(res => {
+                const { users } = this.state;
+                console.log('users---------', users);
+                //Set the users state to res.data.users
+                this.setState({users: res.data.users, loading: false});
+            }).catch(err => console.log('Users Axios Error--------', err));
         } else {
-            this.setState({doWarnUser: !this.state.doWarnUser});
+             this.props.history.push('/');
         }
     }
-    handleUserDelete(id, email, username) {
-        //Destruct the doDeleteUser and deleteUser from state.
-        const { doDeleteUser, deleteUser } = this.state;
-        if(doDeleteUser && deleteUser) {
-            axios.delete(`/api/admin/users/${id}`, {
-                data: { id, email, username, reason: deleteUser }
-            })
-            .then(res => {
-                alert(res.data.message);
-            }).catch(err => console.log('Delete User Database Error----------------', err));
-        } else {
-            this.setState({doDeleteUser: !this.state.doDeleteUser});
-        }
-    }
+   reRenderUsers = (users) => {
+       this.setState({users});
+   }
     render() {
         //Destruct the users from teh state.
-        const { users } = this.state;
-        return (
-            <div>
-                <Typography>Admin</Typography>
+        const { users, loading } = this.state;
+        if(!loading) {
+            return (
                 <div>
+                    <Typography>Admin</Typography>
+                    <div>
+                    </div>
+                    <div>
+                        {users && users.length ? users.map((user, i) => <UserCardContainer key={i} {...user} reRenderUsers={this.reRenderUsers}/>) : null}
+                    </div>
                 </div>
-                <div>
-                    {users && users.length ? users.map(user => <UserCard key={user.id} {...user} {...this.state} />) : null}
-                </div>
-            </div>
-        );
+            );
+        } else {
+            return <Loading />
+        }
     }
 }
 

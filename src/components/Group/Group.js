@@ -4,6 +4,7 @@ import placeholderImage from '../../Images/default-placeholder.png';
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
+import io from 'socket.io-client';
 import './Group.css';
 
 export default class Group extends Component {
@@ -12,7 +13,8 @@ export default class Group extends Component {
         this.state = {
             currentGroup: ''
         }
-        
+        this.socket = io();
+
     }
     componentDidMount() {
         axios.get(`/api/group/${this.props.match.params.id}`)

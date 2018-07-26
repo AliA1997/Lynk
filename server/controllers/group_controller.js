@@ -33,9 +33,10 @@ module.exports = {
         //Assign variable to database instance.
         const db = req.app.get('db');
         //Destruct the id from the request param.
-        const { id } = req.params;
-        if(req.session.user) {
-            const { name, username, email, profile_picture, age } = req.session.user;
+        const { user } = req.params;
+        console.log('req.session.user----------------', req.session.user);
+        if(user) {
+            const { name, username, email, profile_picture, age } = user;
             const userToLookFor = { name, username, email, profile_picture, age };
             console.log('req.session.user------------', userToLookFor);
             //Read User Groups  

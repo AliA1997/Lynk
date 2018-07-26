@@ -30,6 +30,9 @@ module.exports = {
     warnUser(req, res) {
       //No need for a database instance sicne you are just sending  a warning to user and not altering database.
       const { username, email, reason } = req.body;
+      /// Req.Body --------------------------- 
+      console.log('req.body----------------', req.body);
+      /////////////////////////////////////////////////////////////////////
       nodemailer.sendWarningNotification(email, username, reason)
       res.status(200).json({message: 'Warning Sent'});
     },

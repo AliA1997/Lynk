@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 //Importing Material UI Components
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -11,11 +11,14 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 //Import images from images folder.
-import placeholderImage from '../../../Images/default-placeholder.png';
+import placeholderImage from '../../../../Images/default-placeholder.png';
+//import css file
+import './UserCard.css';
 
 
 const UserCard = (props) => {
-    const { id, profile_picture, username, name, email, groups, userWarning, deleteUser, doDeleteUser, doWarnUser } = props;
+    const { id, profile_picture, username, name, email, groups, doDeleteUser, doWarnUser } = props;
+    // console.log('groups----------', groups)
     return (
         <Card>
             <CardHeader 
@@ -23,7 +26,8 @@ const UserCard = (props) => {
                 title={username}
                 subheader={name}
             />
-            {groups && groups.length ? groups.map(group => <Chip 
+            {groups && groups.length ? groups.map((group, i) => <Chip 
+                                                                key={i}
                                                                 avatar={<Avatar src={group.group_image || placeholderImage} alt={group.group_name} />}
                                                                 label={group.group_name}
                                                             />)
@@ -33,7 +37,7 @@ const UserCard = (props) => {
                     Name: {name}, Username: {username}, Email: {email}
                 </Typography>
             </CardContent>
-            <Button variant="contained" color="default" onClick={() => props.sendWarning(id, email, username)}>Send Warning</Button>
+            <Button variant="outlined" color="default" className="warning-button" onClick={() => props.sendWarning(id, email, username)}>Send Warning</Button>
             <TextField
                     required
                     multiline
@@ -41,19 +45,17 @@ const UserCard = (props) => {
                     id="reason-for-warning"
                     label="Reason For Warning"
                     onChange={e => props.handleUserWarning(e.target.value)}
-                    value={userWarning}
                     margin="normal"
                     style={{display: doWarnUser ? 'inline-block' : 'none'}}
             />
-            <Button variant="contained" color="error" onClick={() => props.deleteUser(id, email, username)}>Delete</Button>
+            <Button variant="outlined" className="delete-button" onClick={() => props.deleteUser(id, email, username)}>Delete</Button>
             <TextField
                     required
                     multiline
                     rowsMax="5"
                     id="reason-for-warning"
-                    label="Reason For Warning"
+                    label="Reason For Delete"
                     onChange={e => props.handleUserDelete(e.target.value)}
-                    value={deleteUser}
                     margin="normal"
                     style={{display: doDeleteUser ? 'inline-block' : 'none'}}
             />

@@ -10,6 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logout } from '../../../ducks/reducer';
+import axios from 'axios';
 import './Navbar.css';
 import WeatherDisplay from '../../Global/WeatherDisplay/WeatherDisplay';
 
@@ -42,6 +44,13 @@ class Navbar extends Component {
     
     handleClose = () => {
     this.setState({ anchorEl: null });
+    }
+
+    logout() {
+        axios.post('/api/logout', {}).then(res => {
+            this.props.logout();
+            alert(res.data.message);
+        }).catch(err => console.log('Logout Axios Error------------', err));
     }
     render() {
         const { auth, anchorEl } = this.state;
@@ -96,11 +105,11 @@ class Navbar extends Component {
                         anchorEl={anchorEl}
                         anchorOrigin={{
                             vertical: 'top',
-                            horizontal: 'right',
+                            horizontal: 'left',
                         }}
                         transformOrigin={{
                             vertical: 'top',
-                            horizontal: 'right',
+                            horizontal: 'left',
                         }}
                         open={open}
                         onClose={this.handleClose}
@@ -112,6 +121,14 @@ class Navbar extends Component {
                         <MenuItem onClick={() => this.handleClose()} >
                             <Link to='/dashboard/create_event' className='nav-sublink'>Create Event</Link>
                         </MenuItem>
+                        {user ?
+                         <MenuItem onClick={() => this.logout()}>
+                            <Typography>Logout</Typography>
+                        </MenuItem>
+                        : 
+                        <MenuItem>
+                            <Link to='/login' className='nav-sublink'>Login</Link>
+                        </MenuItem>}
                         </Menu>
                     </div>
                     )}
@@ -129,4 +146,8 @@ const mapStateToProps = state => {
     };
 }
 
-export default withRouter(connect(mapStateToProps)(Navbar));
+const mapDispatchToProps = {
+    logout: logout
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));

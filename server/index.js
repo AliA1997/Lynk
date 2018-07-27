@@ -57,6 +57,7 @@ app.use(bodyParser.json());
 //Initialize our session
 app.use(session({
     secret: process.env.SESSION_SECRET,
+    resave: false,
     //If the session is import then initialize the store for the session
     store: session && new pgSession({
         //Uses the connection string to connect to database
@@ -64,7 +65,6 @@ app.use(session({
         //Insert this table.
         tableName: 'session'
     }),
-    resave: false,
     saveUninitialized: true,
     //Age of the session
     cookie: {
@@ -75,6 +75,9 @@ app.use(session({
 
 //Enable the middleware needed for session.
 io.use(socketSession(session, {
+    resave: false,
+    saveUninitialized: true, 
+    secret: process.env.SESSION_SECRET,
     autoSave: true
 }))
 
@@ -85,7 +88,11 @@ app.use(cors());
 
     //Admin Endpoints 
     app.get('/api/admin/users', admin.readUsers);
+    app.get('/api/admin/groups', admin.readGroups);
+    app.get('/api/admin/events', admin.readEvents);
     app.post('/api/admin/warning/user', admin.warnUser);
+    app.post('/api/admin/warning/groups/:id', admin.warnGroupAdmin);
+    app.post('/api/admin/warning/events/:id', admin.warnEventAdmin);
     app.delete('/api/admin/users/:id', admin.deleteUser);
     app.delete('/api/admin/groups/:id', admin.deleteGroup);
     app.delete('/api/admin/events/:id', admin.deleteEvent);
@@ -93,12 +100,16 @@ app.use(cors());
 
     //User Endpoints 
     app.get('/api/user-data', user.readUserData);
+    app.post('/api/logout', user.logout);
     app.post('/api/login', user.login);
     app.post('/api/register', user.register);
+    app.post('/api/forgot_password', nm.forgetPasswordNotification);
     app.post('/api/facebook-login', socialMedia.facebookLogin);
     app.post('/api/google-login', socialMedia.googleLogin);
     //Verify Email endpoints
     app.patch('/api/users/:id/verify_email', user.verifyEmail);
+    //Forget Password Endpoints
+    app.patch('/api/update_password', user.updatePassword);
 
     //Group Endpoints 
     app.get('/api/group/:id', group.readGroup)

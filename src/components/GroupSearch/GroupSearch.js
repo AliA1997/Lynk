@@ -19,15 +19,16 @@ export default class GroupSearch extends Component {
         .then(res => {
             if(res.data.groups) {
                 //I have 2 arrays on with the default events. and search events. 
-                this.setState({defaultEvents: res.data.groups, searchGroups: res.data.groups, loading: false});
+                this.setState({defaultGroups: res.data.groups, searchGroups: res.data.groups, loading: false});
             }
         }).catch(err => console.log('Event Search-------------------------', err));
     }
     handleSearch = (val) => {
         //Copy the array
-        let copyOfArr = this.state.defaultGroups.slice() ;
+        let copyOfArr = this.state.defaultGroups.slice();
+        console.log('copyOfArr----------------------', copyOfArr);
         //Filter the array.
-        copyOfArr = copyOfArr.filter(group => group === val);
+        copyOfArr = copyOfArr.filter(group => group.group_name.toLowerCase().includes(val));
         ///set the state.
         this.setState({searchGroups: copyOfArr});
     }

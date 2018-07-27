@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Calender from '../Global/Calendar/Calendar';
 // import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
@@ -67,7 +68,7 @@ export default class Event extends Component {
 
                         <h3>Event Location:</h3>
                         <h3>{event_location}</h3>
-
+                        {/* <Calender eventDate={event_date} /> */}
                         <div className='event-attendees'>
                             
                             {event_attendee_list && event_attendee_list.length && event_attendee_list.map(attendee => <p>{attendee}</p>)}

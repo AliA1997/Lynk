@@ -13,7 +13,7 @@ export default class Calender extends Component {
     //Define functions for rendering 
     renderDays() {
         //Specify the format for the day
-        const formatDate = 'dddd';
+        const formatDate = 'ddd';
         //Have an array of days.
         const days = [];
         //Define the start date width the currentMonth.
@@ -127,4 +127,9 @@ export default class Calender extends Component {
             </div>
         );
     }
+}
+
+Calender.defaultProps = {
+    // currentDate: null, 
+    eventDate: null
 }

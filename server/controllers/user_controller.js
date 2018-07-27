@@ -24,15 +24,18 @@ module.exports = {
            // Returning users and comparing userdata and password if users length is more than zero.
            if(users.length){
             console.log('users---------', users); 
-               const userData = users[0];
-               bcrypt.compare(password, userData.password).then(doPasswordsMatch => {
+            bcrypt.compare(password, users[0].password).then(doPasswordsMatch => {
+                const userData = users[0];
                 // If password matches, deleting password and setting req.session.user to userData.  Return status 200 and user data if successful.   
                 if(doPasswordsMatch){
+                        console.log('Password Match')
                        delete userData.password;
                        req.session.user = userData;
                        req.session.save();
                        res.status(200).json({user: req.session.user})
-                   }
+                } else {
+                    res.status(404).json({message: 'Passwords NOt Match!'});
+                }
                }).catch(err => console.log(err, 'Bcrypt compare error')) 
                // Else returning failed login message.
            } else {
@@ -60,6 +63,10 @@ module.exports = {
             }).catch(err => console.log(err, "Register error"))
         }).catch(err => console.log(err, "Hashing error"))
     },
+    logout(req, res) {
+        req.session.destroy();
+        res.status(200).json({message: 'Logout Successfully!'});
+    },
     //Verifies email via a patch.
     verifyEmail(req, res) {
         //Get the id from the session.
@@ -70,5 +77,19 @@ module.exports = {
         db.verify_email(id).then(emailVerified => {
             res.status(200).json({message: 'Email Verified'});
         }).catch(err => console.log('Verify Email Error-----------', err));
+    },
+    updatePassword(req, res) {
+        //Get db from database instance 
+        const db = req.app.get('db');
+        const { newPassword, username } = req.body;
+        //Get the user and hash the new password.
+        console.log( { newPassword, username } )
+        bcrypt.hash(newPassword, saltRounds).then(hashedPassword => {
+
+            db.update_password([hashedPassword, username]).then(users => {
+                res.status(200).json({message: 'Passowrd Updated'});
+            }).catch(err => console.log('Update Password Database Error----------', err));
+            
+        }).catch(err => console.log('Bcrypt Hashing Password Error--------', err));
     }
 }

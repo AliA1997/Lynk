@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Login from './Login/Login';
-import { login } from '../../ducks/reducer';
+import { login, resetPassword } from '../../ducks/reducer';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 // import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 import TiSocialGithub from 'react-icons/lib/ti/social-github-circular';
 // import TiSocialGooglePlusCircular from 'react-icons/lib/ti/social-google-plus-circular';
@@ -15,7 +17,10 @@ class LoginPage extends Component {
         super();
         this.state = {
             username: '', 
-            password: ''
+            password: '',
+            resetUsername: '',
+            resetEmail: '',
+            doResetPassword: false
         }
     }
     componentWillMount() {
@@ -27,7 +32,31 @@ class LoginPage extends Component {
     handleLoginPassword = (val) => {
         this.setState({password: val});
     }
+    handleResetUsername = (val) => {
+        this.setState({resetUsername: val});
+        console.log('afs')
+    }
+    handleResetEmail = (val) => {
+        this.setState({resetEmail: val});
+        console.log('afsd')
 
+    }
+    resetPassword() {
+        const { doResetPassword, resetUsername, resetEmail } = this.state;
+        console.log(this.state);
+        console.log('clicked!');
+        if(doResetPassword && resetUsername && resetEmail) {
+            axios.post('/api/forgot_password', {username: resetUsername, email: resetEmail})
+            .then(res => {
+                this.props.resetPassword(resetUsername);
+                this.setState({doResetPassword: false, resetUsername: '', resetEmail: ''})
+                console.log('Reset Password Working');
+                alert('Look at your email!');
+            }).catch(err => console.log('Forgot Password Error----------', err));
+        } else {
+            this.setState({doResetPassword: !this.state.doResetPassword});
+        }
+    }
     login = () => {
         //Destructure the username from the state, so it can be used in the login endpoint.
         const { username, password } = this.state;
@@ -36,7 +65,7 @@ class LoginPage extends Component {
         .then(res => {
             this.props.login(res.data.user);
             alert('Login Successfully');
-            this.props.history.push('dashboard');
+            this.props.history.push('/dashboard');
         }).catch(err => console.log('Login Error---------------', err));
     }
     // facebookLogin = (response) => {
@@ -73,7 +102,7 @@ class LoginPage extends Component {
     //     clearInterval();
     // }
     render() {
-        const { username, password } = this.state;
+        const { username, password, doResetPassword, resetEmail, resetUsername } = this.state;
         return (
             <div className='login-parent'>
                 <div className='login-page-container-div'>
@@ -83,6 +112,30 @@ class LoginPage extends Component {
                         handleUsername={this.handleLoginUsername}  handlePassword={this.handleLoginPassword} />
                     </div>
                     <Link to='/register' style={{color: "indigo"}}>Don't have an account?</Link>
+                    <div className='reset-password-button'>
+                        <Button variant="outlined"  color="primary"
+                        onClick={() => this.resetPassword()}>Reset Password</Button>
+            
+                            <div style={{style: doResetPassword ? 'inline-block' : 'none'}}>
+                                <TextField
+                                required
+                                style={{style: doResetPassword ? 'inline-block' : 'none'}}
+                                id="user-email"
+                                label="Your Email"
+                                onChange={e => this.handleResetEmail(e.target.value)}
+                                value={resetEmail}
+                                margin="normal"
+                                />
+                                <TextField
+                                required
+                                id="uYour-Username"
+                                label="Your Username"
+                                onChange={e => this.handleResetUsername(e.target.value)}
+                                value={resetUsername}
+                                margin="normal"
+                                />
+                            </div>
+                    </div>
                     <div className='social-media-login'>
 
                         {/* <FacebookLogin 
@@ -110,7 +163,14 @@ class LoginPage extends Component {
 }
 
 const mapDispatchToProps = {
-    login: login 
+    login: login,
+    resetPassword
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(LoginPage));
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginPage));

@@ -56,8 +56,6 @@ class Home extends Component {
                             </Link>
                         </Button>
                     </div>
-                    <div>Fucking Chat!!</div>
-                    <GroupChat />
                 </div>
             </div>
         );

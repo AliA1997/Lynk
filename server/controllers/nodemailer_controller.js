@@ -109,7 +109,71 @@ module.exports = {
             }
         })
     },
-    sendWarningNotification(email, username, reason) {
+    sendDeleteGroupNotification(email, username, reason)  {
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.NODE_MAILER_EMAIL,
+                pass: process.env.NODE_MAILER_PASS
+            },
+            tls: {
+                rejectUnauthorized: false 
+            }
+        });
+        let mailOptions = {
+            from: process.env.NODE_MAILER_EMAIL,
+            to: email,
+            subject: 'Group to be deleted',
+            html: `<div style="color=red">
+                    <h1> ${username} your Group is About to be Deleted! </h1>
+                    <h3>Group to be deleted!</h3>
+                    <p>For this reason: ${reason}</p>
+                  </div>
+            `
+        }
+        transporter.sendMail(mailOptions, (err, data) => {
+            if(err) {
+                console.log('Send Delete Notification Email-------------', err);
+            } else {
+                console.log('Message Send-----------------', data);
+                transporter.close();
+            }
+        })
+    },
+    sendDeleteEventNotification(email, username, reason)  {
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.NODE_MAILER_EMAIL,
+                pass: process.env.NODE_MAILER_PASS
+            },
+            tls: {
+                rejectUnauthorized: false 
+            }
+        });
+        let mailOptions = {
+            from: process.env.NODE_MAILER_EMAIL,
+            to: email,
+            subject: 'Event to be deleted',
+            html: `<div style="color=red">
+                    <h1> ${username} your Event is About to be Deleted! </h1>
+                    <h3>Event to be deleted!</h3>
+                    <p>For this reason: ${reason}</p>
+                  </div>
+            `
+        }
+        transporter.sendMail(mailOptions, (err, data) => {
+            if(err) {
+                console.log('Send Delete Notification Email-------------', err);
+            } else {
+                console.log('Message Send-----------------', data);
+                transporter.close();
+            }
+        })
+    },
+    sendWarningNotification(email, username, reason, isGroup=false, isEvent=false, groupName=null, eventName=null) {
 
         let transporter = nodemailer.createTransport({
             service: "gmail",
@@ -129,8 +193,30 @@ module.exports = {
                     <h1>Warning ${username}! </h1>
                     <h3>Warning</h3>
                     <p>Warning: ${reason}</p>
-                  </div>
+                </div>
             `
+        }
+        if(!isGroup && !isEvent) {
+            mailOptions.html =  `<div style="background=gold">
+            <h1>Warning ${username}! </h1>
+            <h3>Warning</h3>
+            <p>Warning: ${reason}</p>
+        </div>
+    `;
+        } else if(isGroup && !isEvent) {
+            mailOptions.html = `<div style="background=gold">
+                        <h1>Warning ${username}! </h1>
+                        <h3>${groupName} is in trouble!!</h3>
+                        <p>Warning: ${reason}</p>
+                    </div>
+                `
+        } else if(!isGroup && isEvent) {
+            mailOptions.html = `<div style="background=gold">
+                        <h1>Warning ${username}! </h1>
+                        <h3>${eventName} is in trouble!!</h3>
+                        <p>Warning: ${reason}</p>
+                    </div>
+                `
         }
         transporter.sendMail(mailOptions, (err, data) => {
             if(err) {
@@ -140,6 +226,48 @@ module.exports = {
                 transporter.close();
             }
         })
+    },
+    forgetPasswordNotification(req, res) {
+
+        const { email, username } = req.body;
+        
+        const db = req.app.get('db');
+        db.user_to_reset_password([username, email]).then(users => {
+            if(users.length) {
+                let transporter = nodemailer.createTransport({
+                    service: "gmail",
+                    auth: {
+                        user: process.env.NODE_MAILER_EMAIL,
+                        pass: process.env.NODE_MAILER_PASS
+                    },
+                    tls: {
+                        rejectUnauthorized: false 
+                    }
+                });
+                let mailOptions = {
+                    from: process.env.NODE_MAILER_EMAIL,
+                    to: users[0].email,
+                    subject: 'Forgot Password?',
+                    html: `<div style="background=indigo">
+                            <h1>Forgot Passoword ${users[0].username}! </h1>
+                            <h3>Reset Password</h3>
+                            <a href="http://localhost:3000/update_password" style={color: indigo, text_decoration: none}>Reset Password</a> 
+                        </div>
+                    `
+                }        
+                transporter.sendMail(mailOptions, (err, data) => {
+                    if(err) {
+                        console.log('Reset Password Notification Email-------------', err);
+                    } else {
+                        console.log('Message Sent-----------------', data);
+                        transporter.close();
+                    }
+                })
+                res.status(200).json({message: 'Check Email!'})
+            } else {
+                res.status(300).json({message: "User Not Found"});
+            }
+        }).catch(err => console.log('Get User to Reset Database Error-------', err));
     }
  }
 

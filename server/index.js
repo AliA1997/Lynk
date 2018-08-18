@@ -33,7 +33,7 @@ massive(process.env.CONNECTION_STRING).then(database => {
     app.set('db', database);
 }).catch(err => console.log(err, 'Database Connection Error'))
 //Requiring the UsersClass file
-const{ Users } = require('./helpers/UsersClass');
+const{ Groups } = require('./helpers/GroupsClass');
 
 
 //Controller Files 
@@ -54,8 +54,8 @@ app.use(express.static(`${__dirname}/../build`));
 //Initialize our bodyParser data.
 app.use(bodyParser.json());
 
-//Initialize our session
-app.use(session({
+//Initialize our session and assign to a variable since you would wanto use for socket session.
+const userSession = session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     //If the session is import then initialize the store for the session
@@ -70,16 +70,15 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 14
     }
-}));
+});
 
+app.use(userSession);
+
+setTimeout(()  => io.use(socketSession(userSession, {
+    autoSave: true
+})), 2000)
 
 //Enable the middleware needed for session.
-io.use(socketSession(session, {
-    resave: false,
-    saveUninitialized: true, 
-    secret: process.env.SESSION_SECRET,
-    autoSave: true
-}))
 
 app.use(cors());
 // setTimeout(() => {
@@ -161,14 +160,7 @@ app.get('*', (req, res)=>{
 });
 ///Server listening on port 4000.
 server.listen(4000, () => console.log('Listening on Port: 4000'));
-// io.listen(server)
-let messages = [];
-io.on('connection', (socket) => {
-    console.log('socket....id', socket.id);
-    socket.on('SEND_MESSAGE', function(data){
-        console.log('2', data)
-        messages.push(data)
-        io.emit('RECEIVE_MESSAGE', messages);
-  });
-});
+setTimeout(() => {
+    require('./socket')(io, Groups);
+}, 0);
 //

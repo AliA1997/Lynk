@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import GroupChat from '../Group/GroupChat/GroupChat';
 //Redirects the user 
 import { withRouter, Link } from 'react-router-dom';
 //Connects the component to the store.
@@ -10,7 +9,6 @@ import Button from '@material-ui/core/Button';
 import "../Home/Home.css";
 //image
 import lynk from '../../Images/lynk.jpg'
-import Group from '../Group/Group';
 
 
 

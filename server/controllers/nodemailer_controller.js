@@ -63,7 +63,7 @@ module.exports = {
             html: `<div>
                     <h1>Welcome ${username}! </h1>
                     <h3>Please Verify Account</h3>
-                    <a href="http://localhost:3000/verified/${verificationLink}" style={color: indigo, text_decoration: none}>Verify Account</a>
+                    <a href="https://lynk-up.now.sh/verified/${verificationLink}" style={color: indigo, text_decoration: none}>Verify Account</a>
                   </div>
             `
         }
@@ -251,7 +251,7 @@ module.exports = {
                     html: `<div style="background=indigo">
                             <h1>Forgot Passoword ${users[0].username}! </h1>
                             <h3>Reset Password</h3>
-                            <a href="http://localhost:3000/update_password" style={color: indigo, text_decoration: none}>Reset Password</a> 
+                            <a href="https://lynk-up.now.sh/update_password" style={color: indigo, text_decoration: none}>Reset Password</a> 
                         </div>
                     `
                 }        

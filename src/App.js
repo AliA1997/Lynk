@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import actions 
-import { getUserCoordinates````````````
-AKl;al;sdfksla;fksfsfsdsfasdfas } from'./ducks/reducer';
+import { getUserCoordinates } from'./ducks/reducer';
 import { withRouter } from 'react-router-dom';
 import { login } from './ducks/reducer';
 import axios from 'axios';

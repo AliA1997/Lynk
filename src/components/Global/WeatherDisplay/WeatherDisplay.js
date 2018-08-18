@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 //Import Typography from material-ui
 // import Typography from '@material-ui/core/Typography';

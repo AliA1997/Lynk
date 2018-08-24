@@ -145,7 +145,7 @@ app.use(cors());
     app.get('/api/events/search', search.searchEvent);
 
     //Chat Endpoints
-    app.get('/api/chats', chat.readChat);
+    app.get('/api/chats/:id', chat.readChat);
     app.post('/api/chats', chat.createChat);
 
     //Contact Endpoints

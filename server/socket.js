@@ -5,29 +5,27 @@ module.exports = (io, Groups) => {
     let users = [];
     const GroupsClass = new Groups();
     io.on('connection', (socket) => {
+        let userId = uuid.v4();
         io.emit('CONNECT_ROOM');
         console.log('socket.id', socket.id);
         socket.on('room', () => {
             setTimeout(() => {
                 console.log('Socket Room Event Emitter Hit--------------');
-                if(socket.handshake.session.user) {
-                    const { id, name, username, profile_picture } = socket.handshake.session.user;
-                }
-                // let userData = socket.handshake.session.user;
-                // console.log('SOcket User----------', userData);
-                console.log('Socket Room-------------', socket.handshake.query.room);
-                //
+                // // let userData = socket.handshake.session.user;
+                // // console.log('SOcket User----------', userData);
+                // console.log('Socket Room-------------', socket.handshake.query.room);
+                // //
                 let userToAdd = {
-                    name: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.name : "Guest",
-                    username: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.username : "Guest",
-                    picture: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.profile_picture : null,
-                    id: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.id : uuid.v4()
+                    name: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.name : "Guest",
+                    username: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.username : "Guest",
+                    picture: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.profile_picture : null,
+                    id: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.id : userId
                 }
                 users.push(userToAdd);
                 console.log('users--------------', users);
-                //
                 GroupsClass.AddUGroupData({socket_id: socket.id, users, messages, room: socket.handshake.query.room});
-                io.in(socket.handshake.query.room).emit("RECIEVE_USERS", users);
+                console.log(GroupsClass.groups);
+                socket.in(socket.handshake.query.room).emit("RECIEVE_USERS", users);
             }, 1000);
 
         });
@@ -40,18 +38,27 @@ module.exports = (io, Groups) => {
             }
             console.log('messaegs-----------', messages)
             messages.push(newMessage);
-            io.emit('RECEIVE_MESSAGE', messages);
+            socket.emit('RECEIVE_MESSAGE', messages);
         });
-        // socket.on('SEND_USER', function(data){
-        //     let userToAdd = {
-        //         name: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.name : "Guest",
-        //         username: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.username : "Guest",
-        //         picture: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.profile_picture : null,
-        //         id: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.id : uuid.v4()
-        //     }
-        //     if(!users.includes(userToAdd)) users.push(userToAdd) 
-        //     console.log('users-----------', users)
-        //     io.emit('RECEIVE_USER', users);
-        // });
+        
+        socket.on('TYPING', function(data){
+            console.log('Typing---------', data);
+            socket.broadcast.emit('USER_ON_TYPING', data);
+        });
+        socket.on('SEND_USER', function(){
+            let userToAdd = {
+                name: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.name : "Guest",
+                username: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.username : "Guest",
+                picture: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.profile_picture : null,
+                id: socket.handshake.session && socket.handshake.session.user ? socket.handshake.session.user.id : userId
+            }
+            if(!users.includes(userToAdd)) users.push(userToAdd) 
+            console.log('users-----------', users);
+            socket.emit('RECEIVE_USER', users);
+        });
+        socket.on('disconnect', () => {
+            GroupsClass.RemoveGroup(socket.id);
+            socket.emit('SAVE_CHAT');
+        });
     });
 }

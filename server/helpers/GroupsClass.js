@@ -21,8 +21,8 @@ class Groups {
 
         let indexOfgroupToRemove = this.groups.findIndex((group) => group.socket_id == socket_id);
         if(indexOfgroupToRemove !== -1){
-            let room = this.groups[indexOfuserToRemove].room
-            this.groups.splice(indexOfuserToRemove, 1);
+            let room = this.groups[indexOfgroupToRemove].room
+            this.groups.splice(indexOfgroupToRemove, 1);
             return room;
         }
     }

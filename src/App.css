@@ -1,4 +1,6 @@
+
 .parent-className {
+  width: 100%;
   min-height: 100vh;
 }
 
@@ -17,4 +19,10 @@ select {
   border-right: transparent;
   border-left: transparent;
   border-bottom: 0.5px solid rgb(128, 105, 145);
+}
+
+@media (min-width: 1200px) {
+  .parent-className {
+    background-image: none;
+  }
 }

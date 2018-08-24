@@ -7,7 +7,7 @@ module.exports = {
         const db = req.app.get('db');
 
         db.read_chat(id).then(chat => {
-            res.status(200).json({chat})
+            res.status(200).json({chat: chat[0]})
         }).catch(err => console.log(err, 'Read chat error'))
     },
 
